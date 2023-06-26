@@ -1,0 +1,103 @@
+#!/bin/sh
+#
+# ~/.aliasrc
+#
+
+# Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+# ls flag variations
+## exa is used bc I just like it more
+alias ls='exa -al --color=always --group-directories-first --git'
+alias la='exa -a --color=always --group-directories-first'
+alias ll='exa -l --color=always --group-directories-first --git'
+alias lt='exa -aT --color=always --group-directories-first --ignore-glob ".git"'
+alias l.='exa -a | grep "^\."'
+
+# grep flags
+alias grep='grep --color=auto'
+
+# Sets output as human readable
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+
+# Overwrite confirmations
+## Adds verbosity where I like it
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -i'
+
+# Termbin
+## REMEMBER TO PIPE OUTPUT
+alias tb='nc termbin.com 9999'                             # Shortcut for termbin
+
+# Shortcuts
+alias v='nvim'                                             # Shortcut for vim
+alias se='sudoedit'
+alias wget='wget --continue --hsts-file="$XDG_DATA_HOME"/wget-hsts'
+## Internet connection
+alias check='ping -c 4 archlinux.org'                      # Pings archlinux.org to make sure internet connection is functional
+alias myip='curl ip.me'                                    # Finds public facing ip
+alias speed='speedtest --single --secure'                  # Tests internet speed with single and secure connection
+## Pacman and paru
+alias pacsyu='sudo pacman -Syyu'
+alias parsua='paru -Sua'
+alias parsyu='paru -Syyu'
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'           # Removes any package orphans.  USE WITH CAUTION.
+## Terminal
+alias cl='clear'
+alias x='exit'
+## Pihole shortcuts
+alias pihole='ssh pi.hole'
+alias pi-update='ssh -t pi.hole "sudo apt update && sudo apt upgrade -y"'
+alias pi-gravity='ssh -t pi.hole "pihole -g"'
+alias pi-restart='ssh -t pi.hole "pihole restartdns"'
+alias pi-shutdown='ssh -t pi.hole "sudo systemctl poweroff"'
+alias pi-reboot='ssh -t pi.hole "sudo systemctl reboot"'
+## yt-dlp shortcuts
+alias ytdl-audio='yt-dlp --config-location ~/.config/yt-dlp/audio'
+alias ytdl-music='yt-dlp --config-location ~/.config/yt-dlp/music'
+alias ytdl-video='yt-dlp --config-location ~/.config/yt-dlp/video'
+alias ytdl-video-cc='yt-dlp --config-location ~/.config/yt-dlp/video-cc'
+alias ytdl-thumbnail='yt-dlp --list-thumbnail'
+## Default nsxiv flags
+alias nsxiv='nsxiv $NSXIV_OPTS "$@"'
+## fzf scripts
+### mpv fzf scripts
+mpvf() { find ~/Videos/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv % ; }
+mpvfm() { find ~/Music/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv --no-video % ; }
+### Image viewer script
+imgf() { find ~/Pictures/ -type f | sort | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % nsxiv -apq % ; }
+## Simple calculator
+calc() { python3 -c "from math import *; print($*);" }
+alias calc='noglob calc'
+
+# icat alias
+alias icat='kitty +kitten icat'
+
+# verbose copy
+cpv() {
+    rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress "$@"
+}
+compdef _files cpv
+
+# Fun
+## Terminal rickroll
+alias rr='curl -sL https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+## Dancing parrot
+alias parrot='curl parrot.live'
+## Starwars
+alias starwars='curl https://asciitv.fr'
+## Run, Forest, run!
+alias forest='curl ascii.live/forrest'
+## Minesweeper (password: play)
+alias minesweeper='ssh play@anonymine-demo.oskog97.com -p 2222'
+
+# Power
+alias rbn='reboot'
+alias sdn='shutdown now'
