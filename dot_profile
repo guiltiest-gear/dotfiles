@@ -1,0 +1,17 @@
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export DIFFPROG="nvim -d"
+export EDITOR="/usr/bin/nvim"
+export VISUAL=$EDITOR
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
+export LESSHISTFILE="$XDG_STATE_HOME"/less/history
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export NSXIV_OPTS=${NSXIV_OPTS:-"-apq"}
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+export WINEPREFIX="$XDG_DATA_HOME"/wine
+export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
