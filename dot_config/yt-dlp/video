@@ -1,0 +1,17 @@
+# Set download to best video and audio
+-f '(bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio)'
+
+# Embeds thumbnail
+--embed-thumbnail
+
+# Merge output format as mp4
+--merge-output-format mp4
+
+# Use aria2c as the downloader
+--downloader aria2c
+
+# Remove all segments with sponsorblock
+--sponsorblock-remove all
+
+# Output to video folder
+-o ~/Videos/%(title)s.%(ext)s

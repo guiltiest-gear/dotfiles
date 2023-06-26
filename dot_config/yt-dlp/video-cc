@@ -1,0 +1,26 @@
+# Set download to best video and audio
+-f '(bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio)'
+
+# Write subtitle file to disk
+--embed-subs
+
+# Set subtitle format
+--sub-format best
+
+# Set subtitle language to English
+--sub-lang en
+
+# Embeds thumbnail
+--embed-thumbnail
+
+# Merge output format as mp4
+--merge-output-format mp4
+
+# Use aria2c as the downloader
+--downloader aria2c
+
+# Use sponsorblock to remove al the segments
+--sponsorblock-remove all
+
+# Output to CC video folder
+-o ~/Videos/CC\ Videos/%(title)s.%(ext)s

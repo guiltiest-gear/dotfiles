@@ -1,0 +1,14 @@
+# Set download to best video and audio
+-f '(bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio)'
+
+# Merge output format as mp4
+--merge-output-format mp4
+
+# Embeds thumbnail
+--embed-thumbnail
+
+# Use aria2c as the downloaded
+--downloader aria2c
+
+# Output to desktop
+-o ~/Desktop/%(title)s.%(ext)s

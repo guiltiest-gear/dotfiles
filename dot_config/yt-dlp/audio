@@ -1,0 +1,11 @@
+# Extract only the audio
+-x
+
+# Set download format as best audio
+-f '(bestaudio[ext=m4a])'
+
+# Use aria2c as the downloader
+--downloader aria2c
+
+# Send download to desktop
+-o ~/Desktop/%(title)s.%(ext)s

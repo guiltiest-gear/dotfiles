@@ -1,0 +1,17 @@
+# Extract only the audio
+-x
+
+# Prefer free formats
+--prefer-free-formats
+
+# SponsorBlock used to remove non-music
+--sponsorblock-remove all
+
+# Use aria2c as the downloader
+--downloader aria2c
+
+# Set download format as best audio
+-f 'bestaudio'
+
+# Send download to music folder
+-o ~/Music/%(title)s.%(ext)s
