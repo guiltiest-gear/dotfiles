@@ -4,5 +4,8 @@
   "IS_MINIMIZED": false,
   "MINIMIZE_TO_TRAY": false,
   "SKIP_HOST_UPDATE": true,
-  "enableHardwareAcceleration": true
+  "enableHardwareAcceleration": true,
+  "openasar": {
+    "setup": true
+  }
 }
