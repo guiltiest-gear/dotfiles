@@ -1,8 +1,0 @@
-# Fetch the latest hosts file from StevenBlack hosts every other day and restart NetworkManager
-0 16 */2 * * curl -o /etc/hosts https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts && systemctl restart NetworkManager.service
-
-# Scrubs subvolumes
-10 12 * * 6 btrfs scrub start /
-
-# Balances subvolumes for performance
-15 12 * * 6 btrfs balance start -musage=50 -dusage=50 /

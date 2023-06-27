@@ -1,8 +1,0 @@
-[xboxdrv]
-silent = true
-mimic-xpad = true
-deadzone = 4000
-next-controller = true
-
-[xboxdrv-daemon]
-dbus = disabled
