@@ -1,5 +1,5 @@
 [user]
-    email = {{ .email | quote }}
+    email = guiltier.gear@gmail.com
     name = Jade Fox
 [core]
     editor = nvim
