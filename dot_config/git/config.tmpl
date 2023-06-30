@@ -1,6 +1,7 @@
 [user]
     email = {{ .email | quote }}
     name = Jade Fox
+    signingkey = BE23EA3397D8E76CB981C4D35812B9381569351E
 [core]
     editor = nvim
     pager = delta
@@ -43,3 +44,5 @@
     colorMoved = default
 [init]
     defaultBranch = master
+[commit]
+    gpgsign = true
