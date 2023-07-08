@@ -19,8 +19,11 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#7f7d9c"
 export _ZO_EXCLUDE_DIRS="/tmp:/tmp/*:$HOME/Downloads/*:$HOME/Games/*:$HOME/Music/*:$HOME/Documents/*:$HOME/Pictures/*:$HOME/Videos/*:/run/*:$HOME/.local/share/nvim/*"
 export GPG_TTY=$(tty)
 
-# Uses bat as manpager
+# Use bat as manpager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Fix formatting for manpager
+export MANROFFOPT="-c"
 
 # Lines configured by zsh-newuser-install
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
