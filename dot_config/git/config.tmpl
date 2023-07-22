@@ -1,48 +1,48 @@
 [user]
-    email = {{ .email | quote }}
-    name = Jade Fox
-    signingkey = BE23EA3397D8E76CB981C4D35812B9381569351E
+  email = {{ .email | quote }}
+  name = Jade Fox
+  signingkey = BE23EA3397D8E76CB981C4D35812B9381569351E
 [core]
-    editor = nvim
-    pager = delta
+  editor = nvim
+  pager = delta
 [log]
-    date = local
+  date = local
 [alias]
-    au = add -u
-    a = add .
-    cm = commit -m
-    pl = pull origin
-    ps = push origin
-    ft = fetch
-    co = checkout
-    br = branch
-    st = status
-    cl = clone
-    l = log --oneline
-    cam = commit -am
-    graph = log --graph --oneline --decorate
-    last = log -1 HEAD --stat
-    aliases = "!git config -l | grep ^alias | cut -c 7- | sort"
+  au = add -u
+  a = add .
+  cm = commit -m
+  pl = pull origin
+  ps = push origin
+  ft = fetch
+  co = checkout
+  br = branch
+  st = status
+  cl = clone
+  l = log --oneline
+  cam = commit -am
+  graph = log --graph --oneline --decorate
+  last = log -1 HEAD --stat
+  aliases = "!git config -l | grep ^alias | cut -c 7- | sort"
 [interactive]
-    diffFilter = delta
+  diffFilter = delta
 [delta]
-    navigate = true
-    minus-style                   = syntax "#37222c"
-    minus-non-emph-style          = syntax "#37222c"
-    minus-emph-style              = syntax "#713137"
-    minus-empty-line-marker-style = syntax "#37222c"
-    line-numbers-minus-style      = "#b2555b"
-    plus-style                    = syntax "#20303b"
-    plus-non-emph-style           = syntax "#20303b"
-    plus-emph-style               = syntax "#2c5a66"
-    plus-empty-line-marker-style  = syntax "#20303b"
-    line-numbers-plus-style       = "#266d6a"
-    line-numbers-zero-style       = "#3b4261"
+  navigate = true
+  minus-style                   = syntax "#37222c"
+  minus-non-emph-style          = syntax "#37222c"
+  minus-emph-style              = syntax "#713137"
+  minus-empty-line-marker-style = syntax "#37222c"
+  line-numbers-minus-style      = "#b2555b"
+  plus-style                    = syntax "#20303b"
+  plus-non-emph-style           = syntax "#20303b"
+  plus-emph-style               = syntax "#2c5a66"
+  plus-empty-line-marker-style  = syntax "#20303b"
+  line-numbers-plus-style       = "#266d6a"
+  line-numbers-zero-style       = "#3b4261"
 [merge]
-    conflictstyle = diff3
+  conflictstyle = diff3
 [diff]
-    colorMoved = default
+  colorMoved = default
 [init]
-    defaultBranch = master
+  defaultBranch = master
 [commit]
-    gpgsign = true
+  gpgsign = true
