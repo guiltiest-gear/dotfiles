@@ -11,4 +11,4 @@
 --downloader aria2c
 
 # Output to desktop
--o ~/Desktop/%(title)s.%(ext)s
+-o ~/Downloads/%(title)s.%(ext)s
