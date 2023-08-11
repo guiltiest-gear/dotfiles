@@ -56,13 +56,9 @@ _fzf_compgen_dir() {
 }
 
 # fzf zsh keybindings
-if command -v fzf >/dev/null; then
-  . /usr/share/fzf/key-bindings.zsh
-fi
+. /usr/share/fzf/key-bindings.zsh
 
-if command -v fzf >/dev/null; then
-  . /usr/share/fzf/completion.zsh
-fi
+. /usr/share/fzf/completion.zsh
 
 # Ignore case completion
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
