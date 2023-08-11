@@ -169,31 +169,19 @@ bindkey '^e' edit-command-line
 . $ZDOTDIR/aliasrc
 
 # Bash insulter
-if [ -f /etc/bash.command-not-found ]; then
-  . /etc/bash.command-not-found
-fi
+. /etc/bash.command-not-found
 
 # Random color script
-if command -v colorscript >/dev/null; then
-  colorscript random
-fi
+colorscript random
 
 # Load zoxide
-if command -v zoxide >/dev/null; then
-  eval "$(zoxide init zsh)"
-fi
+eval "$(zoxide init zsh)"
 
 # Starship prompt
-if command -v starship >/dev/null; then
-  eval "$(starship init zsh)"
-fi
+eval "$(starship init zsh)"
 
 # Zsh autosuggestions
-if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  . /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
+. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Zsh syntax highlighting (MUST BE PUT AT THE VERY END)
-if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-fi
+. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
