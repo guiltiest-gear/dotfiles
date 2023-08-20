@@ -67,6 +67,8 @@ alias ytdl-video-cc='yt-dlp --config-location ~/.config/yt-dlp/video-cc'
 alias ytdl-thumbnail='yt-dlp --list-thumbnail'
 ## Default nsxiv flags
 alias nsxiv='nsxiv $NSXIV_OPTS "$@"'
+## Fix adb to use XDG dirs
+alias adb='HOME="$XDG_DATA_HOME"/android adb'
 ## fzf scripts
 ### mpv fzf scripts
 mpvf() { find ~/Videos/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv % ; }
