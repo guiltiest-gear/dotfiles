@@ -34,21 +34,21 @@ alias rm='rm -i'
 
 # Termbin
 ## REMEMBER TO PIPE OUTPUT
-alias tb='nc termbin.com 9999'                             # Shortcut for termbin
+alias tb='nc termbin.com 9999'
 
 # Shortcuts
-alias v='nvim'                                             # Shortcut for vim
+alias v='nvim'
 alias se='sudoedit'
 alias wget='wget --continue --hsts-file="$XDG_DATA_HOME"/wget-hsts'
 ## Internet connection
-alias check='ping -c 4 archlinux.org'                      # Pings archlinux.org to make sure internet connection is functional
-alias myip='curl ip.me'                                    # Finds public facing ip
-alias speed='speedtest --single --secure'                  # Tests internet speed with single and secure connection
+alias check='ping -c 4 archlinux.org'
+alias myip='curl ip.me'
+alias speed='speedtest --single --secure'
 ## Pacman and paru
 alias pacsyu='sudo pacman -Syyu'
 alias parsua='paru -Sua'
 alias parsyu='paru -Syyu'
-alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'           # Removes any package orphans.  USE WITH CAUTION.
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 ## Terminal
 alias cl='clear'
 alias x='exit'
@@ -69,12 +69,14 @@ alias ytdl-thumbnail='yt-dlp --list-thumbnail'
 alias nsxiv='nsxiv $NSXIV_OPTS "$@"'
 ## fzf scripts
 ### mpv fzf scripts
-mpvf() { find ~/Videos/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv % ; }
-mpvfm() { find ~/Music/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv --no-video % ; }
+mpvf() { find ~/Videos/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv %; }
+mpvfm() { find ~/Music/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv --no-video %; }
 ### Image viewer script
-imgf() { find ~/Pictures/ -type f | sort | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % nsxiv -apq % ; }
+imgf() { find ~/Pictures/ -type f | sort | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % nsxiv -apq %; }
 ## Simple calculator
-calc() { python3 -c "from math import *; print($*);" }
+calc() {
+  python3 -c "from math import *; print($*);"
+}
 alias calc='noglob calc'
 
 # icat alias
@@ -82,7 +84,7 @@ alias icat='kitty +kitten icat'
 
 # verbose copy
 cpv() {
-    rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress "$@"
+  rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress "$@"
 }
 compdef _files cpv
 
