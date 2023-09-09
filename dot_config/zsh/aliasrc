@@ -12,10 +12,10 @@ alias .5='cd ../../../../..'
 
 # ls flag variations
 ## exa is used bc I just like it more
-alias ls='exa -al --color=always --group-directories-first --git --icons'
-alias la='exa -a --color=always --group-directories-first --icons'
-alias ll='exa -l --color=always --group-directories-first --git --icons'
-alias lt='exa -aT --color=always --group-directories-first --ignore-glob ".git" --icons'
+alias ls='exa -al --color=always --group-directories-first --git'
+alias la='exa -a --color=always --group-directories-first'
+alias ll='exa -l --color=always --group-directories-first --git'
+alias lt='exa -aT --color=always --group-directories-first --ignore-glob ".git"'
 alias l.='exa -a | grep "^\."'
 
 # grep flags
