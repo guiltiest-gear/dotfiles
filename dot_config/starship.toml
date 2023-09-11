@@ -1,6 +1,6 @@
 # Use custom format
 format = """
-$username$directory$lua$c$fill$git_status$git_branch$git_commit
+$username$directory$lua$c$fill$git_status$git_branch$git_state$git_commit
 $character
 """
 
