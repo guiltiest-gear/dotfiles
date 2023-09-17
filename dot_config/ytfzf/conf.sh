@@ -12,7 +12,7 @@
 ##scrape 1 video link per channel instead of the default 2
 #sub_link_count=1
 show_thumbnails=1
-thumbnail_viewer=kitty
+# thumbnail_viewer=kitty
 ##}}}
 #
 ##Functions {{{
@@ -25,11 +25,11 @@ thumbnail_viewer=kitty
 #video_player () {
 #    #check if detach is enabled
 #    case "$is_detach" in
-      #	#disabled
-      #	0) vlc "$@" ;;
-      #	#enabled
-      #	1) setsid -f vlc "$@" > /dev/null 2>&1 ;;
-  #    esac
+#	#disabled
+#	0) vlc "$@" ;;
+#	#enabled
+#	1) setsid -f vlc "$@" > /dev/null 2>&1 ;;
+#    esac
 #}
 
 #on_opt_parse_c () {
