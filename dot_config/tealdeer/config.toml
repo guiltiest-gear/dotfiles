@@ -1,5 +1,5 @@
 [display]
-compact = true
+# compact = true
 use_pager = false
 
 [updates]
