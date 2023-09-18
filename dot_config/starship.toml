@@ -1,6 +1,6 @@
 # Use custom format
 format = """
-$username$directory$lua$c$fill$git_status$git_branch$git_state$git_commit
+$username$directory$lua$c$fill$git_status$git_branch$git_state$git_metrics$git_commit
 $character
 """
 
@@ -50,6 +50,11 @@ style = "bold #9ece6a"
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style)) '
 style = "bold #394260"
+
+# Git metrics
+[git_metrics]
+disabled = false
+# only_nonzero_diffs = false
 
 # Use nerd font symbols for c and lua
 [c]
