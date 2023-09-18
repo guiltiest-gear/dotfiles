@@ -11,12 +11,12 @@ alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
 # ls flag variations
-## exa is used bc I just like it more
-alias ls='exa -al --color=always --group-directories-first --git -M'
-alias la='exa -a --color=always --group-directories-first -M'
-alias ll='exa -l --color=always --group-directories-first --git -M'
-alias lt='exa -aT --color=always --group-directories-first --ignore-glob ".git" -M'
-alias l.='exa -a | grep "^\."'
+## eza is used bc I just like it more
+alias ls='eza -al --color=always --group-directories-first --git -M'
+alias la='eza -a --color=always --group-directories-first -M'
+alias ll='eza -l --color=always --group-directories-first --git -M'
+alias lt='eza -aT --color=always --group-directories-first --ignore-glob ".git" -M'
+alias l.='eza -a | grep "^\."'
 
 # grep flags
 alias grep='grep --color=auto'
