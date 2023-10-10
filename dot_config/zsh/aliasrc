@@ -21,6 +21,9 @@ alias l.='eza -a | grep "^\."'
 # grep flags
 alias grep='grep --color=auto'
 
+# Add color to diffs
+alias diff='diff --color=always'
+
 # Sets output as human readable
 alias df='df -h'
 alias du='du -h'
