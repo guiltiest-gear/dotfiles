@@ -77,18 +77,14 @@ mpvfm() { find ~/Music/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv --
 ### Image viewer script
 imgf() { find ~/Pictures/ -type f | sort | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % nsxiv -apq %; }
 ## Simple calculator
-calc() {
-    python3 -c "from math import *; print($*);"
-}
+calc() { python3 -c "from math import *; print($*);"; }
 alias calc='noglob calc'
 
 # icat alias
 alias icat='kitty +kitten icat'
 
 # verbose copy
-cpv() {
-    rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress "$@"
-}
+cpv() { rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress "$@"; }
 compdef _files cpv
 
 # Fun
