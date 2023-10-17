@@ -68,8 +68,6 @@ alias ytdl-music='yt-dlp --config-location ~/.config/yt-dlp/music'
 alias ytdl-video='yt-dlp --config-location ~/.config/yt-dlp/video'
 alias ytdl-video-cc='yt-dlp --config-location ~/.config/yt-dlp/video-cc'
 alias ytdl-thumbnail='yt-dlp --list-thumbnail'
-## Default nsxiv flags
-alias nsxiv='nsxiv $NSXIV_OPTS "$@"'
 ## fzf scripts
 ### mpv fzf scripts
 mpvf() { find ~/Videos/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv %; }
