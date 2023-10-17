@@ -164,7 +164,7 @@ zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Load in aliases from aliasrc
-. $ZDOTDIR/aliasrc
+. "$ZDOTDIR"/aliasrc
 
 # Bash insulter
 . /etc/bash.command-not-found
