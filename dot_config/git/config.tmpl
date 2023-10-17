@@ -24,7 +24,7 @@
   last = log -1 HEAD --stat
   aliases = "!git config -l | grep ^alias | cut -c 7- | sort"
 [interactive]
-  diffFilter = delta
+  diffFilter = delta --color-only
 [delta]
   navigate = true
   minus-style                   = syntax "#37222c"
