@@ -10,7 +10,6 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
-export NSXIV_OPTS=${NSXIV_OPTS:-"-apq"}
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export WINEPREFIX="$XDG_DATA_HOME"/wine
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
