@@ -7,5 +7,6 @@
   "enableHardwareAcceleration": true,
   "openasar": {
     "setup": true
-  }
+  },
+  "debugLogging": false
 }
