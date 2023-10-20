@@ -40,7 +40,7 @@ alias rm='rm -i'
 alias tb='nc termbin.com 9999'
 
 # Shortcuts
-alias v='nvim'
+alias vim='nvim'
 alias se='sudoedit'
 alias wget='wget --continue --hsts-file="$XDG_DATA_HOME"/wget-hsts'
 ## Internet connection
