@@ -143,6 +143,9 @@ function extract {
           *.cba | *.ace)
             unace x ./"$n"
             ;;
+          *.AppImage | *.appimage)
+            ./"$n" --appimage-extract
+            ;;
           *)
             echo "extract: '$n' - unknown archive method"
             return 1
