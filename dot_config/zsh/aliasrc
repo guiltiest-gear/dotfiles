@@ -12,10 +12,10 @@ alias .5='cd ../../../../..'
 
 # ls flag variations
 ## eza is used bc I just like it more
-alias ls='eza -Mal --color always --group-directories-first --git --color-scale size'
-alias la='eza -Ma --color always --group-directories-first --color-scale size'
-alias ll='eza -Ml --color always --group-directories-first --git --color-scale size'
-alias lt='eza -MaT --color always --group-directories-first --ignore-glob ".git" --color-scale size'
+alias ls='eza -Mal --color always --group-directories-first --git --color-scale size --no-quotes'
+alias la='eza -Ma --color always --group-directories-first --color-scale size --no-quotes'
+alias ll='eza -Ml --color always --group-directories-first --git --color-scale size --no-quotes'
+alias lt='eza -MaT --color always --group-directories-first --ignore-glob ".git" --color-scale size --no-quotes'
 alias l.='eza -a | grep "^\."'
 
 # grep flags
