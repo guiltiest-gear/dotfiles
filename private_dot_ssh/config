@@ -1,0 +1,28 @@
+Host *
+  # Why is this not enabled by default???
+  Compression yes
+  # Use a shared channel for multiple sessions of the same host
+  # It doesn't make sense to duplicate sessions anyway
+  # This should lead to improved connection times
+  ControlMaster auto
+  ControlPath ~/.ssh/control/%r@%h:%p
+  ControlPersist 600
+Host aur.archlinux.org
+  IdentityFile ~/.ssh/aur
+  User aur
+Host 192.168.1.232
+  IdentityFile ~/.ssh/dietpi
+  User dietpi
+Host pi.hole
+  IdentityFile ~/.ssh/dietpi
+  User dietpi
+Host codeberg.org
+  IdentityFile ~/.ssh/codeberg
+  User git
+  # ControlMaster auto
+  ControlPersist 120
+Host github.com
+  IdentityFile ~/.ssh/github
+  User git
+  # ControlMaster auto
+  ControlPersist 120
