@@ -18,11 +18,10 @@ alias ll='eza -Ml --color always --group-directories-first --git --color-scale s
 alias lt='eza -MaT --color always --group-directories-first --ignore-glob ".git" --color-scale size --no-quotes'
 alias l.='eza -a | grep "^\."'
 
-# grep flags
+# Output coloring
 alias grep='grep --color=auto'
-
-# Add color to diffs
-alias diff='diff --color=always'
+alias diff='diff --color=auto'
+alias ip='ip -color=auto'
 
 # Sets output as human readable
 alias df='df -h'
