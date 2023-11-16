@@ -47,6 +47,10 @@ setopt HIST_EXPIRE_DUPS_FIRST
 bindkey -v
 export KEYTIMEOUT=1
 
+# Enhanced zsh vi mode
+export ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+. /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 # Use fd to list path candidates
 _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
@@ -57,10 +61,13 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# fzf zsh keybindings
-. /usr/share/fzf/key-bindings.zsh
-
-. /usr/share/fzf/completion.zsh
+# NOTE: This is here so that the fzf zsh keybindings work properly after enhanced zsh vi mode init
+function zvm_after_init() {
+  # fzf zsh keybindings
+  . /usr/share/fzf/key-bindings.zsh
+  # fzf zsh completion
+  . /usr/share/fzf/completion.zsh
+}
 
 # Ignore case completion
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
