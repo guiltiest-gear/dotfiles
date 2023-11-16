@@ -9,7 +9,7 @@ autoload -U colors && colors
 [[ $- != *i* ]] && return
 
 ### EXPORT
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|x|sdn|rbn|history|cd -|cd ..|..|...|cl|clear)"
 export HISTCONTROL=ignoredups:erasedups
 export FZF_DEFAULT_OPTS="--no-mouse --color=dark --cycle"
