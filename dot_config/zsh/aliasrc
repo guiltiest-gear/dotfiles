@@ -1,8 +1,4 @@
 #!/bin/sh
-#
-# ~/.aliasrc
-#
-
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'

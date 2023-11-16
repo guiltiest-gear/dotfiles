@@ -1,15 +1,11 @@
-#
-# ~/.zshrc
-#
-
+#!/bin/zsh
 # Enable colors and change prompt:
 autoload -U colors && colors
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-### EXPORT
-# export TERM="xterm-256color"
+### Export
 export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|x|sdn|rbn|history|cd -|cd ..|..|...|cl|clear)"
 export HISTCONTROL=ignoredups:erasedups
 export FZF_DEFAULT_OPTS="--no-mouse --color=dark --cycle"
@@ -27,10 +23,11 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # Fix formatting for manpager
 export MANROFFOPT="-c"
 
-# Lines configured by zsh-newuser-install
+# I like my history larger like this
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export HISTSIZE=10000
 export SAVEHIST=10000
+# Various options
 setopt ALIASES
 setopt COMPLETE_ALIASES
 setopt GLOB_DOTS
