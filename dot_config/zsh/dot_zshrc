@@ -68,15 +68,15 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# Ignore case completion
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
-
 # Basic auto/tab complete
 autoload -Uz compinit
 compinit
 _comp_options+=(globdots)
 zstyle ':completion:*' menu select
 zmodload zsh/complist
+
+# Ignore case completion
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
 
 # Use vi navigation keys in the menu completion
 bindkey -M menuselect 'h' vi-backward-char
