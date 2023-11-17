@@ -42,7 +42,6 @@ setopt HIST_EXPIRE_DUPS_FIRST
 
 # vi mode
 bindkey -v
-export KEYTIMEOUT=1
 
 # Enhanced zsh vi mode
 export ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
