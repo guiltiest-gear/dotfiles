@@ -8,7 +8,7 @@
 --sub-format best
 
 # Set subtitle language to English
---sub-lang en
+--sub-lang en-US
 
 # Embeds thumbnail
 --embed-thumbnail
