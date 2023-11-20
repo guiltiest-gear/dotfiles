@@ -58,10 +58,10 @@ alias pi-restart='kitten ssh -t pi.hole "pihole restartdns"'
 alias pi-shutdown='kitten ssh -t pi.hole "sudo systemctl poweroff"'
 alias pi-reboot='kitten ssh -t pi.hole "sudo systemctl reboot"'
 ## yt-dlp shortcuts
-alias ytdl-audio='yt-dlp --config-location ~/.config/yt-dlp/audio'
-alias ytdl-music='yt-dlp --config-location ~/.config/yt-dlp/music'
-alias ytdl-video='yt-dlp --config-location ~/.config/yt-dlp/video'
-alias ytdl-video-cc='yt-dlp --config-location ~/.config/yt-dlp/video-cc'
+alias ytdl-audio='yt-dlp --config-locations ~/.config/yt-dlp/audio'
+alias ytdl-music='yt-dlp --config-locations ~/.config/yt-dlp/music'
+alias ytdl-video='yt-dlp --config-locations ~/.config/yt-dlp/video'
+alias ytdl-video-cc='yt-dlp --config-locations ~/.config/yt-dlp/video-cc'
 alias ytdl-thumbnail='yt-dlp --list-thumbnail'
 ## fzf scripts
 ### mpv fzf scripts
