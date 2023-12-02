@@ -11,4 +11,4 @@
 --external-downloader-args aria2c:'-c -j 3 -x 3 -s 3 -k 1M'
 
 # Send download to desktop
--o ~/Desktop/%(title)s.%(ext)s
+-o ~/Downloads/%(title)s.%(ext)s
