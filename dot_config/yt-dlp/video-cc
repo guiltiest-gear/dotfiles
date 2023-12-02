@@ -20,7 +20,7 @@
 --downloader aria2c
 
 # Arguments to aria2c
---external-downloader-args '-c -j 3 -x 3 -s 3 -k 1M'
+--external-downloader-args aria2c:'-c -j 3 -x 3 -s 3 -k 1M'
 
 # Use sponsorblock to remove al the segments
 --sponsorblock-remove all
