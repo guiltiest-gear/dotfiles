@@ -10,5 +10,8 @@
 # Use aria2c as the downloaded
 --downloader aria2c
 
+# Arguments to aria2c
+--external-downloader-args '-c -j 3 -x 3 -s 3 -k 1M'
+
 # Output to desktop
 -o ~/Downloads/%(title)s.%(ext)s
