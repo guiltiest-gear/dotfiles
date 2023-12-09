@@ -5,7 +5,7 @@
 --prefer-free-formats
 
 # SponsorBlock used to remove non-music
---sponsorblock-remove all
+--sponsorblock-remove default
 
 # Use aria2c as the downloader
 --downloader aria2c

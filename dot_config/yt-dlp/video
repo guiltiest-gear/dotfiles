@@ -14,7 +14,7 @@
 --external-downloader-args aria2c:'-c -j 3 -x 3 -s 3 -k 1M'
 
 # Remove all segments with sponsorblock
---sponsorblock-remove all
+--sponsorblock-remove default
 
 # Output to video folder
 -o ~/Videos/%(title)s.%(ext)s
