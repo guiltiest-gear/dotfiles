@@ -68,7 +68,7 @@ alias ytdl-video-cc='yt-dlp --config-locations ~/.config/yt-dlp/video-cc'
 alias ytdl-thumbnail='yt-dlp --list-thumbnail'
 ## fzf scripts
 ### mpv fzf scripts
-mpvf() { find ~/Videos/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv %; }
+mpvf() { find ~/Videos/ -type f -name "*.mp4" | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv %; }
 mpvfm() { find ~/Music/ -type f | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % mpv --no-video %; }
 ### Image viewer script
 imgf() { find ~/Pictures/ -type f | sort | fzf | sed 's/^/"/;s/$/"/' | xargs -rI % nsxiv -apq %; }
