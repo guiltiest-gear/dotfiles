@@ -19,10 +19,8 @@ Host pi.hole
 Host codeberg.org
   IdentityFile ~/.ssh/codeberg
   User git
-  # ControlMaster auto
   ControlPersist 120
 Host github.com
   IdentityFile ~/.ssh/github
   User git
-  # ControlMaster auto
   ControlPersist 120
