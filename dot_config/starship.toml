@@ -22,7 +22,7 @@ vimcmd_replace_one_symbol = "[](bold #9d7cd8)"
 
 # Username style options
 [username]
-format = "[$user]($style) in "
+format = '\[[$user]($style)\] '
 style_root = "bold #db4b4b"
 
 # Directory options
