@@ -52,18 +52,15 @@ bindkey -v
 # NOTE: This is here so that the fzf zsh keybindings work properly after enhanced zsh vi mode init
 function zvm_after_init() {
   # fzf zsh keybindings
-  . /usr/share/fzf/key-bindings.zsh
+  source /usr/share/fzf/key-bindings.zsh
   # fzf zsh completion
-  . /usr/share/fzf/completion.zsh
+  source /usr/share/fzf/completion.zsh
 }
 
 # Use quick escape for getting to normal mode
 function zvm_config() {
   ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 }
-
-# Enhanced zsh vi mode
-. /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Use fd to list path candidates
 _fzf_compgen_path() {
@@ -164,10 +161,10 @@ zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Load in aliases from aliasrc
-. "$ZDOTDIR"/aliasrc
+source "$ZDOTDIR"/aliasrc
 
 # Bash insulter
-. /etc/bash.command-not-found
+source /etc/bash.command-not-found
 
 # Random color script
 colorscript random
@@ -178,8 +175,11 @@ eval "$(zoxide init zsh)"
 # Starship prompt
 eval "$(starship init zsh)"
 
+# Enhanced zsh vi mode
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 # Zsh autosuggestions
-. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 # Zsh syntax highlighting (MUST BE PUT AT THE VERY END)
-. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh 2>/dev/null
