@@ -46,6 +46,7 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
 
 # vi mode
+# NOTE: Keep this here in case we don't have zsh-vi-mode installed
 bindkey -v
 
 # NOTE: This is here so that the fzf zsh keybindings work properly after enhanced zsh vi mode init
@@ -56,6 +57,7 @@ function zvm_after_init() {
   . /usr/share/fzf/completion.zsh
 }
 
+# Use quick escape for getting to normal mode
 function zvm_config() {
   ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 }
