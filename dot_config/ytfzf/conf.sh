@@ -13,6 +13,7 @@
 #sub_link_count=1
 show_thumbnails=1
 thumbnail_viewer=kitty
+is_loop=1
 ##}}}
 #
 ##Functions {{{
