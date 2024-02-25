@@ -69,5 +69,5 @@ style = "bold #7aa2f7"
 
 [python]
 symbol = " "
-format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
+format = '\[[${symbol}${pyenv_prefix}(${version}) (\($virtualenv\))]($style)\]'
 style = "bold #e0af68"
