@@ -41,9 +41,9 @@ alias check='ping -c 4 archlinux.org'
 alias myip='curl ip.me'
 alias speed='speedtest --single --secure'
 ## Pacman and paru
-alias pacsyu='sudo pacman -Syyu'
-alias parsua='paru -Sua'
-alias parsyu='paru -Syyu'
+# alias pacsyu='sudo pacman -Syyu'
+# alias parsua='paru -Sua'
+# alias parsyu='paru -Syyu'
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 ## Terminal
 # HACK: For some reason, clear doesn't work properly with xterm-kitty when output exceeds number of rows
