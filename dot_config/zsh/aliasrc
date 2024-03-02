@@ -85,15 +85,15 @@ compdef _files cpv
 
 # Fun
 ## Terminal rickroll
-alias rr='curl -sL https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+# alias rr='curl -sL https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 ## Dancing parrot
-alias parrot='curl parrot.live'
+# alias parrot='curl parrot.live'
 ## Starwars
-alias starwars='curl https://asciitv.fr'
+# alias starwars='curl https://asciitv.fr'
 ## Run, Forest, run!
-alias forest='curl ascii.live/forrest'
+# alias forest='curl ascii.live/forrest'
 ## Minesweeper (password: play)
-alias minesweeper='ssh play@anonymine-demo.oskog97.com -p 2222'
+# alias minesweeper='ssh play@anonymine-demo.oskog97.com -p 2222'
 
 # Power
 alias rbn='reboot'
