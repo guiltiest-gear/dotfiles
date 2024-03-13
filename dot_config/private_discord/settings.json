@@ -7,5 +7,6 @@
   "SKIP_HOST_UPDATE": true,
   "MINIMIZE_TO_TRAY": false,
   "IS_MAXIMIZED": true,
-  "IS_MINIMIZED": false
+  "IS_MINIMIZED": false,
+  "chromiumSwitches": {}
 }
