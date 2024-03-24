@@ -1,7 +1,8 @@
 {
   "openasar": {
     "setup": true,
-    "quickstart": true
+    "quickstart": true,
+    "cmdPreset": "perf"
   },
   "debugLogging": false,
   "SKIP_HOST_UPDATE": true,
