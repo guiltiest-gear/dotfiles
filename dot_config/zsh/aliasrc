@@ -50,7 +50,7 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 # Tricking clear into thinking we're using xterm-256color seems to fix things
 alias cl='TERM=xterm-256color clear'
 alias clear='TERM=xterm-256color clear'
-alias x='exit'
+# alias x='exit'
 ## Pihole shortcuts
 alias pihole='kitten ssh pi.hole'
 alias pi-update='kitten ssh -t pi.hole "sudo apt update && sudo apt upgrade -y"'
