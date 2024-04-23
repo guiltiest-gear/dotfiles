@@ -26,4 +26,4 @@
 --sponsorblock-remove default
 
 # Output to CC video folder
--o ~/Videos/CC\ Videos/%(title)s.%(ext)s
+-o ~/Videos/cc-videos/%(title)s.%(ext)s
