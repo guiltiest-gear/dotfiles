@@ -34,17 +34,17 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 
 # Various options
-setopt ALIASES
-setopt COMPLETE_ALIASES
-setopt GLOB_DOTS
+setopt aliases
+setopt complete_aliases
+setopt glob_dots
 setopt interactive_comments
-setopt APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_FIND_NO_DUPS
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_EXPIRE_DUPS_FIRST
+setopt append_history
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_find_no_dups
+setopt hist_save_no_dups
+setopt hist_expire_dups_first
 
 # vi mode
 # NOTE: Keep this here in case we don't have zsh-vi-mode installed
