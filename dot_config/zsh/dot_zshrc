@@ -6,7 +6,7 @@ autoload -U colors && colors
 [[ $- != *i* ]] && return
 
 ### Export
-export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|x|sdn|rbn|history|cd -|cd ..|..|...|cl|clear)"
+export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|sdn|rbn|history|cd -|cd ..|..|...|cl|clear)"
 export HISTCONTROL=ignoredups:erasedups
 export FZF_DEFAULT_OPTS="--no-mouse --color=dark --cycle --tiebreak=chunk \
   --color=fg:#c0caf5,bg:#1a1b26,hl:#ff9e64 \
