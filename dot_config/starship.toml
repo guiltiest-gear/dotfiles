@@ -22,7 +22,7 @@ vimcmd_replace_one_symbol = "[](bold #9d7cd8)"
 
 # Username style options
 [username]
-format = '\[[$user]($style)\] '
+format = '\[[$user]($style)\]'
 style_root = "bold #db4b4b"
 
 # Directory options
@@ -36,7 +36,7 @@ style = "bold #769ff0"
 
 # Git branch
 [git_branch]
-format = '\[[$symbol$branch](bold #769ff0)\]($style) '
+format = '\[[$symbol$branch](bold #769ff0)\]($style)'
 symbol = " "
 style = "bold #394260"
 
@@ -48,7 +48,7 @@ style = "bold #9ece6a"
 
 # Git status
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style)) '
+format = '([\[$all_status$ahead_behind\]]($style))'
 style = "bold #394260"
 
 # Git metrics
@@ -58,16 +58,16 @@ disabled = false
 
 [c]
 symbol = " "
-format = '\[[$symbol($version(-$name))]($style)\] '
+format = '\[[$symbol($version(-$name))]($style)\]'
 style = "bold #9ece6a"
 detect_extensions = ["c", "h", "cc", "cpp", "hh", "hpp"]
 
 [lua]
 symbol = " "
-format = '\[[$symbol($version)]($style)\] '
+format = '\[[$symbol($version)]($style)\]'
 style = "bold #7aa2f7"
 
 [python]
 symbol = " "
-format = '\[[${symbol}${pyenv_prefix}(${version}) (\($virtualenv\))]($style)\]'
+format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 style = "bold #e0af68"
