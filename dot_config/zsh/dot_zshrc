@@ -45,6 +45,7 @@ setopt hist_ignore_space
 setopt hist_find_no_dups
 setopt hist_save_no_dups
 setopt hist_expire_dups_first
+setopt share_history
 
 # vi mode
 # NOTE: Keep this here in case we don't have zsh-vi-mode installed
