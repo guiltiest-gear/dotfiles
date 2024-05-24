@@ -18,7 +18,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#7f7d9c"
 export _ZO_EXCLUDE_DIRS="/tmp:/tmp/*:$HOME/Downloads/*:$HOME/Music/*:$HOME/Documents/*:$HOME/Pictures/*:\
   $HOME/Videos/*:/run/*:$HOME/.local/share/nvim/*:$HOME/.local/state/nvim/*:$HOME/.local/share/chezmoi/*:\
-  $HOME/Downloads:/mnt/*:$HOME/Downloads:$HOME/Music:$HOME/Documents:$HOME/Pictures:$HOME/Videos"
+  $HOME/Downloads:/mnt/*:$HOME/Desktop:$HOME/Music:$HOME/Documents:$HOME/Pictures:$HOME/Videos"
 export GPG_TTY=$(tty)
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 
