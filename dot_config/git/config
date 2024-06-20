@@ -1,5 +1,5 @@
 [user]
-  email = {{ .email | quote }}
+  email = "guiltier.gear@gmail.com"
   name = Jade Fox
   signingkey = BE23EA3397D8E76CB981C4D35812B9381569351E
 [core]
