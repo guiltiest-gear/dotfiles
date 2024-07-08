@@ -25,7 +25,6 @@ export _ZO_EXCLUDE_DIRS="/tmp:/tmp/*:$HOME/Downloads/*:$HOME/Music/*:$HOME/Docum
 export GPG_TTY=$(tty)
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
-export WINEPREFIX="$XDG_DATA_HOME"/wine
 
 # Use bat as manpager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
