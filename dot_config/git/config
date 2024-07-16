@@ -16,7 +16,7 @@
   ft = fetch
   co = checkout
   br = branch
-  st = status
+  st = status -sb
   cl = clone
   l = log --oneline
   cam = commit -am
