@@ -54,3 +54,5 @@
   rebase = true
 [rebase]
   autoStash = true
+[help]
+  autocorrect = 20
