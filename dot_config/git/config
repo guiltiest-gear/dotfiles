@@ -34,7 +34,7 @@
   light = false
   line-numbers = true
 [include]
-  path = tokyonight_night.gitconfig
+  path = "~/.local/share/nvim/lazy/tokyonight.nvim/extras/delta/tokyonight_night.gitconfig"
 [merge]
   conflictstyle = diff3
 [diff]
