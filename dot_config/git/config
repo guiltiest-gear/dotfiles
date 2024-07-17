@@ -26,6 +26,7 @@
   c = commit
   ca = commit -a
   d = diff
+  ds = diff --staged
 [interactive]
   diffFilter = delta --color-only
 [delta]
