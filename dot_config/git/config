@@ -31,7 +31,7 @@
   diffFilter = delta --color-only
 [delta]
   navigate = true
-  light = false
+  dark = true
   line-numbers = true
 [include]
   path = "~/.local/share/nvim/lazy/tokyonight.nvim/extras/delta/tokyonight_night.gitconfig"
