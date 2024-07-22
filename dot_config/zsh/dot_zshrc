@@ -50,7 +50,7 @@ bindkey -v
 
 # NOTE: This is here so that the fzf zsh keybindings work properly after enhanced zsh vi mode init
 zvm_after_init() {
-  eval "$(fzf --zsh)"
+  source <(fzf --zsh)
 }
 
 # Use quick escape for getting to normal mode
