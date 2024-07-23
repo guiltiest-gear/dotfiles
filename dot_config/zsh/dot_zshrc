@@ -47,6 +47,7 @@ setopt share_history
 # vi mode
 # NOTE: Keep this here in case we don't have zsh-vi-mode installed
 bindkey -v
+export KEYTIMEOUT=1
 
 # NOTE: This is here so that the fzf zsh keybindings work properly after enhanced zsh vi mode init
 zvm_after_init() {
