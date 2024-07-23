@@ -73,14 +73,15 @@ _fzf_compgen_dir() {
 }
 
 # Basic auto/tab complete
-autoload -Uz compinit
-compinit
-_comp_options+=(globdots)
+autoload -U compinit && compinit -u
 zstyle ':completion:*' menu select
-zmodload zsh/complist
-
 # Ignore case completion
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+zmodload zsh/complist
+compinit
+# Include hidden files
+_comp_options+=(globdots)
 
 # Use vi navigation keys in the menu completion
 bindkey -M menuselect 'h' vi-backward-char
