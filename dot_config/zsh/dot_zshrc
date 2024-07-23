@@ -51,6 +51,10 @@ bindkey -v
 # NOTE: This is here so that the fzf zsh keybindings work properly after enhanced zsh vi mode init
 zvm_after_init() {
   source <(fzf --zsh)
+  # Edit line in vim with ctrl-e
+  autoload -Uz edit-command-line
+  zle -N edit-command-line
+  bindkey '^E' edit-command-line
 }
 
 # Use quick escape for getting to normal mode
@@ -150,11 +154,6 @@ extract() {
 }
 
 IFS=$SAVEIFS
-
-# Edit line in vim with ctrl-e
-autoload edit-command-line
-zle -N edit-command-line
-bindkey '^e' edit-command-line
 
 # Load in aliases from aliasrc
 source "$ZDOTDIR"/aliasrc
