@@ -1,0 +1,38 @@
+{
+    "currentVersionInfo": {
+        "version": "1.6.0",
+        "hasShownChangelog": true
+    },
+    "settings": {
+        "emojiButton": false,
+        "stickerButton": true,
+        "gifButton": false,
+        "giftButton": true,
+        "attachButton": false,
+        "messageActions": {
+            "reactionButton": false,
+            "superReactionButton": true,
+            "editButton": false,
+            "replyButton": false
+        },
+        "dms": {
+            "friendsTab": false,
+            "premiumTab": true,
+            "snowsgivingTab": true,
+            "discordBirthdayTab": true
+        },
+        "channels": {
+            "publicBadge": true,
+            "boostBar": true,
+            "inviteButton": false
+        },
+        "voice": {
+            "cameraPanelButton": false,
+            "screensharePanelButton": false,
+            "activityPanelButton": false
+        },
+        "compatibility": {
+            "invisibleTypingButton": false
+        }
+    }
+}
