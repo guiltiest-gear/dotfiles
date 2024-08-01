@@ -161,8 +161,8 @@ IFS=$SAVEIFS
 # Load in aliases from aliasrc
 source "$ZDOTDIR"/aliasrc
 
-# Bash insulter
-source /etc/bash.command-not-found
+# Insulter
+source "$ZDOTDIR"/command-not-found.zsh
 
 # fzf tokyonight colors
 source ~/.local/share/nvim/lazy/tokyonight.nvim/extras/fzf/tokyonight_night.sh
