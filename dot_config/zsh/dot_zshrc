@@ -88,6 +88,12 @@ autoload -U compinit && compinit -u
 zstyle ':completion:*' menu select
 # Ignore case completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# Set description format for fzf-tab group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# Switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+# Disable sort when completing git checkout
+zstyle ':completion:*:git-checkout:*' sort false
 
 zmodload zsh/complist
 compinit
@@ -189,6 +195,9 @@ eval "$(zoxide init zsh)"
 
 # Starship prompt
 eval "$(starship init zsh)"
+
+# fzf-tab complete
+source /usr/share/zsh/plugins/fzf-tab-git/fzf-tab.plugin.zsh
 
 # Enhanced zsh vi mode
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
