@@ -1,4 +1,10 @@
 #!/bin/zsh
+# Set up zinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
 # Enable colors and change prompt:
 autoload -U colors && colors
 
@@ -196,17 +202,27 @@ eval "$(zoxide init zsh)"
 # Starship prompt
 eval "$(starship init zsh)"
 
-# fzf-tab complete
-source /usr/share/zsh/plugins/fzf-tab-git/fzf-tab.plugin.zsh
+## Plugins
 
-# Enhanced zsh vi mode
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# zsh-vi-mode
+zinit ice depth=1
+# NOTE: For some bizarre reason, this plugin and this alone requires the full
+# url to clone without authentication, incredibly bizarre behavior
+zinit light https://github.com/jeffreytse/zsh-vi-mode.git
 
-# git extras
-source /usr/share/doc/git-extras/git-extras-completion.zsh
+# fzf-tab
+zinit ice depth=1
+zinit light Aloxaf/fzf-tab
 
-# Zsh autosuggestions
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+# zsh-autosuggestions
+zinit ice depth=1
+zinit light zsh-users/zsh-autosuggestions
 
-# Zsh syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh 2>/dev/null
+# zsh-bd
+zinit ice depth=1
+zinit light Tarrasch/zsh-bd
+
+# zsh-syntax-highlighting
+# NOTE: Always ensure this is the last plugin sourced
+zinit ice depth=1
+zinit light zsh-users/zsh-syntax-highlighting
