@@ -1,6 +1,6 @@
 # Use custom format
 format = """
-$username$directory$lua$c$python$fill$git_metrics$git_status$git_branch$git_state$git_commit
+$username$directory$fill$lua$c$python$git_metrics$git_status$git_branch$git_state$git_commit
 $character
 """
 
