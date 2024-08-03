@@ -107,10 +107,6 @@ compinit
 _comp_options+=(globdots)
 
 # Use vi navigation keys in the menu completion
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
 
 ### extract function
 SAVEIFS=$IFS
@@ -178,6 +174,10 @@ extract() {
 }
 
 IFS=$SAVEIFS
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Trap USR1 signals to trigger a rehash
 TRAPUSR1() {
