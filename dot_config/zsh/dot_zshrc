@@ -225,6 +225,12 @@ zinit light Tarrasch/zsh-bd
 # verbose copy
 zinit snippet OMZP::cp
 
+# Prepend sudo
+zinit snippet OMZP::sudo
+
+# extract
+zinit snippet OMZP::extract
+
 # zsh-syntax-highlighting
 # NOTE: Always ensure this is the last plugin sourced
 zinit ice depth=1
