@@ -222,6 +222,9 @@ zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1
 zinit light Tarrasch/zsh-bd
 
+# verbose copy
+zinit snippet OMZP::cp
+
 # zsh-syntax-highlighting
 # NOTE: Always ensure this is the last plugin sourced
 zinit ice depth=1
