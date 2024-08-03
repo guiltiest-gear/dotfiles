@@ -208,7 +208,7 @@ eval "$(starship init zsh)"
 zinit ice depth=1
 # NOTE: For some bizarre reason, this plugin and this alone requires the full
 # url to clone without authentication, incredibly bizarre behavior
-zinit light https://github.com/jeffreytse/zsh-vi-mode.git
+zinit light https://github.com/jeffreytse/zsh-vi-mode
 
 # fzf-tab
 zinit ice depth=1
