@@ -105,6 +105,8 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':fzf-tab:*' switch-group '<' '>'
 # Disable sort when completing git checkout
 zstyle ':completion:*:git-checkout:*' sort false
+# Preview directory content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 zmodload zsh/complist
 compinit
