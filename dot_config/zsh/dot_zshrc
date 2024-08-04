@@ -36,6 +36,7 @@ export MANROFFOPT="-c"
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export HISTSIZE=10000
 export SAVEHIST=$HISTSIZE
+export HISTDUP=erase
 
 # Various options
 setopt aliases
