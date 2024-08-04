@@ -177,6 +177,9 @@ zinit snippet OMZP::sudo
 # extract
 zinit snippet OMZP::extract
 
+# rsync aliases
+zinit snippet OMZP::rsync
+
 # zsh-syntax-highlighting
 # NOTE: Always ensure this is the last plugin sourced
 zinit ice depth=1
