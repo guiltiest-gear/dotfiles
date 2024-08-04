@@ -139,9 +139,8 @@ eval "$(starship init zsh)"
 source /usr/share/doc/git-extras/git-extras-completion.zsh
 
 ## Plugins
-
 # zsh-vi-mode
-zinit ice depth=1 wait"2" lucid
+zinit ice depth=1 wait"1" lucid
 # NOTE: For some bizarre reason, this plugin and this alone requires the full
 # url to clone without authentication, incredibly bizarre behavior
 zinit light https://github.com/jeffreytse/zsh-vi-mode
@@ -151,11 +150,11 @@ zinit ice depth=1 wait lucid
 zinit light Aloxaf/fzf-tab
 
 # zsh-autosuggestions
-zinit ice depth=1 wait"1" lucid
+zinit ice depth=1 wait lucid
 zinit light zsh-users/zsh-autosuggestions
 
 # zsh-bd
-zinit ice depth=1 wait"3" lucid
+zinit ice depth=1 wait"2" lucid
 zinit light Tarrasch/zsh-bd
 
 # verbose copy
