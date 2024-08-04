@@ -94,25 +94,6 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# Basic auto/tab complete
-autoload -U compinit && compinit -u
-zstyle ':completion:*' menu no
-# Ignore case completion
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-# Set description format for fzf-tab group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# Switch group using `<` and `>`
-zstyle ':fzf-tab:*' switch-group '<' '>'
-# Disable sort when completing git checkout
-zstyle ':completion:*:git-checkout:*' sort false
-# Preview directory content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-
-zmodload zsh/complist
-compinit
-# Include hidden files
-_comp_options+=(globdots)
-
 # Use vi navigation keys in the menu completion
 # bindkey -M menuselect 'h' vi-backward-char
 # bindkey -M menuselect 'k' vi-up-line-or-history
@@ -179,6 +160,28 @@ zinit snippet OMZP::extract
 
 # rsync aliases
 zinit snippet OMZP::rsync
+
+# Load completion
+zmodload zsh/complist
+# Include hidden files
+_comp_options+=(globdots)
+
+# Basic auto/tab complete
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu no
+# Ignore case completion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# Set description format for fzf-tab group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# Switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+# Disable sort when completing git checkout
+zstyle ':completion:*:git-checkout:*' sort false
+# Preview directory content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
+# Use cdreplay for performance
+zinit cdreplay -q
 
 # zsh-syntax-highlighting
 # NOTE: Always ensure this is the last plugin sourced
