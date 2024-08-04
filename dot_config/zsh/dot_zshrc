@@ -135,6 +135,9 @@ eval "$(zoxide init zsh)"
 # Starship prompt
 eval "$(starship init zsh)"
 
+# git extras completion
+source /usr/share/doc/git-extras/git-extras-completion.zsh
+
 ## Plugins
 
 # zsh-vi-mode
