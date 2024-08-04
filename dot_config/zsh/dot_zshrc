@@ -35,7 +35,7 @@ export MANROFFOPT="-c"
 # I like my history larger like this
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export HISTSIZE=10000
-export SAVEHIST=10000
+export SAVEHIST=$HISTSIZE
 
 # Various options
 setopt aliases
