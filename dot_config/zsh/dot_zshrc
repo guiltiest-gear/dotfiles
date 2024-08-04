@@ -28,6 +28,7 @@ $HOME/Videos:$HOME"
 export GPG_TTY=$(tty)
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
+export YSU_MESSAGE_POSITION="after"
 
 # Use bat as manpager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -160,6 +161,10 @@ zinit light zsh-users/zsh-autosuggestions
 # zsh-bd
 zinit ice depth=1 wait"2" lucid
 zinit light Tarrasch/zsh-bd
+
+# zsh-you-should-use
+zinit ice depth=1 wait lucid
+zinit light MichaelAquilina/zsh-you-should-use
 
 # verbose copy
 zinit snippet OMZP::cp
