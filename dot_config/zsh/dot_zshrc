@@ -11,6 +11,34 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
+## Plugins
+# zsh-vi-mode
+zinit ice depth=1
+# NOTE: For some bizarre reason, this plugin and this alone requires the full
+# url to clone without authentication, incredibly bizarre behavior
+zinit light https://github.com/jeffreytse/zsh-vi-mode
+
+# fzf-tab
+zinit ice depth=1 wait lucid
+zinit light Aloxaf/fzf-tab
+
+# zsh-autosuggestions
+zinit ice depth=1
+zinit light zsh-users/zsh-autosuggestions
+
+# zsh-you-should-use
+zinit ice depth=1 wait"2" lucid
+zinit light MichaelAquilina/zsh-you-should-use
+
+# verbose copy
+zinit snippet OMZP::cp
+
+# Prepend sudo
+zinit snippet OMZP::sudo
+
+# extract
+zinit snippet OMZP::extract
+
 # Enable colors and change prompt:
 autoload -U colors && colors
 
@@ -136,37 +164,6 @@ eval "$(starship init zsh)"
 # git extras completion
 source /usr/share/doc/git-extras/git-extras-completion.zsh
 
-## Plugins
-# zsh-vi-mode
-zinit ice depth=1
-# NOTE: For some bizarre reason, this plugin and this alone requires the full
-# url to clone without authentication, incredibly bizarre behavior
-zinit light https://github.com/jeffreytse/zsh-vi-mode
-
-# fzf-tab
-zinit ice depth=1 wait lucid
-zinit light Aloxaf/fzf-tab
-
-# zsh-autosuggestions
-zinit ice depth=1
-zinit light zsh-users/zsh-autosuggestions
-
-# zsh-bd
-# zinit ice depth=1 wait"1" lucid
-# zinit light Tarrasch/zsh-bd
-
-# zsh-you-should-use
-zinit ice depth=1 wait"2" lucid
-zinit light MichaelAquilina/zsh-you-should-use
-
-# verbose copy
-zinit snippet OMZP::cp
-
-# Prepend sudo
-zinit snippet OMZP::sudo
-
-# extract
-zinit snippet OMZP::extract
 # Use cdreplay for performance
 zinit cdreplay -q
 
