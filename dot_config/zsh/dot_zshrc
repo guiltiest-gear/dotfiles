@@ -167,10 +167,6 @@ zinit snippet OMZP::sudo
 
 # extract
 zinit snippet OMZP::extract
-
-# rsync aliases
-zinit snippet OMZP::rsync
-
 # Use cdreplay for performance
 zinit cdreplay -q
 
