@@ -151,7 +151,7 @@ zinit ice depth=1 wait lucid
 zinit light Aloxaf/fzf-tab
 
 # zsh-autosuggestions
-zinit ice depth=1 wait lucid
+zinit ice depth=1
 zinit light zsh-users/zsh-autosuggestions
 
 # zsh-bd
