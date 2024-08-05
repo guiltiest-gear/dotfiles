@@ -41,6 +41,11 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
+# vi mode
+# NOTE: Keep this here in case we don't have zsh-vi-mode installed
+bindkey -v
+export KEYTIMEOUT=1
+
 ## Plugins
 # zsh-vi-mode
 zinit ice depth=1
@@ -113,11 +118,6 @@ setopt hist_find_no_dups
 setopt hist_save_no_dups
 setopt hist_expire_dups_first
 setopt share_history
-
-# vi mode
-# NOTE: Keep this here in case we don't have zsh-vi-mode installed
-bindkey -v
-export KEYTIMEOUT=1
 
 # Use vi navigation keys in the menu completion
 # bindkey -M menuselect 'h' vi-backward-char
