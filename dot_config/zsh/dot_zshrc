@@ -41,6 +41,9 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
+# Enable colors and change prompt:
+autoload -U colors && colors
+
 # vi mode
 # NOTE: Keep this here in case we don't have zsh-vi-mode installed
 bindkey -v
@@ -73,9 +76,6 @@ zinit snippet OMZP::sudo
 
 # extract
 zinit snippet OMZP::extract
-
-# Enable colors and change prompt:
-autoload -U colors && colors
 
 ### Export
 export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|sdn|rbn|history|cd -|cd ..|..|...|cl|clear|z)"
