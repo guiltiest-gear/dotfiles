@@ -105,6 +105,12 @@ TRAPUSR1() {
   rehash
 }
 
+# Load completion
+zmodload zsh/complist
+# Include hidden files
+_comp_options+=(globdots)
+# Basic auto/tab complete
+autoload -Uz compinit && compinit
 # Disable zsh menu completion
 zstyle ':completion:*' menu no
 # Ignore case completion
@@ -174,12 +180,6 @@ zinit snippet OMZP::extract
 # rsync aliases
 zinit snippet OMZP::rsync
 
-# Load completion
-zmodload zsh/complist
-# Include hidden files
-_comp_options+=(globdots)
-# Basic auto/tab complete
-autoload -Uz compinit && compinit
 # Use cdreplay for performance
 zinit cdreplay -q
 
