@@ -68,6 +68,8 @@ print_message() {
     "If you were in the same room as Stephen Hawking and Albert Einstein, you'd singlehandedly drop the average IQ to 7."
     "You are the 13th reason"
     "Your life is nothing, you serve ZERO purpose. You should kill yourself, NOW!"
+    "*LOUD INCORRECT BUZZER*"
+    "I'm getting real sick of you, you know that?"
   )
 
   # If CMD_NOT_FOUND_MSGS array is populated use those messages instead of the defaults
