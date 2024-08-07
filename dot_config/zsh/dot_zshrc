@@ -65,7 +65,7 @@ zinit ice depth=1
 zinit light zsh-users/zsh-autosuggestions
 
 # zsh-you-should-use
-zinit ice depth=1 wait"2" lucid
+zinit ice depth=1 wait"1" lucid
 zinit light MichaelAquilina/zsh-you-should-use
 
 # verbose copy
