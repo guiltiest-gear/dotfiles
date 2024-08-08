@@ -91,7 +91,7 @@ $HOME/Videos:$HOME"
 export GPG_TTY=$(tty)
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
-export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node_repl_history
 export YSU_MESSAGE_POSITION="after"
 
 # Use bat as manpager
