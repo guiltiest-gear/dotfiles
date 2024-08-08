@@ -56,7 +56,7 @@ style = "bold #394260"
 
 # Git metrics
 [git_metrics]
-disabled = false
+# disabled = false
 format = "([+$added]($added_style))([-$deleted]($deleted_style))"
 # only_nonzero_diffs = false
 
