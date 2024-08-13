@@ -152,6 +152,9 @@ source "$ZDOTDIR"/aliasrc
 # Insulter
 source "$ZDOTDIR"/command-not-found.zsh
 
+# Random color script
+colorscript random
+
 # fzf tokyonight colors
 source ~/.local/share/nvim/lazy/tokyonight.nvim/extras/fzf/tokyonight_night.sh
 
@@ -166,9 +169,6 @@ eval "$(starship init zsh)"
 
 # Transient prompt hack for starship
 source "$ZDOTDIR"/transient-prompt.zsh
-
-# Random color script
-colorscript random
 
 # Use cdreplay for performance
 zinit cdreplay -q
