@@ -93,6 +93,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node_repl_history
 export YSU_MESSAGE_POSITION="after"
+export PATH=$HOME/.local/bin/:$PATH
 
 # Use bat as manpager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
