@@ -27,6 +27,7 @@
   ca = commit -a
   d = diff
   ds = diff --staged
+  ap = add -p
 [interactive]
   diffFilter = delta --color-only
 [delta]
