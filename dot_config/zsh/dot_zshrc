@@ -167,9 +167,6 @@ eval "$(zoxide init zsh)"
 # Starship prompt
 eval "$(starship init zsh)"
 
-# Transient prompt hack for starship
-# source "$ZDOTDIR"/transient-prompt.zsh
-
 # Use cdreplay for performance
 zinit cdreplay -q
 
