@@ -1,7 +1,7 @@
 {
 	"all": {
 		"changeLogs": {
-			"BDFDB": "3.7.8",
+			"BDFDB": "3.7.9",
 			"BetterNsfwTag": "1.3.2",
 			"CharCounter": "1.6.6",
 			"CopyRawMessage": "1.1.5",
@@ -23,7 +23,7 @@
 			"useChromium": false
 		},
 		"hashes": {
-			"0BDFDB.data.json": "d134bc83cf9b9d33fc5951343cebeca0ffd1d514",
+			"0BDFDB.data.json": "77d4ee1ea6f2c200aba65902b0ad600033454bca",
 			"0BDFDB.raw.css": "5b43d81101400952eaac0b60060f000744df4f86"
 		}
 	}
