@@ -14,7 +14,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Functions
 # NOTE: This is here so that the fzf zsh keybindings work properly after enhanced zsh vi mode init
 zvm_after_init() {
-  source <(fzf --zsh)
+  _evalcache fzf --zsh
   # Edit line in vim with ctrl-e
   autoload -Uz edit-command-line
   zle -N edit-command-line
@@ -68,6 +68,10 @@ zinit light zsh-users/zsh-autosuggestions
 zinit ice depth=1 wait"1" lucid
 zinit light MichaelAquilina/zsh-you-should-use
 
+# evalcache
+zinit ice depth=1
+zinit light mroth/evalcache
+
 # verbose copy
 zinit snippet OMZP::cp
 
@@ -95,6 +99,7 @@ export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node_repl_history
 export YSU_MESSAGE_POSITION="after"
 export PATH=$HOME/.local/bin:$PATH
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
+export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/zsh/evalcache
 
 # Use bat as manpager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -163,10 +168,10 @@ source ~/.local/share/nvim/lazy/tokyonight.nvim/extras/fzf/tokyonight_night.sh
 source /usr/share/doc/git-extras/git-extras-completion.zsh
 
 # Load zoxide
-eval "$(zoxide init zsh)"
+_evalcache zoxide init zsh
 
 # Starship prompt
-eval "$(starship init zsh)"
+_evalcache starship init zsh
 
 # Use cdreplay for performance
 zinit cdreplay -q
