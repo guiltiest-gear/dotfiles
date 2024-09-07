@@ -72,8 +72,8 @@ mpvf() { fd "mp4$|mkv$" --type=f --color=never ~/Videos/ | fzf --scheme=path | s
 ### Image viewer script
 imgf() { find ~/Pictures/ -type f | sort | fzf --scheme=path | sed 's/^/"/;s/$/"/' | xargs -rI % nsxiv -apq %; }
 ## Simple calculator
-calc() { python3 -c "from math import *; print($*);"; }
-alias calc='noglob calc'
+# calc() { python3 -c "from math import *; print($*);"; }
+# alias calc='noglob calc'
 
 # icat alias
 alias icat='kitty +kitten icat'
