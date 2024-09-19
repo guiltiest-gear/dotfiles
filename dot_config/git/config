@@ -28,6 +28,7 @@
   d = diff
   ds = diff --staged
   ap = add -p
+  amend = commit --amend
 [interactive]
   diffFilter = delta --color-only
 [delta]
