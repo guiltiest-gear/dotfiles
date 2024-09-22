@@ -42,9 +42,6 @@ alias check='ping -c 4 archlinux.org'
 alias myip='curl ip.me'
 alias speed='speedtest --single --secure'
 ## Pacman and paru
-# alias pacsyu='sudo pacman -Syyu'
-# alias parsua='paru -Sua'
-# alias parsyu='paru -Syyu'
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 ## Terminal
 # HACK: For some reason, clear doesn't work properly with xterm-kitty when output exceeds number of rows
@@ -71,9 +68,6 @@ mpvf() { fd "mp4$|mkv$" --type=f --color=never ~/Videos/ | fzf --scheme=path | s
 # mpvfm() { fd "." --type=f --color=never ~/Music/ | fzf --scheme=path | sed 's/^/"/;s/$/"/' | xargs -rI % mpv --no-video %; }
 ### Image viewer script
 imgf() { find ~/Pictures/ -type f | sort | fzf --scheme=path | sed 's/^/"/;s/$/"/' | xargs -rI % nsxiv -apq %; }
-## Simple calculator
-# calc() { python3 -c "from math import *; print($*);"; }
-# alias calc='noglob calc'
 
 # icat alias
 alias icat='kitty +kitten icat'
