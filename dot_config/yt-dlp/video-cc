@@ -10,17 +10,8 @@
 # Set subtitle language to English
 --sub-lang en-US
 
-# Embeds thumbnail
---embed-thumbnail
-
 # Merge output format as mp4
 --merge-output-format mp4
-
-# Use aria2c as the downloader
---downloader aria2c
-
-# Arguments to aria2c
---external-downloader-args aria2c:'-c -j 3 -x 3 -s 3 -k 1M'
 
 # Use sponsorblock to remove most of the segments
 --sponsorblock-remove default
