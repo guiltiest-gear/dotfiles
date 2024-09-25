@@ -1,8 +1,12 @@
 #!/bin/sh
+# NOTE: Do not move the xdg environment variables
+# You will not be able to login to the desktop environment, since $ICEAUTHORITY depends on these variables
+# Don't be stupid, don't move them
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
+
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export DIFFPROG="nvim -d"
 export EDITOR="/usr/bin/nvim"
