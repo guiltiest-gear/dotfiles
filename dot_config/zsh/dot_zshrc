@@ -81,9 +81,7 @@ zinit snippet OMZP::sudo
 # extract
 zinit snippet OMZP::extract
 
-### Export
-export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|sdn|rbn|history|cd -|cd ..|..|...|cl|clear|z)"
-export HISTCONTROL=ignoredups:erasedups
+# Exports
 export FZF_DEFAULT_OPTS="--no-mouse --cycle --tiebreak=chunk"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
@@ -93,26 +91,9 @@ $HOME/Videos/*:/run/*:$HOME/.local/share/nvim/*:$HOME/.local/state/nvim/*:$HOME/
 $HOME/.local/share/chezmoi:$HOME/Downloads:$HOME/Desktop:$HOME/Music:$HOME/Documents:$HOME/Pictures:\
 $HOME/Videos:$HOME"
 export _ZO_FZF_OPTS="--scheme=path"
-export GPG_TTY=$(tty)
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
-export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
-export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node_repl_history
 export YSU_MESSAGE_POSITION="after"
-export PATH=$HOME/.local/bin:$PATH
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
 export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/zsh/evalcache
-
-# Use bat as manpager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-# Fix formatting for manpager
-export MANROFFOPT="-c"
-
-# I like my history larger like this
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
-export HISTSIZE=10000
-export SAVEHIST=$HISTSIZE
-export HISTDUP=erase
 
 # Various options
 setopt aliases

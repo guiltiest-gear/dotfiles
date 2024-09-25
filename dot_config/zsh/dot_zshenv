@@ -1,0 +1,32 @@
+#!/bin/zsh
+# Append to the path
+typeset -U path PATH
+path=(~/.local/bin $path)
+export PATH
+
+# Editor config
+export DIFFPROG="$EDITOR -d"
+export EDITOR="/usr/bin/nvim"
+export VISUAL=$EDITOR
+
+# Exports
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
+export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node_repl_history
+export GPG_TTY=$(tty)
+export LESSHISTFILE="$XDG_STATE_HOME"/less/history
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+
+# History related exports
+export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|sdn|rbn|history|cd -|cd ..|..|...|cl|clear|z)"
+export HISTCONTROL=ignoredups:erasedups
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export HISTSIZE=10000
+export SAVEHIST=$HISTSIZE
+export HISTDUP=erase
+
+# Use bat as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Fix formatting for manpager
+export MANROFFOPT="-c"
