@@ -1,5 +1,4 @@
 Host *
-  # Why is this not enabled by default???
   Compression yes
   # Use a shared channel for multiple sessions of the same host
   # It doesn't make sense to duplicate sessions anyway
