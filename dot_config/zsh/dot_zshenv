@@ -5,9 +5,9 @@ path=(~/.local/bin $path)
 export PATH
 
 # Editor config
-export DIFFPROG="$EDITOR -d"
 export EDITOR="/usr/bin/nvim"
 export VISUAL=$EDITOR
+export DIFFPROG="$EDITOR -d"
 
 # Exports
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
