@@ -7,5 +7,6 @@
   "openasar": {
     "setup": true,
     "quickstart": true
-  }
+  },
+  "debugLogging": false
 }
