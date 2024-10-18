@@ -134,7 +134,7 @@ zstyle ':completion:*:git-checkout:*' sort false
 # Preview directory content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # Re-add style flags to fzf-tab
-zstyle -e ':fzf-tab:*' fzf-flags 'reply=(`echo $FZF_DEFAULT_OPTS`)'
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 # Load in aliases from aliasrc
 source "$ZDOTDIR"/aliasrc
