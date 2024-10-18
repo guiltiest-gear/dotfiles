@@ -53,3 +53,5 @@
   autocorrect = 20
 [git-extras]
   default-branch = master
+[push]
+  autoSetupRemote = true
