@@ -71,6 +71,8 @@ imgf() { find ~/Pictures/ -type f | sort | fzf --scheme=path | sed 's/^/"/;s/$/"
 
 # icat alias
 alias icat='kitty +kitten icat'
+# kitty ssh alias
+alias s='kitten ssh'
 
 # Fun
 ## Terminal rickroll
