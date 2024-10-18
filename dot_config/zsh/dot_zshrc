@@ -90,29 +90,7 @@ export _ZO_EXCLUDE_DIRS="/tmp:/tmp/*:$HOME/Downloads/*:$HOME/Music/*:$HOME/Docum
 $HOME/Videos/*:/run/*:$HOME/.local/share/nvim/*:$HOME/.local/state/nvim/*:$HOME/.local/share/chezmoi/*:\
 $HOME/.local/share/chezmoi:$HOME/Downloads:$HOME/Desktop:$HOME/Music:$HOME/Documents:$HOME/Pictures:\
 $HOME/Videos:$HOME"
-export _ZO_FZF_OPTS="--scheme=path \
-  --highlight-line \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --border=none
-  --color=bg+:#283457 \
-  --color=bg:#16161e \
-  --color=border:#27a1b9 \
-  --color=fg:#c0caf5 \
-  --color=gutter:#16161e \
-  --color=header:#ff9e64 \
-  --color=hl+:#2ac3de \
-  --color=hl:#2ac3de \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#2ac3de \
-  --color=query:#c0caf5:regular \
-  --color=scrollbar:#27a1b9 \
-  --color=separator:#ff9e64 \
-  --color=spinner:#ff007c
-"
+export _ZO_FZF_OPTS="--scheme=path"
 export YSU_MESSAGE_POSITION="after"
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
 export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/zsh/evalcache
