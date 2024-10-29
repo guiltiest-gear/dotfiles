@@ -18,7 +18,7 @@ export LESSHISTFILE="$XDG_STATE_HOME"/less/history
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 
 # History related exports
-export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|sdn|rbn|history|cd -|cd ..|..|...|cl|clear|z)"
+# export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|sdn|rbn|history|cd -|cd ..|..|...|cl|clear|z)"
 export HISTCONTROL=ignoredups:erasedups
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export HISTSIZE=10000
