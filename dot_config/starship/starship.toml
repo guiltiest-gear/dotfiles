@@ -43,7 +43,7 @@ symbol = " "
 
 # Git commit
 [git_commit]
-only_detached = false
+# only_detached = false
 format = '[\($hash$tag\)]($style)'
 
 # Git status
