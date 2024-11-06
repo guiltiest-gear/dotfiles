@@ -3,7 +3,7 @@
 
 # Use custom format
 format = """
-$username$directory$fill$lua$c$python$nodejs$git_metrics$git_status$git_branch$git_state$git_commit
+$username$directory$fill$lua$c$python$nodejs$perl$git_status$git_branch$git_state$git_commit
 $character
 """
 
@@ -50,12 +50,6 @@ format = '[\($hash$tag\)]($style)'
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style))'
 
-# Git metrics
-[git_metrics]
-# disabled = false
-format = "([+$added]($added_style))([-$deleted]($deleted_style))"
-# only_nonzero_diffs = false
-
 [c]
 symbol = " "
 format = '\[[$symbol($version(-$name))]($style)\]'
@@ -71,4 +65,8 @@ format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 
 [nodejs]
 symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+[perl]
+symbol = " "
 format = '\[[$symbol($version)]($style)\]'
