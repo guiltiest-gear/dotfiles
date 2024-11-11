@@ -158,7 +158,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # Re-add style flags to fzf-tab
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # Set other fzf flags
-zstyle ':fzf-tab:*' fzf-flags --scheme=path --bind=tab:accept
+zstyle ':fzf-tab:*' fzf-flags --scheme=path
 
 # Load in aliases from aliasrc
 source "$ZDOTDIR"/aliasrc
