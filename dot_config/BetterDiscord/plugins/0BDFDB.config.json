@@ -5,7 +5,7 @@
 			"BetterNsfwTag": "1.3.2",
 			"CharCounter": "1.6.6",
 			"CopyRawMessage": "1.1.5",
-			"ImageUtilities": "5.4.8",
+			"ImageUtilities": "5.4.9",
 			"PluginRepo": "2.4.6",
 			"ReadAllNotificationsButton": "1.7.8",
 			"ServerCounter": "1.0.8",
@@ -23,8 +23,8 @@
 			"useChromium": false
 		},
 		"hashes": {
-			"0BDFDB.data.json": "0e72ef0662b9d1f48a8d73485ae09bb1e247959f",
-			"0BDFDB.raw.css": "d54c1db8ea68d8dcc12b6ce688e277d5cad65856"
+			"0BDFDB.data.json": "7b0c17d20714da30b25c7df02cb800b5db9f4ffc",
+			"0BDFDB.raw.css": "7c6c34a10391702b93af4cfaeb3965fe7b0fdcc7"
 		}
 	}
 }
