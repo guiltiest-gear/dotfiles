@@ -8,5 +8,12 @@
     "setup": true,
     "quickstart": true
   },
-  "debugLogging": false
+  "debugLogging": false,
+  "enableHardwareAcceleration": true,
+  "WINDOW_BOUNDS": {
+    "x": 320,
+    "y": 180,
+    "width": 1280,
+    "height": 720
+  }
 }
