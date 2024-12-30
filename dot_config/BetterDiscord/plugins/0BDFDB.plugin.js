@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 3.8.6
+ * @version 3.8.7
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -62,6 +62,10 @@ module.exports = (_ => {
 							value: true,
 							isDisabled: data => data.nativeValue,
 							hasNote: data => data.disabled && data.value
+						},
+						checkForUpdates: {
+							value: false,
+							hasNote: true
 						},
 						showSupportBadges: {
 							value: false
@@ -298,7 +302,7 @@ module.exports = (_ => {
 			};
 			BDFDB.TimeUtils.suppress = function (callback, strings, config) {return function (...args) {
 				try {return callback(...args);}
-				catch (err) {!config.ignoreErrors && BDFDB.LogUtils.error([strings, err], config);}
+				catch (err) {(!config || !config.ignoreErrors) && BDFDB.LogUtils.error([strings, err], config);}
 			}};
 
 			BDFDB.LogUtils.log("Loading Library");
@@ -699,7 +703,7 @@ module.exports = (_ => {
 				}, "Failed to clean up Plugin!", plugin)();
 			};
 			BDFDB.PluginUtils.checkUpdate = function (pluginName, url) {
-				if (pluginName && url && PluginStores.updateData.plugins[url]) return new Promise(callback => {
+				if (pluginName && url && Internal.settings.general.checkForUpdates && PluginStores.updateData.plugins[url]) return new Promise(callback => {
 					requestFunction(url, {timeout: 60000}, (error, response, body) => {
 						if (error || !PluginStores.updateData.plugins[url]) return callback(null);
 						let newName = (body.match(/"name"\s*:\s*"([^"]+)"/) || [])[1] || pluginName;
