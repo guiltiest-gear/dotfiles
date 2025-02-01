@@ -11,9 +11,12 @@
   "debugLogging": false,
   "enableHardwareAcceleration": true,
   "WINDOW_BOUNDS": {
-    "x": 320,
-    "y": 180,
+    "x": 2163,
+    "y": 141,
     "width": 1280,
     "height": 720
-  }
+  },
+  "DANGEROUS_ENABLE_DEVTOOLS_ONLY_ENABLE_IF_YOU_KNOW_WHAT_YOURE_DOING": true,
+  "MIN_WIDTH": 940,
+  "MIN_HEIGHT": 500
 }
