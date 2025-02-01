@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 3.8.9
+ * @version 3.9.2
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -3996,8 +3996,8 @@ module.exports = (_ => {
 													BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
 														style: {flex: 1},
 														children: [
-															BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormTitle, {
-																tag: Internal.LibraryComponents.FormComponents.FormTags && Internal.LibraryComponents.FormComponents.FormTags.H4,
+															BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormTitle.Title, {
+																tag: Internal.LibraryComponents.FormTitle.Tags && Internal.LibraryComponents.FormTitle.Tags.H4,
 																children: config.header
 															}),
 															BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextElement, {
@@ -4063,11 +4063,11 @@ module.exports = (_ => {
 					});
 				};
 				
-				var MappedMenuItems = {}, RealMenuItems = BDFDB.ModuleUtils.findByProperties("MenuCheckboxItem", "MenuItem") || BDFDB.ModuleUtils.find(m => {
+				var MappedMenuItems = {}, RealMenuItems = BDFDB.ModuleUtils.find(m => {
 					if (!m || typeof m != "function") return false;
 					let string = m.toString();
-					return string.endsWith("{return null}}") && string.indexOf("(){return null}") > -1 && string.indexOf("catch(") == -1;
-				}) || BDFDB.ModuleUtils.findByString("(){return null}function");
+					return string.indexOf("(){return null}") > -1 && string.indexOf("catch(") == -1 && string.split("){return null}").length > 4;
+				});
 				if (!RealMenuItems) {
 					RealMenuItems = {};
 					BDFDB.LogUtils.error(["could not find Module for MenuItems"]);
@@ -5275,8 +5275,8 @@ module.exports = (_ => {
 										if (typeof this.props.onClick == "function") this.props.onClick(this.props.collapsed, this);
 										BDFDB.ReactUtils.forceUpdate(this);
 									},
-									children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormTitle, {
-										tag: Internal.LibraryComponents.FormComponents.FormTags && Internal.LibraryComponents.FormComponents.FormTags.H5,
+									children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormTitle.Title, {
+										tag: Internal.LibraryComponents.FormTitle.Tags && Internal.LibraryComponents.FormTitle.Tags.H5,
 										className: BDFDB.disCN.collapsecontainertitle,
 										children: this.props.title
 									})
@@ -6208,8 +6208,7 @@ module.exports = (_ => {
 					}
 				};
 				
-				CustomComponents.FormComponents = {};
-				CustomComponents.FormComponents.FormItem = reactInitialized && class BDFDB_FormItem extends Internal.LibraryModules.React.Component {
+				CustomComponents.FormItem = reactInitialized && class BDFDB_FormItem extends Internal.LibraryModules.React.Component {
 					render() {
 						return BDFDB.ReactUtils.createElement("div", {
 							className: this.props.className,
@@ -6219,8 +6218,8 @@ module.exports = (_ => {
 									children: [
 										this.props.title != null || this.props.error != null ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
 											wrap: true,
-											children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormTitle, {
-												tag: this.props.tag || Internal.LibraryComponents.FormComponents.FormTags && Internal.LibraryComponents.FormComponents.FormTags.H5,
+											children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormTitle.Title, {
+												tag: this.props.tag || Internal.LibraryComponents.FormTitle.Tags && Internal.LibraryComponents.FormTitle.Tags.H5,
 												disabled: this.props.disabled,
 												required: this.props.required,
 												error: this.props.error,
@@ -6415,8 +6414,8 @@ module.exports = (_ => {
 											style: {flex: "1 1 auto"},
 											children: this.props.label
 										}),
-										typeof this.props.note == "string" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormText, {
-											type: Internal.LibraryComponents.FormComponents.FormText.Types.DESCRIPTION,
+										typeof this.props.note == "string" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormText.Text, {
+											type: Internal.LibraryComponents.FormText.Types.DESCRIPTION,
 											children: this.props.note
 										}) : null
 									].filter(n => n)
@@ -6961,6 +6960,15 @@ module.exports = (_ => {
 					}
 				};
 				
+				CustomComponents.Scrollers = new Proxy({}, {
+					get: function (_, item) {
+						if (item == "AUTO") return Internal.LibraryComponents.ScrollerBase(BDFDB.disCN.scrollerauto, BDFDB.disCN.scrollerfade, BDFDB.disCN.scrollercustomtheme);
+						else if (item == "Thin") return Internal.LibraryComponents.ScrollerBase(BDFDB.disCN.scrollerthin, BDFDB.disCN.scrollerfade, BDFDB.disCN.scrollercustomtheme);
+						else if (item == "None") return Internal.LibraryComponents.ScrollerBase(BDFDB.disCN.scrollernone, BDFDB.disCN.scrollerfade, BDFDB.disCN.scrollercustomtheme);
+						else return "div";
+					}
+				});
+				
 				CustomComponents.SearchBar = reactInitialized && class BDFDB_SearchBar extends Internal.LibraryModules.React.Component {
 					handleChange(query) {
 						this.props.query = query;
@@ -7076,19 +7084,19 @@ module.exports = (_ => {
 						return this.props.children ? BDFDB.ReactUtils.createElement("div", {
 							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.settingspanellistwrapper, this.props.mini && BDFDB.disCN.settingspanellistwrappermini),
 							children: [
-								this.props.dividerTop ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormDivider, {
+								this.props.dividerTop ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormDivider, {
 									className: this.props.mini ? BDFDB.disCN.marginbottom4 : BDFDB.disCN.marginbottom8
 								}) : null,
-								typeof this.props.title == "string" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormTitle, {
+								typeof this.props.title == "string" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormTitle.Title, {
 									className: BDFDB.disCN.marginbottom4,
-									tag: Internal.LibraryComponents.FormComponents.FormTags && Internal.LibraryComponents.FormComponents.FormTags.H3,
+									tag: Internal.LibraryComponents.FormTitle.Tags && Internal.LibraryComponents.FormTitle.Tags.H3,
 									children: this.props.title
 								}) : null,
 								BDFDB.ReactUtils.createElement("div", {
 									className: BDFDB.disCN.settingspanellist,
 									children: this.props.children
 								}),
-								this.props.dividerBottom ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormDivider, {
+								this.props.dividerBottom ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormDivider, {
 									className: this.props.mini ? BDFDB.disCN.margintop4 : BDFDB.disCN.margintop8
 								}) : null
 							]
@@ -7105,7 +7113,7 @@ module.exports = (_ => {
 						let childComponent = Internal.LibraryComponents[this.props.type];
 						if (!childComponent) return null;
 						if (this.props.mini && childComponent.Sizes) this.props.size = childComponent.Sizes.MINI || childComponent.Sizes.MIN;
-						let label = this.props.label ? (this.props.tag ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormTitle, {
+						let label = this.props.label ? (this.props.tag ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormTitle.Title, {
 							className: BDFDB.DOMUtils.formatClassName(this.props.labelClassName, BDFDB.disCN.marginreset),
 							tag: this.props.tag,
 							children: this.props.label
@@ -7119,7 +7127,7 @@ module.exports = (_ => {
 							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.settingsrow, BDFDB.disCN.settingsrowcontainer, this.props.disabled && BDFDB.disCN.settingsrowdisabled, margin != null && (InternalData.DiscordClasses[`marginbottom${margin}`] && BDFDB.disCN[`marginbottom${margin}`] || margin == 0 && BDFDB.disCN.marginreset)),
 							id: this.props.id,
 							children: [
-								this.props.dividerTop ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormDivider, {
+								this.props.dividerTop ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormDivider, {
 									className: this.props.mini ? BDFDB.disCN.marginbottom4 : BDFDB.disCN.marginbottom8
 								}) : null,
 								BDFDB.ReactUtils.createElement("div", {
@@ -7147,13 +7155,13 @@ module.exports = (_ => {
 								}),
 								typeof this.props.note == "string" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
 									className: BDFDB.disCN.settingsrownote,
-									children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormText, {
+									children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormText.Text, {
 										disabled: this.props.disabled,
-										type: Internal.LibraryComponents.FormComponents.FormText.Types.DESCRIPTION,
+										type: Internal.LibraryComponents.FormText.Types.DESCRIPTION,
 										children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextScroller, {speed: 2, children: this.props.note})
 									})
 								}) : null,
-								this.props.dividerBottom ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormComponents.FormDivider, {
+								this.props.dividerBottom ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormDivider, {
 									className: this.props.mini ? BDFDB.disCN.margintop4 : BDFDB.disCN.margintop8
 								}) : null
 							]
