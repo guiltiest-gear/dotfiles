@@ -181,6 +181,9 @@ _evalcache zoxide init zsh
 # Starship prompt
 _evalcache starship init zsh
 
+# Enable transient prompt
+source "$ZDOTDIR"/transient-prompt.zsh
+
 # Use cdreplay for performance
 zinit cdreplay -q
 
