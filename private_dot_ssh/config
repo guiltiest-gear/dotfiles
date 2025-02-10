@@ -17,3 +17,7 @@ Host github.com
   IdentityFile ~/.ssh/github
   User git
   ControlPersist 120
+Host gitlab.archlinux.org
+  IdentityFile ~/.ssh/archlinux-gitlab
+  User git
+  ControlPersist 120
