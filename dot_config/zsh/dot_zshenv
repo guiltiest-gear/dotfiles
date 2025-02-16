@@ -19,6 +19,8 @@ export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node_repl_history
 export GPG_TTY=$(tty)
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+export DVDCSS_CACHE="$XDG_DATA_HOME"/dvdcss
+export VIDEO_FORMAT=NTSC
 
 # History related exports
 # export HISTORY_IGNORE="(ls|la|ll|cd|pwd|exit|sdn|rbn|history|cd -|cd ..|..|...|cl|clear|z)"
