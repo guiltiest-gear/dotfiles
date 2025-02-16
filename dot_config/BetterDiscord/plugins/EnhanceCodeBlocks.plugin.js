@@ -1,7 +1,7 @@
 /**
  * @name enhancecodeblocks
  * @description Enhances Discords Codeblocks & Text File Attachments
- * @version 1.0.24
+ * @version 1.0.26
  * @author Doggybootsy
  */
 "use strict";
@@ -502,7 +502,7 @@ var import_react8, ModalRoot, Spinner, foundToolTip, Tooltip, Switch, Popout, Er
     import_react8 = __toESM(require_react());
     init_icon();
     init_settingsItem();
-    ModalRoot = BdApi.Webpack.getModule((m) => m.ModalRoot).ModalRoot, Spinner = BdApi.Webpack.getModule((m) => m.Type?.PULSING_ELLIPSIS, { searchExports: !0 }), foundToolTip = BdApi.Webpack.getModule((m) => m.prototype?.setDomElement && m.prototype.render.toString().includes("renderTooltip()"), { searchExports: !0 }), Tooltip = foundToolTip || BdApi.Components.Tooltip, Switch = BdApi.Webpack.getModule(BdApi.Webpack.Filters.byStrings("focusProps:", ",tooltipNote:", ".Switch,"), { searchExports: !0 }), Popout = BdApi.Webpack.getModule((m) => m.prototype?.render?.toString().includes("shouldShowPopout"), { searchExports: !0 }), ErrorBoundary = class extends import_react8.default.Component {
+    ModalRoot = BdApi.Webpack.getByStrings("reducedMotion:", "transitionState:", "small", "dialog", { searchExports: !0 }), Spinner = BdApi.Webpack.getModule((m) => m.Type?.PULSING_ELLIPSIS, { searchExports: !0 }), foundToolTip = BdApi.Webpack.getModule((m) => m.prototype?.setDomElement && m.prototype.render.toString().includes("renderTooltip()"), { searchExports: !0 }), Tooltip = foundToolTip || BdApi.Components.Tooltip, Switch = BdApi.Webpack.getModule(BdApi.Webpack.Filters.byStrings("focusProps:", ",tooltipNote:"), { searchExports: !0 }), Popout = BdApi.Webpack.getModule((m) => m.prototype?.render?.toString().includes("shouldShowPopout"), { searchExports: !0 }), ErrorBoundary = class extends import_react8.default.Component {
       state = { hasError: !1 };
       componentDidCatch() {
         this.setState({ hasError: !0 });
@@ -709,7 +709,10 @@ var import_react14, import_react_spring3, thin, openModal, codeblock_default, in
     init_components();
     init_data();
     init_util();
-    ({ thin } = BdApi.Webpack.getModule((m) => m.thin && m.none)), openModal = BdApi.Webpack.getModule((m) => m.openModal && m.closeModal).openModal;
+    ({ thin } = BdApi.Webpack.getModule((m) => m.thin && m.none)), openModal = BdApi.Webpack.getMangled("onCloseRequest:null!=", {
+      openModal: BdApi.Webpack.Filters.byStrings("onCloseRequest:null!="),
+      closeModal: BdApi.Webpack.Filters.byStrings(".setState", ".getState()[")
+    }).openModal;
     codeblock_default = (0, import_react14.memo)(CodeBlock);
   }
 });
@@ -772,14 +775,7 @@ async function getInvite() {
   }
 }
 async function joinGuild() {
-  let guild = GuildStore.getGuild(GUILD_CONSTANT.guildId);
-  if (guild)
-    return BdApi.UI.showToast(`Going to ${guild.name}`, { icon: !0, type: "info" }), transitionTo(`/channels/${GUILD_CONSTANT.guildId}`);
-  let invite = await getInvite();
-  invite && (InviteModalStore.isOpen = () => !0, native.minimize = () => {
-  }, await dispatcher.dispatch({ type: "INVITE_MODAL_OPEN", invite }), setTimeout(() => {
-    InviteModalStore.isOpen = originalIsOpen, native.minimize = originalNative;
-  }));
+  BdApi.UI.showInviteModal(GUILD_CONSTANT.invite);
 }
 var GUILD_CONSTANT, dispatcher, inviteResolver, InviteModalStore, originalIsOpen, native, originalNative, GuildStore, transitionTo, cachedInvite, joinGuild_default, init_joinGuild = __esm({
   "src/settings/joinGuild.ts"() {
@@ -973,7 +969,7 @@ var BdApi2, codeBlock, MessageAttachment, messageListItem, ECBlocks, src_default
           if (res)
             for (let attachment2 of res.props.items) {
               let { renderPlaintextFilePreview } = attachment2;
-              attachment2.renderPlaintextFilePreview = (props2) => BdApi2.React.createElement(attachment_default, { props: props2, item: attachment2, canDeleteAttachments: that.props.canDeleteAttachments, renderPlaintextFilePreview });
+              attachment2.renderPlaintextFilePreview = attachment2.item.originalItem.__enhancecodeblocks__ ??= (props2) => BdApi2.React.createElement(attachment_default, { props: props2, item: attachment2, canDeleteAttachments: that.props.canDeleteAttachments, renderPlaintextFilePreview });
             }
         }), BdApi2.DOM.addStyle(css_default), this.forceUpdateMessages();
       }
