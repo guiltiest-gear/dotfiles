@@ -6,7 +6,7 @@ Host *
 Host aur.archlinux.org
   IdentityFile ~/.ssh/aur
   User aur
-Host pi.hole
+Host amaterasu
   IdentityFile ~/.ssh/dietpi
   User dietpi
 Host codeberg.org
