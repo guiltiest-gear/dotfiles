@@ -52,8 +52,7 @@ alias clear='TERM=xterm-256color clear'
 ## Pihole shortcuts
 alias pihole='kitten ssh amaterasu'
 alias pi-update='kitten ssh -t amaterasu "sudo apt update && sudo apt upgrade -y"'
-alias pi-gravity='kitten ssh -t amaterasu "pihole -g"'
-alias pi-restart='kitten ssh -t amaterasu "pihole restartdns"'
+alias pi-gravity='kitten ssh -t amaterasu "sudo pihole -g"'
 alias pi-shutdown='kitten ssh -t amaterasu "sudo systemctl poweroff"'
 alias pi-reboot='kitten ssh -t amaterasu "sudo systemctl reboot"'
 ## yt-dlp shortcuts
