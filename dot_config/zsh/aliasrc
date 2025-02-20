@@ -73,6 +73,9 @@ alias icat='kitty +kitten icat'
 # kitty ssh alias
 alias s='kitten ssh'
 
+# Fix adb
+alias adb='HOME=$XDG_DATA_HOME/android adb'
+
 # Fun
 ## Terminal rickroll
 # alias rr='curl -sL https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
