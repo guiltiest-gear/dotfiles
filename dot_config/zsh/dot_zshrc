@@ -181,6 +181,9 @@ _evalcache zoxide init zsh
 # Starship prompt
 _evalcache starship init zsh
 
+# pipx completions
+_evalcache register-python-argcomplete pipx
+
 # Enable transient prompt
 source "$ZDOTDIR"/transient-prompt.zsh
 
