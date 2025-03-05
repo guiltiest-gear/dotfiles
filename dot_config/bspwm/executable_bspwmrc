@@ -56,6 +56,9 @@ bspc config -m eDP-1 top_padding 37
 # Set picture in picture windows to float
 bspc rule -a '*:*:Picture-in-Picture' state=floating
 
+# Make Gimp windows float
+bspc rule -a Gimp state=floating follow=on
+
 # bspc rule -a Gimp desktop='^8' state=floating follow=on
 # bspc rule -a Chromium desktop='^2'
 # bspc rule -a mplayer2 state=floating
