@@ -1,8 +1,4 @@
 #!/bin/zsh
-# Append to the path
-typeset -U path PATH
-path=(~/.local/bin $path)
-export PATH
 
 # Editor config
 export EDITOR=$(which nvim)
