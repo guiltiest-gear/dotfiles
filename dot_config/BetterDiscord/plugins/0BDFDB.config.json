@@ -1,13 +1,13 @@
 {
 	"all": {
 		"changeLogs": {
-			"BDFDB": "3.9.6",
+			"BDFDB": "3.9.8",
 			"BetterNsfwTag": "1.3.2",
 			"CharCounter": "1.6.6",
 			"CopyRawMessage": "1.1.5",
 			"ImageUtilities": "5.5.2",
 			"PluginRepo": "2.4.6",
-			"ReadAllNotificationsButton": "1.7.8",
+			"ReadAllNotificationsButton": "1.7.9",
 			"ServerCounter": "1.0.8",
 			"SpellCheck": "1.6.9",
 			"StaffTag": "1.6.2",
@@ -24,8 +24,8 @@
 			"useChromium": false
 		},
 		"hashes": {
-			"0BDFDB.data.json": "28749620b44068190a5c5c1773476fbb7631f702",
-			"0BDFDB.raw.css": "ed83227434cef2fb8b72fb0c2fb79fc5e7c65402"
+			"0BDFDB.data.json": "8777aeb2d4a7ab68632b5e738fab73f8d77074bd",
+			"0BDFDB.raw.css": "1803f451c26300a6f5f9a6601b329c184ac37b70"
 		}
 	}
 }
