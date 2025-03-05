@@ -9,7 +9,7 @@ super + Return
 
 # program launcher
 super + r
-	SHELL=/bin/bash dmenu_run
+  j4-dmenu-desktop --dmenu=/usr/local/bin/dmenu
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -42,6 +42,10 @@ super + c
 # Access the dmenu network manager
 super + shift + n
   networkmanager_dmenu
+
+# Access the powermenu
+super + p
+  powermenu
 
 #
 # bspwm hotkeys
