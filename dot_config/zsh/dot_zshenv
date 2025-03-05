@@ -5,7 +5,7 @@ path=(~/.local/bin $path)
 export PATH
 
 # Editor config
-export EDITOR="/usr/bin/nvim"
+export EDITOR=$(which nvim)
 export VISUAL=$EDITOR
 export DIFFPROG="$EDITOR -d"
 
