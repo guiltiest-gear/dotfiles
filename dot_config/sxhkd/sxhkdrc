@@ -39,6 +39,10 @@ XF86AudioMute
 super + c
   clipmenu
 
+# Access the dmenu network manager
+super + shift + n
+  networkmanager_dmenu
+
 #
 # bspwm hotkeys
 #
