@@ -32,6 +32,9 @@ else
   xrandr --output eDP-1 --primary --auto --pos 0x0 --rotate normal
 fi
 
+# Set the wallpaper
+feh --no-fehbg --bg-max --randomize "$HOME"/git/wallpapers/* &
+
 # Give each monitor 5 workspaces
 bspc wm -O HDMI-1-0 eDP-1
 bspc monitor HDMI-1-0 -d $(seq -s " " 1 5)
