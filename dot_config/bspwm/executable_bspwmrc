@@ -33,7 +33,7 @@ else
 fi
 
 # Set the wallpaper
-feh --no-fehbg --bg-max --randomize "$HOME"/git/wallpapers/* &
+feh --no-fehbg --bg-fill --randomize "$HOME"/git/wallpapers/* &
 
 # Give each monitor 5 workspaces
 bspc wm -O HDMI-1-0 eDP-1
