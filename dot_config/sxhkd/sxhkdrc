@@ -36,7 +36,7 @@ XF86AudioMute
   pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Access clipmenu
-super + c
+super + shift + c
   clipmenu
 
 # Access the dmenu network manager
