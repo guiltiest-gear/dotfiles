@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 3.9.8
+ * @version 4.0.2
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -1206,7 +1206,7 @@ module.exports = (_ => {
 					};
 					
 					if (InternalData) loadLibrary();
-					else BdApi.alert("Error", "Could not initiate BDFDB Library Plugin. Check your Internet Connection and make sure GitHub isn't blocked by your Network or try disabling your VPN/Proxy.");
+					else BdApi.UI.alert("Error", "Could not initiate BDFDB Library Plugin. Check your Internet Connection and make sure GitHub isn't blocked by your Network or try disabling your VPN/Proxy.");
 				};
 				
 				const backupObj = getBackup(cssFileName, cssFilePath);
@@ -2005,7 +2005,7 @@ module.exports = (_ => {
 					return notice;
 				};
 				BDFDB.NotificationUtils.alert = function (header, body) {
-					if (typeof header == "string" && typeof header == "string" && BdApi && typeof BdApi.alert == "function") BdApi.alert(header, body);
+					if (typeof header == "string" && typeof header == "string" && BdApi && typeof BdApi.UI.alert == "function") BdApi.UI.alert(header, body);
 				};
 
 				var Tooltips = [];
@@ -2015,7 +2015,7 @@ module.exports = (_ => {
 					const itemLayerContainer = document.querySelector(BDFDB.dotCN.app + " ~ " + BDFDB.dotCN.itemlayercontainer) || document.querySelector(BDFDB.dotCN.itemlayercontainer);
 					if (!itemLayerContainer || !Node.prototype.isPrototypeOf(anker) || !document.contains(anker)) return null;
 					const id = BDFDB.NumberUtils.generateId(Tooltips);
-					const itemLayer = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCNS.itemlayer + BDFDB.disCN.itemlayerdisabledpointerevents}"><div class="${BDFDB.disCN.tooltip}" tooltip-id="${id}"><div class="${BDFDB.disCN.tooltipcontent}"></div><div class="${BDFDB.disCN.tooltippointer}"></div></div></div>`);
+					const itemLayer = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCNS.itemlayer + BDFDB.disCN.itemlayerdisabledpointerevents}"><div class="${BDFDB.disCN.tooltip}" tooltip-id="${id}"><div class="${BDFDB.disCN.tooltipcontent}"></div><div class="${document.querySelector(BDFDB.dotCN.titlebarthick) ? BDFDB.disCNS.tooltippointer + BDFDB.disCN.tooltippointerbg : BDFDB.disCN.tooltippointer}"></div></div></div>`);
 					itemLayerContainer.appendChild(itemLayer);
 					
 					const tooltip = itemLayer.firstElementChild;
@@ -2038,7 +2038,8 @@ module.exports = (_ => {
 						customBackgroundColor = true;
 						let backgroundColorIsGradient = BDFDB.ObjectUtils.is(config.backgroundColor);
 						let backgroundColor = !backgroundColorIsGradient ? BDFDB.ColorUtils.convert(config.backgroundColor, "RGBA") : BDFDB.ColorUtils.createGradient(config.backgroundColor);
-						style = (style ? (style + " ") : "") + `background: ${backgroundColor} !important; border-color: ${backgroundColorIsGradient ? BDFDB.ColorUtils.convert(config.backgroundColor[type == "left" ? 100 : 0], "RGBA") : backgroundColor} !important;`;
+						let borderColor = backgroundColorIsGradient ? BDFDB.ColorUtils.convert(config.backgroundColor[type == "left" ? 100 : 0], "RGBA") : backgroundColor;
+						style = (style ? (style + " ") : "") + `background: ${backgroundColor} !important; border-color: ${borderColor} !important; --tooltip-pointer-bg: ${borderColor} !important;`;
 					}
 					if (style) tooltip.style = style;
 					const zIndexed = config.zIndex && typeof config.zIndex == "number";
@@ -3977,7 +3978,7 @@ module.exports = (_ => {
 						let name = plugin.name || (typeof plugin.getName == "function" ? plugin.getName() : null);
 						name = typeof name == "string" ? name : null;
 						let oldTransitionState = 0;
-						!Internal.LibraryModules.ModalUtils ? BdApi.alert(BDFDB.ReactUtils.createElement("div", {
+						!Internal.LibraryModules.ModalUtils ? BdApi.UI.alert(BDFDB.ReactUtils.createElement("div", {
 								style: {"display": "flex", "flex-direction": "column"},
 								children: [
 									config.header,
@@ -5104,7 +5105,12 @@ module.exports = (_ => {
 						if (this.props.refClass) {
 							let node = BDFDB.ReactUtils.findDOMNode(this);
 							if (node && node.parentElement) {
-								this.refElement = node.parentElement.querySelector(this.props.refClass);
+								let parent = node.parentElement, loop = 0;
+								while (!this.refElement && parent && loop < 5) {
+									this.refElement = parent.querySelector(this.props.refClass);
+									parent = parent.parentElement;
+									loop++;
+								}
 								if (this.refElement) {
 									if (!this._updateCounter) this._updateCounter = _ => {
 										if (!document.contains(node)) BDFDB.ListenerUtils.multiRemove(this.refElement, "keydown click change", this._updateCounter);
@@ -8097,7 +8103,6 @@ module.exports = (_ => {
 					before: [
 						"BlobMaskInner",
 						"EmojiPickerListRow",
-						"MemberListItem",
 						"Menu",
 						"MessageActionsContextMenu",
 						"MessageHeader",
@@ -8304,27 +8309,10 @@ module.exports = (_ => {
 				Internal.processEmojiPickerListRow = function (e) {
 					if (e.instance.props.emojiDescriptors && Internal.LibraryComponents.EmojiPickerButton.current && Internal.LibraryComponents.EmojiPickerButton.current.props && Internal.LibraryComponents.EmojiPickerButton.current.props.allowManagedEmojisUsage) for (let i in e.instance.props.emojiDescriptors) e.instance.props.emojiDescriptors[i] = Object.assign({}, e.instance.props.emojiDescriptors[i], {isDisabled: false});
 				};
-				var memberStore = {};
-				Internal.processMemberListItem = function (e) {
-					if (!e.instance.props.channel || !e.instance.props.user) return;
-					if (!memberStore || !memberStore.channel || memberStore.channel.id != e.instance.props.channel.id) memberStore = {channel: e.instance.props.channel, members: {}};
-					let src = BDFDB.UserUtils.getAvatar(e.instance.props.user.id);
-					if (!src) return;
-					memberStore.members[(src.split(".com")[1] || src).split("/").slice(0, 3).join("/").split(".")[0] + " " + e.instance.props.user.username] = e.instance.props.user;
-				};
 				Internal.processNameContainer = function (e) {
-					if (e.instance.props.innerClassName != BDFDB.disCN.memberinner || !memberStore || !memberStore.members) return;
-					let avatar = BDFDB.ReactUtils.findChild(e.instance.props.avatar, {props: ["src"]});
-					if (!avatar) return;
-					let src = avatar.props._originalSrc || avatar.props.src;
-					if (!src) return;
-					if (src.indexOf("discordapp.com/guilds/") > -1) src = BDFDB.UserUtils.getAvatar(src.split(".com")[1].split("/").slice(4, 5)[0]);
-					src = (src.split(".com")[1] || src).split("/").slice(0, 3).join("/").split(".")[0];
-					let username = avatar.props["aria-label"];
-					if (!memberStore.members[src + " " + username]) return;
-					e.instance.props.user = memberStore.members[src + " " + username];
-					e.instance.props.channel = memberStore.channel;
-					e.instance.props.avatar = Internal._processAvatarRender(e.instance.props.user, e.instance.props.avatar) || e.instance.props.avatar;
+					if (!e.instance.props.avatar) return;
+					let userId = BDFDB.ReactUtils.findValue(e.instance.props.name, "userId");
+					if (userId) e.instance.props.avatar = Internal._processAvatarRender(BDFDB.LibraryStores.UserStore.getUser(userId), e.instance.props.avatar) || e.instance.props.avatar;
 				};
 				Internal.processMenu = function (e) {
 					if (e.instance.props && (e.instance.props.children || BDFDB.ArrayUtils.is(e.instance.props.children) && e.instance.props.children.length)) {
