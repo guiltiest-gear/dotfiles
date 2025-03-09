@@ -37,7 +37,7 @@ XF86AudioMute
 
 # Increase/decrease brightness
 XF86MonBrightness{Up,Down}
-  brightnessctl s {+5%,5%-}
+  brightnessctl -q s {+5%,5%-}
 
 # Access clipmenu
 super + shift + c
