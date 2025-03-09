@@ -51,7 +51,7 @@
 [rebase]
   autoStash = true
 [help]
-  autocorrect = 20
+  autoCorrect = prompt
 [git-extras]
   default-branch = master
 [push]
