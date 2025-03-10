@@ -3,6 +3,9 @@
 # Fix java applications misbehaving
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# Enable window swallowing
+pgrep swallow || exec swallow &
+
 # Start sxhkd
 pgrep -x sxhkd >/dev/null || exec sxhkd &
 
