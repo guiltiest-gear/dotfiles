@@ -4,7 +4,7 @@
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Start sxhkd
-pgrep -x sxhkd >/dev/null || sxhkd &
+pgrep -x sxhkd >/dev/null || exec sxhkd &
 
 # Start picom
 pgrep picom || picom -b
@@ -13,10 +13,10 @@ pgrep picom || picom -b
 ~/.config/polybar/launch.sh
 
 # Start polkit-gnome
-pgrep -af polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+pgrep -af polkit-gnome-au || exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Start thunar daemon
-pgrep thunar || thunar --daemon &
+pgrep thunar || exec thunar --daemon &
 
 # Fix incorrect cursor on desktop
 xsetroot -cursor_name left_ptr
