@@ -6,9 +6,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # Start sxhkd
 pgrep -x sxhkd >/dev/null || sxhkd &
 
-# Enable window swallowing
-pgrep bspswallow || bspswallow &
-
 # Start picom
 pgrep picom || picom -b
 
