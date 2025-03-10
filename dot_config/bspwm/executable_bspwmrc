@@ -19,7 +19,7 @@ pgrep -af polkit-gnome-au || exec /usr/lib/polkit-gnome/polkit-gnome-authenticat
 pgrep thunar || exec thunar --daemon &
 
 # Fix incorrect cursor on desktop
-xsetroot -cursor_name left_ptr
+xsetroot -cursor_name left_ptr &
 
 # Set up monitors
 if [[ $(xrandr -q | grep "HDMI-1-0 connected") ]]; then
