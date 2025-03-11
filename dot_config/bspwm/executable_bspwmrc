@@ -21,6 +21,9 @@ pgrep -af polkit-gnome-au || exec /usr/lib/polkit-gnome/polkit-gnome-authenticat
 # Start thunar daemon
 pgrep thunar || exec thunar --daemon &
 
+# Start emote
+pgrep emote || exec emote &
+
 # Fix incorrect cursor on desktop
 xsetroot -cursor_name left_ptr &
 

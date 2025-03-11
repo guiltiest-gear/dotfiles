@@ -51,6 +51,10 @@ super + shift + n
 super + p
   powermenu
 
+# Show emote
+super + e
+  emote
+
 #
 # bspwm hotkeys
 #
