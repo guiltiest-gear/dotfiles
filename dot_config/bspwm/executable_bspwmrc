@@ -9,6 +9,9 @@ pgrep -f "bash $HOME/.local/bin/swallow" || exec swallow &
 # Start sxhkd
 pgrep -x sxhkd >/dev/null || exec sxhkd &
 
+# Enable window swallowing
+pgrep bspswallow || bspswallow &
+
 # Start picom
 pgrep picom || picom -b
 
