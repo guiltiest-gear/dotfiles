@@ -71,7 +71,7 @@ imgf() { find ~/Pictures/ -type f | sort | fzf --scheme=path | sed 's/^/"/;s/$/"
 # icat alias
 alias icat='kitty +kitten icat'
 # kitty ssh alias
-alias s='kitten ssh'
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 # Fix adb
 alias adb='HOME=$XDG_DATA_HOME/android adb'
