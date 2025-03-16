@@ -384,20 +384,20 @@ globalkeys = gears.table.join(
   end, { description = "Open emote", group = "launcher" }),
 
   awful.key({}, "XF86AudioMute", function()
-    awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    awful.spawn({ "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle" })
   end, { description = "Toggle mute", group = "client" }),
   awful.key({}, "XF86AudioRaiseVolume", function()
-    awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+    awful.spawn({ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%" })
   end, { description = "Raise volume", group = "client" }),
   awful.key({}, "XF86AudioLowerVolume", function()
-    awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")
+    awful.spawn({ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%" })
   end, { description = "Lower volume", group = "client" }),
 
   awful.key({}, "XF86MonBrightnessUp", function()
-    awful.spawn("brightnessctl -q s +5%")
+    awful.spawn({ "brightnessctl", "-q", "s", "+5%" })
   end, { description = "Increase brightness", group = "client" }),
   awful.key({}, "XF86MonBrightnessDown", function()
-    awful.spawn("brightnessctl -q s 5%-")
+    awful.spawn({ "brightnessctl", "-q", "s", "5%-" })
   end, { description = "Decrease brightness", group = "client" })
 )
 
