@@ -1,0 +1,19 @@
+---
+base: lua53
+lua_versions:
+  - lua53
+globals:
+  awesome:
+    any: true
+  awful:
+    any: true
+  client:
+    any: true
+  screen:
+    any: true
+  tag:
+    any: true
+  update_timer:
+    any: true
+  root:
+    any: true

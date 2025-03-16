@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "description": "Awesomewm setting for lua_ls",
+  "diagnostics": {
+    "enable": true,
+    "globals": [
+      "awesome",
+      "awful",
+      "client",
+      "screen",
+      "tag",
+      "update_timer",
+      "root"
+    ]
+  },
+  "workspace": {
+    "library": ["/usr/share/awesome/lib/", "/usr/share/lua/5.3/"],
+    "maxPreload": 2000,
+    "preloadFileSize": 1000
+  },
+  "telemetry.enable": false
+}

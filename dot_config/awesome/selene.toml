@@ -1,0 +1,4 @@
+std = "awesome"
+
+[lints]
+mixed_table = "allow"
