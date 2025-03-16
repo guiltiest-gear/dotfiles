@@ -363,22 +363,25 @@ globalkeys = gears.table.join(
   -- Application keys
   awful.key({ modkey }, "b", function()
     awful.spawn("firefox")
-  end, { description = "Open Firefox", group = "client" }),
+  end, { description = "Open Firefox", group = "launcher" }),
   awful.key({ modkey }, "m", function()
     awful.spawn("thunderbird")
-  end, { description = "Open Thunderbird", group = "client" }),
+  end, { description = "Open Thunderbird", group = "launcher" }),
   awful.key({ modkey }, "f", function()
     awful.spawn("thunar")
-  end, { description = "Open thunar", group = "client" }),
+  end, { description = "Open thunar", group = "launcher" }),
   awful.key({ modkey }, "p", function()
     awful.spawn("powermenu")
-  end, { description = "Open the power menu", group = "client" }),
+  end, { description = "Open the power menu", group = "launcher" }),
   awful.key({ modkey, "Shift" }, "c", function()
     awful.spawn("clipmenu")
-  end, { description = "Open clipmenu", group = "client" }),
+  end, { description = "Open clipmenu", group = "launcher" }),
   awful.key({ modkey, "Shift" }, "n", function()
     awful.spawn("networkmanager_dmenu")
-  end, { description = "Open networkmanager dmenu", group = "client" }),
+  end, { description = "Open networkmanager dmenu", group = "launcher" }),
+  awful.key({ modkey }, ".", function()
+    awful.spawn("emote")
+  end, { description = "Open emote", group = "launcher" }),
 
   awful.key({}, "XF86AudioMute", function()
     awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
