@@ -580,6 +580,14 @@ awful.rules.rules = {
     },
   },
 
+  -- Make picture-in-picture windows float
+  {
+    rule = { name = "Picture-in-Picture" },
+    properties = {
+      floating = true,
+    },
+  },
+
   -- Floating clients.
   {
     rule_any = {
