@@ -579,6 +579,15 @@ awful.rules.rules = {
     },
   },
 
+  -- Fix discord not tiling
+  {
+    rule = { name = "Discord" },
+    properties = {
+      maximized = false,
+      floating = false,
+    },
+  },
+
   -- Floating clients.
   {
     rule_any = {
