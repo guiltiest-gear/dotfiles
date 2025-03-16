@@ -342,6 +342,11 @@ globalkeys = gears.table.join(
     awful.spawn({ "j4-dmenu-desktop", "--dmenu=/usr/local/bin/dmenu" })
   end, { description = "run prompt", group = "launcher" }),
 
+  -- dmenu_run prompt
+  awful.key({ modkey, alt }, "r", function()
+    awful.spawn("dmenu_run")
+  end, { description = "Run dmenu_run", group = "launcher" }),
+
   awful.key({ modkey }, "x", function()
     awful.prompt.run({
       prompt = "Run Lua code: ",
