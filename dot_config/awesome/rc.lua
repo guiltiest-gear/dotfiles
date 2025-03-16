@@ -571,6 +571,14 @@ awful.rules.rules = {
     },
   },
 
+  -- Always maximize mpv
+  {
+    rule = { name = "mpv" },
+    properties = {
+      fullscreen = true,
+    },
+  },
+
   -- Floating clients.
   {
     rule_any = {
