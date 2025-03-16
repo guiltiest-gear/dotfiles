@@ -551,7 +551,12 @@ awful.rules.rules = {
 
   -- Fix firefox not tiling
   {
-    rule = { class = "firefox" },
+    rule_any = {
+      class = {
+        "firefox",
+        "thunderbird",
+      },
+    },
     properties = {
       maximized = false,
       floating = false,
