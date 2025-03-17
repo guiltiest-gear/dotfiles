@@ -8,9 +8,6 @@ else
   xrandr --output eDP-1 --primary --auto --pos 0x0 --rotate normal
 fi
 
-# Fix incorrect cursor on desktop
-xsetroot -cursor_name left_ptr &
-
 # Start picom
 pgrep picom || picom -b
 
