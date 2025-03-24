@@ -508,12 +508,16 @@ awful.rules.rules = {
     },
   },
 
-  -- Fix firefox not tiling
+  -- Fix various windows not tiling
   {
     rule_any = {
       class = {
         "firefox",
         "thunderbird",
+      },
+      name = {
+        "Discord",
+        "Thunar",
       },
     },
     properties = {
@@ -527,15 +531,6 @@ awful.rules.rules = {
     rule = { name = "mpv" },
     properties = {
       fullscreen = true,
-    },
-  },
-
-  -- Fix discord not tiling
-  {
-    rule = { name = "Discord" },
-    properties = {
-      maximized = false,
-      floating = false,
     },
   },
 
