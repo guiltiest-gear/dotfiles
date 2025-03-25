@@ -109,6 +109,10 @@ volumewidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.volume)
 vicious.register(volumewidget, vicious.widgets.volume, "VOL: $1%", 1, { "Master", "-D", "pulse" })
 
+batwidget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.bat)
+vicious.register(batwidget, vicious.widgets.bat, "BAT: $2%", 60, "BAT0")
+
 spacer = wibox.widget.textbox("|")
 
 -- Create a wibox for each screen and add it
@@ -219,6 +223,8 @@ awful.screen.connect_for_each_screen(function(s)
       cpuwidget,
       spacer,
       memwidget,
+      spacer,
+      batwidget,
       spacer,
       datewidget,
       s.mylayoutbox,
