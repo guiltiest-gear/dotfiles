@@ -540,9 +540,12 @@ awful.rules.rules = {
     },
   },
 
-  -- Make picture-in-picture windows float
+  -- Windows that should always float
   {
-    rule = { name = "Picture-in-Picture" },
+    rule_any = {
+      name = { "Picture-in-Picture" },
+      type = { "dialog" },
+    },
     properties = {
       floating = true,
     },
@@ -581,16 +584,6 @@ awful.rules.rules = {
       },
     },
     properties = { floating = true },
-  },
-
-  -- Make dialog boxes float
-  {
-    rule = {
-      type = "dialog",
-    },
-    properties = {
-      floating = true,
-    },
   },
 
   -- Set Firefox to always map on the tag named "2" on screen 1.
