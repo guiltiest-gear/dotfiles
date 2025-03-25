@@ -111,7 +111,7 @@ vicious.register(volumewidget, vicious.widgets.volume, "VOL: $1%", 1, { "Master"
 
 batwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.bat)
-vicious.register(batwidget, vicious.widgets.bat, "BAT: $2%", 60, "BAT0")
+vicious.register(batwidget, vicious.widgets.bat, "BAT: $2%", 60, "BAT1")
 
 spacer = wibox.widget.textbox("|")
 
