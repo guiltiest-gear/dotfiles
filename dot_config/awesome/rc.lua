@@ -430,7 +430,14 @@ clientkeys = gears.table.join(
   end, { description = "Swap client up", group = "client" }),
   awful.key({ modkey, alt }, "l", function(c)
     awful.client.swap.bydirection("right", c, false)
-  end, { description = "Swap client to the right", group = "client" })
+  end, { description = "Swap client to the right", group = "client" }),
+
+  awful.key({ modkey, "Shift" }, "j", function(c)
+    c:move_to_screen(c.screen.index + 1)
+  end, { description = "Move to right screen", group = "client" }),
+  awful.key({ modkey, "Shift" }, "k", function(c)
+    c:move_to_screen(c.screen.index - 1)
+  end, { description = "Move to left screen", group = "client" })
 )
 
 -- Bind all key numbers to tags.
