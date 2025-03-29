@@ -86,25 +86,6 @@ awful.layout.layouts = {
   -- awful.layout.suit.corner.se,
 }
 
--- Set a random wallpaper
-screen.connect_signal("request::wallpaper", function(s)
-  awful.wallpaper({
-    screen = s,
-    bg = "#0000ff",
-    widget = {
-      {
-        image = gears.filesystem.get_random_file_from_dir(os.getenv("HOME") .. "/git/wallpapers", { "jpg" }, true),
-        resize = true,
-        widget = wibox.widget.imagebox,
-      },
-      valign = "center",
-      halign = "center",
-      tiled = false,
-      widget = wibox.container.tile,
-    },
-  })
-end)
-
 datewidget = wibox.widget.textbox()
 vicious.register(datewidget, vicious.widgets.date, "%B %d %G, %r", 1)
 
@@ -178,6 +159,9 @@ local tasklist_buttons = gears.table.join(
 )
 
 awful.screen.connect_for_each_screen(function(s)
+  -- Set the wallpaper
+  gears.wallpaper.maximized(gears.filesystem.get_configuration_dir() .. "wallpaper.png", s, true)
+
   -- Set the gap
   beautiful.useless_gap = 3
 
@@ -655,17 +639,6 @@ gears.timer({
   autostart = true,
   callback = function()
     collectgarbage()
-  end,
-})
-
--- Change the wallpaper every half hour
-gears.timer({
-  timeout = 1800,
-  autostart = true,
-  callback = function()
-    for s in screen do
-      s:emit_signal("request::wallpaper")
-    end
   end,
 })
 
