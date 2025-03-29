@@ -20,9 +20,6 @@ pgrep thunar || exec thunar --daemon &
 # Start emote
 pgrep emote || exec emote &
 
-# Set the wallpaper
-feh --no-fehbg --bg-fill --randomize "$HOME"/git/wallpapers/* &
-
 # Fix java applications misbehaving
 wmname LG3D
 
