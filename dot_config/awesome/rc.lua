@@ -93,7 +93,7 @@ screen.connect_signal("request::wallpaper", function(s)
     bg = "#0000ff",
     widget = {
       {
-        image = gears.filesystem.get_random_file_from_dir("~/git/wallpapers", { "jpg" }, true),
+        image = gears.filesystem.get_random_file_from_dir(os.getenv("HOME") .. "/git/wallpapers", { "jpg" }, true),
         resize = true,
         widget = wibox.widget.imagebox,
       },
