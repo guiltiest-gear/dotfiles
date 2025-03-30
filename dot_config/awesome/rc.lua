@@ -553,17 +553,6 @@ awful.rules.rules = {
     },
   },
 
-  -- Windows that should always float
-  {
-    rule_any = {
-      name = { "Picture-in-Picture" },
-      type = { "dialog" },
-    },
-    properties = {
-      floating = true,
-    },
-  },
-
   -- Floating clients.
   {
     rule_any = {
@@ -589,12 +578,14 @@ awful.rules.rules = {
       -- and the name shown there might not match defined rules here.
       name = {
         "Event Tester", -- xev.
+        "Picture-in-Picture",
       },
       role = {
         "AlarmWindow", -- Thunderbird's calendar.
         "ConfigManager", -- Thunderbird's about:config.
         "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
       },
+      type = { "dialog" },
     },
     properties = { floating = true },
   },
