@@ -347,6 +347,9 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, ".", function()
     awful.spawn("emote")
   end, { description = "Open emote", group = "launcher" }),
+  awful.key({}, "Print", function()
+    awful.spawn({ "flameshot", "gui" })
+  end, { description = "Take screenshot", group = "launcher" }),
 
   awful.key({}, "XF86AudioMute", function()
     awful.spawn({ "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle" })
