@@ -533,6 +533,7 @@ awful.rules.rules = {
       class = {
         "firefox",
         "thunderbird",
+        "libreoffice",
       },
       name = {
         "Discord",
