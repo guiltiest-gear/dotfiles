@@ -353,20 +353,20 @@ globalkeys = gears.table.join(
 
   awful.key({}, "XF86AudioMute", function()
     awful.spawn({ "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle" })
-  end, { description = "Toggle mute", group = "client" }),
+  end, { description = "Toggle mute", group = "audio" }),
   awful.key({}, "XF86AudioRaiseVolume", function()
     awful.spawn({ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%" })
-  end, { description = "Raise volume", group = "client" }),
+  end, { description = "Raise volume", group = "audio" }),
   awful.key({}, "XF86AudioLowerVolume", function()
     awful.spawn({ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%" })
-  end, { description = "Lower volume", group = "client" }),
+  end, { description = "Lower volume", group = "audio" }),
 
   awful.key({}, "XF86MonBrightnessUp", function()
     awful.spawn({ "brightnessctl", "-q", "s", "+5%" })
-  end, { description = "Increase brightness", group = "client" }),
+  end, { description = "Increase brightness", group = "brightness" }),
   awful.key({}, "XF86MonBrightnessDown", function()
     awful.spawn({ "brightnessctl", "-q", "s", "5%-" })
-  end, { description = "Decrease brightness", group = "client" })
+  end, { description = "Decrease brightness", group = "brightness" })
 )
 
 clientkeys = gears.table.join(
