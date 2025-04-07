@@ -549,8 +549,9 @@ awful.rules.rules = {
 
   -- Always maximize mpv
   {
-    rule = { name = "mpv" },
+    rule = { class = "mpv" },
     properties = {
+      size_hints_honor = false,
       fullscreen = true,
     },
   },
