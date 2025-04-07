@@ -534,6 +534,7 @@ awful.rules.rules = {
         "firefox",
         "thunderbird",
         "libreoffice",
+        "PrismLauncher",
       },
       name = {
         "Discord",
