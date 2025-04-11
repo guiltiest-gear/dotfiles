@@ -103,11 +103,23 @@ vicious.register(fswidget, vicious.widgets.fs, "/ ${/ used_p}%")
 
 wifiwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.wifi)
-vicious.register(wifiwidget, vicious.widgets.wifiiw, "${ssid} ${rate}Mb/s", 1, "wlo1")
+vicious.register(
+  wifiwidget,
+  vicious.widgets.wifiiw,
+  "${ssid} ${rate}Mb/s",
+  1,
+  "wlo1"
+)
 
 volumewidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.volume)
-vicious.register(volumewidget, vicious.widgets.volume, "VOL: $1%", 1, { "Master", "-D", "pulse" })
+vicious.register(
+  volumewidget,
+  vicious.widgets.volume,
+  "VOL: $1%",
+  1,
+  { "Master", "-D", "pulse" }
+)
 
 batwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.bat)
@@ -160,13 +172,21 @@ local tasklist_buttons = gears.table.join(
 
 awful.screen.connect_for_each_screen(function(s)
   -- Set the wallpaper
-  gears.wallpaper.maximized(gears.filesystem.get_configuration_dir() .. "wallpaper.png", s, true)
+  gears.wallpaper.maximized(
+    gears.filesystem.get_configuration_dir() .. "wallpaper.png",
+    s,
+    true
+  )
 
   -- Set the gap
   beautiful.useless_gap = 3
 
   -- Each screen has its own tag table.
-  awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+  awful.tag(
+    { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+    s,
+    awful.layout.layouts[1]
+  )
 
   -- Create a promptbox for each screen
   s.mypromptbox = awful.widget.prompt()
@@ -248,10 +268,30 @@ end)
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-  awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
-  awful.key({ modkey }, "[", awful.tag.viewprev, { description = "view previous", group = "tag" }),
-  awful.key({ modkey }, "]", awful.tag.viewnext, { description = "view next", group = "tag" }),
-  awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
+  awful.key(
+    { modkey },
+    "s",
+    hotkeys_popup.show_help,
+    { description = "show help", group = "awesome" }
+  ),
+  awful.key(
+    { modkey },
+    "[",
+    awful.tag.viewprev,
+    { description = "view previous", group = "tag" }
+  ),
+  awful.key(
+    { modkey },
+    "]",
+    awful.tag.viewnext,
+    { description = "view next", group = "tag" }
+  ),
+  awful.key(
+    { modkey },
+    "Escape",
+    awful.tag.history.restore,
+    { description = "go back", group = "tag" }
+  ),
 
   awful.key({ modkey, "Control" }, "j", function()
     awful.screen.focus_relative(1)
@@ -272,7 +312,12 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Control" }, "k", function()
 		awful.screen.focus_relative(-1)
 	end, { description = "focus the previous screen", group = "screen" }), ]]
-  awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
+  awful.key(
+    { modkey },
+    "u",
+    awful.client.urgent.jumpto,
+    { description = "jump to urgent client", group = "client" }
+  ),
   awful.key({ modkey }, "Tab", function()
     awful.client.focus.history.previous()
     if client.focus then
@@ -284,8 +329,18 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, "Return", function()
     awful.spawn(terminal)
   end, { description = "open a terminal", group = "launcher" }),
-  awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-  awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
+  awful.key(
+    { modkey, "Control" },
+    "r",
+    awesome.restart,
+    { description = "reload awesome", group = "awesome" }
+  ),
+  awful.key(
+    { modkey, "Shift" },
+    "q",
+    awesome.quit,
+    { description = "quit awesome", group = "awesome" }
+  ),
 
   awful.key({ modkey }, "space", function()
     awful.layout.inc(1)
@@ -485,7 +540,10 @@ for i = 1, 9 do
           client.focus:toggle_tag(tag)
         end
       end
-    end, { description = "toggle focused client on tag #" .. i, group = "tag" })
+    end, {
+      description = "toggle focused client on tag #" .. i,
+      group = "tag",
+    })
   )
 end
 
@@ -606,7 +664,11 @@ client.connect_signal("manage", function(c)
   -- i.e. put it at the end of others instead of setting it master.
   -- if not awesome.startup then awful.client.setslave(c) end
 
-  if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
+  if
+    awesome.startup
+    and not c.size_hints.user_position
+    and not c.size_hints.program_position
+  then
     -- Prevent clients from being unreachable after screen count changes.
     awful.placement.no_offscreen(c)
   end
