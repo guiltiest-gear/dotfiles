@@ -597,6 +597,7 @@ awful.rules.rules = {
       name = {
         "Discord",
         "Thunar",
+        "Steam",
       },
     },
     properties = {
