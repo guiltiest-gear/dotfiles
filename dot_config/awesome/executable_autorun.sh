@@ -20,6 +20,9 @@ pgrep thunar || exec thunar --daemon &
 # Start emote
 pgrep emote || exec emote &
 
+# Set the compose key to right alt
+setxkbmap -option compose:ralt
+
 # Fix java applications misbehaving
 wmname LG3D
 
