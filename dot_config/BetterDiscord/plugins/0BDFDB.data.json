@@ -139,8 +139,8 @@
 		"ChatRestrictionUtils": {"strings": ["dispatch({type:\"MESSAGE_LENGTH_UPSELL\"", "Message Too Long Alert"], "exported": false, "value": "exports", "map": {
 			"applyChatRestrictions": ["Message Too Long Alert"]
 		}},
-		"ClipboardUtils": {"strings": ["ClipboardUtils.copy", "execCommand(\"copy\")"], "exported": false, "value": "exports", "map": {
-			"copy": ["ClipboardUtils.copy", "execCommand(\"copy\")"]
+		"ClipboardUtils": {"strings": ["clipboard.writeText", "Clipboard API not supported"], "exported": false, "value": "exports", "map": {
+			"copy": ["clipboard.writeText", "Clipboard API not supported"]
 		}},
 		"ConnectionProviderUtils": {"props": ["get", "isSupported", "filter"]},
 		"ConnectionUtils": {"props": ["setShowActivity", "setVisibility"]},
@@ -471,7 +471,9 @@
 		"GuildItemWrapper": {"strings": ["guildNode:", "lowerBadge:", "isUnavailable"]},
 		"GuildItemIcon": {"strings": ["\"always\"", ".acronym", "width:48,height:48"], "noSearch": true},
 		"GuildItemWrapper": {"strings": [".pauseBackground", ".isUnavailable", "guildJoinRequestStatus"]},
-		"GuildsBar": {"strings": ["unreadMentionsIndicatorTop", "disableAppDownload", ".GUILD_MEMBER_VERIFICATION"]},
+		"GuildsBar": {"strings": ["unreadMentionsIndicatorTop", "disableAppDownload", "GUILD_DISCOVERY"], "noSearch": true},
+		"GuildsBarHeader": {"strings": ["GUILD_MEMBER_VERIFICATION_FOR_HUB", "isCurrentUserGuest", "hideDms"], "noSearch": true},
+		"GuildsBarTree": {"strings": ["guildDiscoveryButton", "disableAppDownload", "getGuildsTree"], "noSearch": true},
 		"GuildSidebar": {"strings": ["\"guildsnav\"", "unreadMentionsIndicatorBottom"]},
 		"GuildTooltip": {"strings": ["tooltipClassName", "includeActivity", "listItemTooltip"]},
 		"HeaderBar": {"strings": [".hamburger", "scrollable", "themed"]},
@@ -495,7 +497,7 @@
 		"LazyImage": {"protos": ["loadImage", "getRatio", "getSrc"]},
 		"LazyImageZoomable": {"strings": ["zoomThumbnailPlaceholder", "onCloseImage"], "noSearch": true},
 		"ListItemTooltip": {"strings": [".listItemWrapper", "tooltipClassName", "disableWrapper"]},
-		"MemberListItem": {"strings": ["ownerTooltipText", "onClickPremiumGuildIcon:", ".CUSTOM_STATUS"]},
+		"MemberListItem": {"strings": ["MemberListItem", "roleColorStrings"]},
 		"Mention": {"strings": ["iconType:", "color:", "),backgroundColor:"]},
 		"Menu": {"strings": ["\"empty\"", "getItemProps", "isUsingKeyboardNavigation"]},
 		"Message": {"strings": ["childrenMessageContent", "childrenRepliedMessage", "zalgo", ".buttonContainer"]},
@@ -516,6 +518,9 @@
 		"ModalFooter": {"strings": [".footerSeparator", ".separator", "Direction.HORIZONTAL_REVERSE"]},
 		"ModalRoot": {"strings": ["rootWithShadow", "ImpressionTypes.MODAL", "transitionState:"]},
 		"NameContainer": {"strings": ["\"listitem\"", "wrappedName", "innerClassName"], "noSearch": true},
+		"NameContainerAvatar": {"strings": ["shouldAnimateStatus", "avatarDecoration", "MEMBER_USER"], "noSearch": true},
+		"NameContainerDecorators": {"strings": ["lostPermissionTooltipText", "premiumSince", "isOwner"], "noSearch": true},
+		"NameContainerInner": {"strings": ["primaryGuild", ".clanTag", "hideClanTag"], "noSearch": true},
 		"NameTag": {"strings": ["invertColor:", "usernameClass", "discriminatorClass"]},
 		"NavItem": {"strings": [".selected", ".acronym", "fontSize:"]},
 		"Note": {"strings": [".noteRef", "handleBlur", ".SPACE"]},
@@ -603,7 +608,7 @@
 		"UserProfileMutualGuilds": {"strings": ["mutualGuilds", ".listScroller", ".emptyText"]},
 		"UserSummaryItem": {"protos": ["renderMoreUsers", "renderUsers", "renderIcon"]},
 		"UserSettingsAppearance": {"protos": ["renderTheme", "renderDisplayMode", "renderMessageGroupSpacingSlider"]},
-		"UserThemeContainer": {"strings": ["shouldTrackView", "\"VIEW\"", ".Provider"], "noSearch": true},
+		"UserThemeContainer": {"strings": ["profileUi", "\"VIEW\"", ".Provider"], "noSearch": true},
 		"VideoBackground": {"strings": ["backgroundSrc:", "pulseSpeakingIndicator:", ".avatarWrapper"]},
 		"VoiceUser": {"strings": [".voiceUser", ".content", "userNameClassName"]},
 		"VoiceUsers": {"strings": ["hidePreview", "previewIsOpen", ".MOVE_MEMBERS"]}
@@ -1287,7 +1292,8 @@
 			"themeCustomBackground": "custom-theme-background",
 			"themeDark": "theme-dark",
 			"themeLight": "theme-light",
-			"themeUndefined": "theme-undefined"
+			"themeUndefined": "theme-undefined",
+			"visualRefresh": "visual-refresh"
 		},
 		"Toast": {
 			"avatar": "avatar_67c5da",
@@ -1344,7 +1350,7 @@
 		"UserProfileUsernameSection": "_05e81"
 	},
 	"DiscordClassModules": {
-		"AccountDetails": {"props": ["accountProfilePopoutWrapper", "redIcon"]},
+		"AccountDetails": {"props": ["avatarWrapper", "micButtonParent", "redIcon"]},
 		"AccountDetailsButtons": {"props": ["button", "enabled", "disabled"]},
 		"Anchor": {"props": ["anchor", "anchorUnderlineOnHover"]},
 		"AnimationContainer": {"props": ["animatorLeft", "didRender"]},
@@ -1596,7 +1602,7 @@
 		"UserProfileSection": {"props": ["section", "heading"], "length": 2},
 		"UserProfileUsernameSection": {"props": ["customStatusSoloEmoji", "nameTag", "discriminator"]},
 		"UserSummaryItem": {"props": ["avatarContainerMasked", "container"]},
-		"UserTheme": {"props": ["biteSize", "outer"]},
+		"UserTheme": {"props": ["overlay", "outer", "inner"]},
 		"VoiceChannel": {"props": ["avatarSpeaking", "voiceUser"]},
 		"VoiceChannelLimit": {"props": ["total", "users", "wrapper"]},
 		"VoiceChannelList": {"props": ["list", "collapsed"]},
@@ -3235,6 +3241,7 @@
 		"usersummaryemptyuser": ["UserSummaryItem", "emptyUser"],
 		"usersummaryicon": ["UserSummaryItem", "icon"],
 		"usersummarymoreUsers": ["UserSummaryItem", "moreUsers"],
+		"visualrefresh": ["NotFound", "visualRefresh"],
 		"voiceavatar": ["VoiceChannel", "avatar"],
 		"voiceavatarcontainer": ["VoiceChannel", "avatarContainer"],
 		"voiceavatarlarge": ["VoiceChannel", "avatarLarge"],

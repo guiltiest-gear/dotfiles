@@ -7,10 +7,10 @@
 			"CopyRawMessage": "1.1.5",
 			"ImageUtilities": "5.5.2",
 			"PluginRepo": "2.4.6",
-			"ReadAllNotificationsButton": "1.8.0",
-			"ServerCounter": "1.0.9",
+			"ReadAllNotificationsButton": "1.8.3",
+			"ServerCounter": "1.1.1",
 			"SpellCheck": "1.7.0",
-			"StaffTag": "1.6.5",
+			"StaffTag": "1.6.7",
 			"ThemeRepo": "2.4.9"
 		},
 		"choices": {
@@ -24,7 +24,7 @@
 			"useChromium": false
 		},
 		"hashes": {
-			"0BDFDB.data.json": "af1c90033269b4d321ea613578a7672082db0162",
+			"0BDFDB.data.json": "ba98160f7166416f304d0e1fa85b6a7a7ce97394",
 			"0BDFDB.raw.css": "56a2a3fa3db5e989de5aaea7da0a3f06fb54074c"
 		}
 	}

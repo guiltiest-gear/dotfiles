@@ -2,7 +2,7 @@
  * @name StaffTag
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.6.5
+ * @version 1.6.7
  * @description Adds a Crown/Tag to Server Owners (or Admins/Management)
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -96,10 +96,10 @@ module.exports = (_ => {
 				
 				this.modulePatches = {
 					before: [
-						"MessageUsername",
-						"NameContainer"
+						"MessageUsername"
 					],
 					after: [
+						"NameContainerDecorators",
 						"UserHeaderUsername",
 						"VoiceUser"
 					]
@@ -158,6 +158,9 @@ module.exports = (_ => {
 					}
 					${BDFDB.dotCN.memberownericon} {
 						top: 0px;
+					}
+					${BDFDB.dotCN.memberownericon} + ${BDFDB.dotCN.memberownericon} {
+						display: none;
 					}
 					${BDFDB.dotCNS.message + BDFDB.dotCN.memberownericon} {
 						top: 2px;
@@ -264,13 +267,12 @@ module.exports = (_ => {
 				BDFDB.MessageUtils.rerenderAll();
 			}
 
-			processNameContainer (e) {
-				let user = BDFDB.LibraryStores.UserStore.getUser(BDFDB.ReactUtils.findValue(e.instance.props.name, "userId"));
-				if (!user) return;
+			processNameContainerDecorators (e) {
+				if (!e.instance.props.user) return;
 				let channelId = e.instance.props.channel && e.instance.props.channel.id || BDFDB.LibraryStores.SelectedChannelStore.getChannelId();
-				let userType = this.getUserType(user, channelId);
+				let userType = this.getUserType(e.instance.props.user, channelId);
 				if (userType && this.settings.tagPlaces.memberList) {
-					this.injectStaffTag(BDFDB.ObjectUtils.get(e.instance, "props.decorators.props.children"), user, userType, 1, {
+					this.injectStaffTag(e.returnvalue.props.children, e.instance.props.user, userType, 1, {
 						channelId: channelId,
 						tagClass: BDFDB.disCN.bottagmember
 					});
