@@ -170,13 +170,20 @@ local tasklist_buttons = gears.table.join(
   end)
 )
 
-awful.screen.connect_for_each_screen(function(s)
-  -- Set the wallpaper
+local function set_wallpaper(s)
   gears.wallpaper.maximized(
     gears.filesystem.get_configuration_dir() .. "wallpaper.png",
     s,
     true
   )
+end
+
+-- Re-set the wallpaper when a screen's geometry changes
+screen.connect_signal("property::geometry", set_wallpaper)
+
+awful.screen.connect_for_each_screen(function(s)
+  -- Set the wallpaper
+  set_wallpaper(s)
 
   -- Set the gap
   beautiful.useless_gap = 3
