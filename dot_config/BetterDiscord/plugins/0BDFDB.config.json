@@ -10,7 +10,7 @@
 			"ReadAllNotificationsButton": "1.8.3",
 			"ServerCounter": "1.1.1",
 			"SpellCheck": "1.7.0",
-			"StaffTag": "1.6.7",
+			"StaffTag": "1.6.8",
 			"ThemeRepo": "2.4.9"
 		},
 		"choices": {
@@ -24,8 +24,8 @@
 			"useChromium": false
 		},
 		"hashes": {
-			"0BDFDB.data.json": "ba98160f7166416f304d0e1fa85b6a7a7ce97394",
-			"0BDFDB.raw.css": "56a2a3fa3db5e989de5aaea7da0a3f06fb54074c"
+			"0BDFDB.data.json": "3a7b8300f762ef1eea54fceb110724c40814f953",
+			"0BDFDB.raw.css": "d4e377e8c00f6f7390938129f1ce4051c3245d49"
 		}
 	}
 }
