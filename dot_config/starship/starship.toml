@@ -3,7 +3,7 @@
 
 # Use custom format
 format = """
-$username$directory$fill$lua$c$python$nodejs$perl$git_status$git_branch$git_state$git_commit
+$username$directory$fill$lua$c$cpp$python$nodejs$perl$git_status$git_branch$git_state$git_commit
 $character
 """
 
@@ -53,7 +53,10 @@ format = '([\[$all_status$ahead_behind\]]($style))'
 [c]
 symbol = " "
 format = '\[[$symbol($version(-$name))]($style)\]'
-detect_extensions = ["c", "h", "cc", "cpp", "hh", "hpp"]
+
+[cpp]
+symbol = " "
+format = '\[[$symbol($version(-$name))]($style)\]'
 
 [lua]
 symbol = " "
