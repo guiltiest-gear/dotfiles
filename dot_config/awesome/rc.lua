@@ -605,6 +605,8 @@ awful.rules.rules = {
         "Discord",
         "Thunar",
         "Steam",
+        "HandBrake Queue",
+        "HandBrake",
       },
     },
     properties = {
