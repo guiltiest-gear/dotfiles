@@ -55,6 +55,15 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "xresources/theme.lua")
 
+-- Set the gap
+beautiful.useless_gap = 3
+
+-- Make the taglist use noto fonts instead
+beautiful.taglist_font = "Noto Sans CJK Black 8"
+
+-- Use hack nerd mono for the default font
+beautiful.font = "Hack Nerd Font Mono Regular 8"
+
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty -1"
 
@@ -185,12 +194,10 @@ awful.screen.connect_for_each_screen(function(s)
   -- Set the wallpaper
   set_wallpaper(s)
 
-  -- Set the gap
-  beautiful.useless_gap = 3
-
   -- Each screen has its own tag table.
   awful.tag(
-    { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+    -- { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+    { "一", "二", "三", "四", "五", "六", "七", "八", "九" },
     s,
     awful.layout.layouts[1]
   )
