@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.0.7
+ * @version 4.0.8
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -2011,7 +2011,7 @@ module.exports = (_ => {
 					const itemLayerContainer = document.querySelector(BDFDB.dotCN.app + " ~ " + BDFDB.dotCN.itemlayercontainer) || document.querySelector(BDFDB.dotCN.itemlayercontainer);
 					if (!itemLayerContainer || !Node.prototype.isPrototypeOf(anker) || !document.contains(anker)) return null;
 					const id = BDFDB.NumberUtils.generateId(Tooltips);
-					const itemLayer = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCNS.itemlayer + BDFDB.disCN.itemlayerdisabledpointerevents}"><div class="${BDFDB.disCN.tooltip}" tooltip-id="${id}"><div class="${BDFDB.disCN.tooltipcontent}"></div><div class="${document.querySelector(BDFDB.dotCN.titlebarthick) ? BDFDB.disCNS.tooltippointer + BDFDB.disCN.tooltippointerbg : BDFDB.disCN.tooltippointer}"></div></div></div>`);
+					const itemLayer = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCNS.itemlayer + BDFDB.disCN.itemlayerdisabledpointerevents}"><div class="${BDFDB.disCN.tooltip}" tooltip-id="${id}"><div class="${BDFDB.disCN.tooltipcontent}"></div><div class="${BDFDB.disCNS.tooltippointer + BDFDB.disCN.tooltippointerbg}"></div><div class="${BDFDB.disCN.tooltippointer}"></div></div></div>`);
 					itemLayerContainer.appendChild(itemLayer);
 					
 					const tooltip = itemLayer.firstElementChild;
@@ -2035,7 +2035,7 @@ module.exports = (_ => {
 						let backgroundColorIsGradient = BDFDB.ObjectUtils.is(config.backgroundColor);
 						let backgroundColor = !backgroundColorIsGradient ? BDFDB.ColorUtils.convert(config.backgroundColor, "RGBA") : BDFDB.ColorUtils.createGradient(config.backgroundColor);
 						let borderColor = backgroundColorIsGradient ? BDFDB.ColorUtils.convert(config.backgroundColor[type == "left" ? 100 : 0], "RGBA") : backgroundColor;
-						style = (style ? (style + " ") : "") + `background: ${backgroundColor} !important; border-color: ${borderColor} !important; --tooltip-pointer-bg: ${borderColor} !important;`;
+						style = (style ? (style + " ") : "") + `background: ${backgroundColor} !important; --tooltip-pointer-bg: ${borderColor} !important;`;
 					}
 					if (style) tooltip.style = style;
 					const zIndexed = config.zIndex && typeof config.zIndex == "number";
@@ -2553,7 +2553,7 @@ module.exports = (_ => {
 				LibraryModules.LanguageStore = (LanguageStores.find(n => n && n.exports && n.exports[InternalData.LanguageStringHashes.DISCORD]) || LanguageStores.find(n => n && n.exports && n.exports.default && n.exports.default[InternalData.LanguageStringHashes.DISCORD]) || {}).exports;
 				LibraryModules.LanguageStore = LibraryModules.LanguageStore.default || LibraryModules.LanguageStore;
 				LibraryModules.React = BDFDB.ModuleUtils.findByProperties("createElement", "cloneElement");
-				LibraryModules.ReactDOM = BDFDB.ModuleUtils.findByProperties("render", "findDOMNode");
+				LibraryModules.ReactDOM = BDFDB.ModuleUtils.findByProperties("render", "findDOMNode", {noWarnings: true}) || BDFDB.ModuleUtils.findByProperties("createRoot");
 				Internal.LibraryModules = new Proxy(LibraryModules, {
 					get: function (_, item) {
 						if (LibraryModules[item]) return LibraryModules[item];
@@ -2679,7 +2679,7 @@ module.exports = (_ => {
 				MyReact.findDOMNode = function (instance) {
 					if (Node.prototype.isPrototypeOf(instance)) return instance;
 					if (!instance || !instance.updater || typeof instance.updater.isMounted !== "function" || !instance.updater.isMounted(instance)) return null;
-					let node = Internal.LibraryModules.ReactDOM.findDOMNode(instance) || BDFDB.ObjectUtils.get(instance, "child.stateNode");
+					let node = Internal.LibraryModules.ReactDOM.findDOMNode && Internal.LibraryModules.ReactDOM.findDOMNode(instance) || BDFDB.ObjectUtils.get(instance, "child.stateNode");
 					return Node.prototype.isPrototypeOf(node) ? node : null;
 				};
 				MyReact.findParent = function (nodeOrInstance, config) {
@@ -3000,7 +3000,12 @@ module.exports = (_ => {
 				MyReact.render = function (component, node, ignoreErrors = false) {
 					if (!BDFDB.ReactUtils.isValidElement(component) || !Node.prototype.isPrototypeOf(node)) return;
 					try {
-						Internal.LibraryModules.ReactDOM.render(component, node);
+						let root;
+						if (Internal.LibraryModules.ReactDOM.render) Internal.LibraryModules.ReactDOM.render(component, node);
+						else {
+							root = Internal.LibraryModules.ReactDOM.createRoot(node);
+							root.render(component);
+						}
 						let observer = new MutationObserver(changes => changes.forEach(change => {
 							let nodes = Array.from(change.removedNodes);
 							if (nodes.indexOf(node) > -1 || nodes.some(n =>  n.contains(node))) {
@@ -3009,8 +3014,11 @@ module.exports = (_ => {
 							}
 						}));
 						observer.observe(document.body, {subtree: true, childList: true});
+						if (root) node.root = root;
 					}
-					catch (err) {!ignoreErrors && BDFDB.LogUtils.error(["Could not render React Element!", err]);}
+					catch (err) {
+						!ignoreErrors && BDFDB.LogUtils.error(["Could not render React Element!", err]);
+					}
 				};
 				MyReact.hookCall = function (callback, args, ignoreErrors = false) {
 					if (typeof callback != "function") return null;
@@ -3021,6 +3029,9 @@ module.exports = (_ => {
 					}, {}, false, ignoreErrors), tempNode, ignoreErrors);
 					BDFDB.ReactUtils.unmountComponentAtNode(tempNode);
 					return returnValue;
+				};
+				MyReact.unmountComponentAtNode = function (node) {
+					node && node.root && node.root.unmount ? node.root.unmount() : (Internal.LibraryModules.ReactDOM.unmountComponentAtNode && Internal.LibraryModules.ReactDOM.unmountComponentAtNode(node));
 				};
 				BDFDB.ReactUtils = new Proxy({}, {
 					get: function (_, item) {
@@ -4616,7 +4627,6 @@ module.exports = (_ => {
 								i++;
 								try {returnvalue = formatter && BDFDB.ArrayUtils.is(stringObj) ? formatter(LanguageStringFormattersObj[InternalData.LanguageStringHashes[item]], formatVars) : stringObj.format(formatVars, false);}
 								catch (err) {
-									window.temp1 = err;
 									returnvalue = null;
 									let value = values.shift();
 									value = value != null ? (value === 0 ? "0" : value) : "undefined";
@@ -4951,7 +4961,7 @@ module.exports = (_ => {
 						let processingAndListening = (this.props.disabled || this.props.submitting) && (null != this.props.onMouseEnter || null != this.props.onMouseLeave);
 						let props = BDFDB.ObjectUtils.exclude(this.props, "look", "color", "hover", "size", "fullWidth", "grow", "disabled", "submitting", "type", "style", "wrapperClassName", "className", "innerClassName", "onClick", "onContextMenu", "onMouseDown", "onMouseUp", "onMouseEnter", "onMouseLeave", "children", "rel");
 						let button = BDFDB.ReactUtils.createElement("button", Object.assign({}, !this.props.disabled && !this.props.submitting && props, {
-							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.button, this.props.look != null ? this.props.look : Internal.LibraryComponents.Button.Looks.FILLED, this.props.color != null ? this.props.color : Internal.LibraryComponents.Button.Colors.BRAND, this.props.hover, this.props.size != null ? this.props.size : Internal.LibraryComponents.Button.Sizes.MEDIUM, processingAndListening && this.props.wrapperClassName, this.props.fullWidth && BDFDB.disCN.buttonfullwidth, (this.props.grow === undefined || this.props.grow) && BDFDB.disCN.buttongrow, this.props.hover && this.props.hover !== Internal.LibraryComponents.Button.Hovers.DEFAULT && BDFDB.disCN.buttonhashover, this.props.submitting && BDFDB.disCN.buttonsubmitting),
+							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.button, this.props.look != null ? this.props.look : Internal.LibraryComponents.Button.Looks.FILLED, this.props.color != null ? this.props.color : Internal.LibraryComponents.Button.Colors.BRAND, this.props.hover, this.props.size != null ? this.props.size : Internal.LibraryComponents.Button.Sizes.MEDIUM, processingAndListening && this.props.wrapperClassName, this.props.fullWidth && BDFDB.disCN.buttonfullwidth, (this.props.grow === undefined || this.props.grow) && BDFDB.disCN.buttongrow, this.props.submitting && BDFDB.disCN.buttonsubmitting),
 							onClick: (this.props.disabled || this.props.submitting) ? e => {return e.preventDefault();} : this.handleClick.bind(this),
 							onContextMenu: (this.props.disabled || this.props.submitting) ? e => {return e.preventDefault();} : this.handleContextMenu.bind(this),
 							onMouseUp: !this.props.disabled && this.handleMouseDown.bind(this),
@@ -8104,15 +8114,14 @@ module.exports = (_ => {
 				
 				Internal.modulePatches = {
 					before: [
-						"BlobMaskInner",
 						"EmojiPickerListRow",
 						"Menu",
 						"MessageHeader",
-						"NameContainer",
 						"SearchBar"
 					],
 					after: [
 						"DiscordTag",
+						"NameContainerAvatar",
 						"UserHeaderAvatar",
 						"UserPanelHeader",
 						"UserProfileHeader"
@@ -8205,116 +8214,15 @@ module.exports = (_ => {
 					const wrapper = e.node.querySelector(BDFDB.dotCNC.userpopoutouter + BDFDB.dotCN.userprofilemodal) || e.node;
 					if (avatar) Internal._processAvatarMount(user, avatar, wrapper);
 				};
-				Internal.processBlobMaskInner = function (e) {
-					if (!e.component.prototype || BDFDB.PatchUtils.isPatched(BDFDB, e.component.prototype, "render")) return;
-					
-					let newBadges = ["lowerLeftBadge", "upperLeftBadge"];
-					let extraDefaultProps = {};
-					for (let type of newBadges) {
-						extraDefaultProps[`${type}`] = null;
-						extraDefaultProps[`${type}Size`] = {width: 16};
-					}
-					
-					BDFDB.PatchUtils.patch(BDFDB, e.component.prototype, "render", {
-						before: e2 => {
-							e2.instance.props = Object.assign({}, e.component.defaultProps, extraDefaultProps, e2.instance.props);
-							for (let type of newBadges) if (!e2.instance.state[`${type}Mask`]) e2.instance.state[`${type}Mask`] = new Internal.LibraryComponents.Animations.Controller({spring: 0});
-						},
-						after: e2 => {
-							let [tChildren, tIndex] = BDFDB.ReactUtils.findParent(e2.returnValue, {name: "TransitionGroup"});
-							if (tIndex > -1) {
-								tChildren[tIndex].props.children.push(!e2.instance.props.lowerLeftBadge ? null : BDFDB.ReactUtils.createElement(Internal.LibraryComponents.BadgeAnimationContainer, {
-									className: BDFDB.disCN.guildlowerleftbadge,
-									key: "lower-left-badge",
-									animatedStyle: _ => {
-										const spring = e2.instance.state.lowerLeftBadgeMask.springs.spring;
-										return {
-											opacity: spring.to([0, .5, 1], [0, 0, 1]),
-											transform: spring.to(value => "translate(" + -1 * (16 - 16 * value) + "px, " + (16 - 16 * value) + "px)")
-										};
-									},
-									children: e2.instance.props.lowerLeftBadge
-								}));
-								tChildren[tIndex].props.children.push(!e2.instance.props.upperLeftBadge ? null : BDFDB.ReactUtils.createElement(Internal.LibraryComponents.BadgeAnimationContainer, {
-									className: BDFDB.disCN.guildupperleftbadge,
-									key: "upper-left-badge",
-									animatedStyle: _ => {
-										const spring = e2.instance.state.upperLeftBadgeMask.springs.spring;
-										return {
-											opacity: spring.to([0, .5, 1], [0, 0, 1]),
-											transform: spring.to(value => "translate(" + -1 * (16 - 16 * value) + "px, " + -1 * (16 - 16 * value) + "px)")
-										};
-									},
-									children: e2.instance.props.upperLeftBadge
-								}));
-							}
-							let [mChildren, mIndex] = BDFDB.ReactUtils.findParent(e2.returnValue, {type: "mask"});
-							if (mIndex > -1) {
-								mChildren[mIndex].props.children.push(BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Animations.animated.rect, {
-									x: -4,
-									y: -4,
-									width: e2.instance.props.upperLeftBadgeSize.width ? (e2.instance.props.upperLeftBadgeSize.width + 8) : 24,
-									height: e2.instance.props.upperLeftBadgeSize.height ? (e2.instance.props.upperLeftBadgeSize.height + 8) : 24,
-									rx: 12,
-									ry: 12,
-									transform: e2.instance.state.upperLeftBadgeMask.springs.spring.to([0, 1], [20, 0]).to(value => `translate(${value * -1} ${value * -1})`),
-									fill: "black"
-								}));
-								mChildren[mIndex].props.children.push(BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Animations.animated.rect, {
-									x: -4,
-									y: 28,
-									width: e2.instance.props.lowerLeftBadgeSize.width ? (e2.instance.props.lowerLeftBadgeSize.width + 8) : 24,
-									height: e2.instance.props.lowerLeftBadgeSize.height ? (e2.instance.props.lowerLeftBadgeSize.height + 8) : 24,
-									rx: 12,
-									ry: 12,
-									transform: e2.instance.state.lowerLeftBadgeMask.springs.spring.to([0, 1], [20, 0]).to(value => `translate(${value * -1} ${value * 1})`),
-									fill: "black"
-								}));
-							}
-						}
-					}, {name: "BlobMask"});
-					BDFDB.PatchUtils.patch(BDFDB, e.component.prototype, "componentDidMount", {
-						after: e2 => {
-							for (let type of newBadges) e2.instance.state[`${type}Mask`].update({
-								spring: e2.instance.props[type] != null ? 1 : 0,
-								immediate: true
-							}).start();
-						}
-					}, {name: "BlobMask"});
-					BDFDB.PatchUtils.patch(BDFDB, e.component.prototype, "componentWillUnmount", {
-						after: e2 => {
-							for (let type of newBadges) if (e2.instance.state[`${type}Mask`]) e2.instance.state[`${type}Mask`].dispose();
-						}
-					});
-					BDFDB.PatchUtils.patch(BDFDB, e.component.prototype, "componentDidUpdate", {
-						after: e2 => {
-							for (let type of newBadges) if (e2.instance.props[type] != null && e2.methodArguments[0][type] == null) {
-								e2.instance.state[`${type}Mask`].update({
-									spring: 1,
-									immediate: !document.hasFocus(),
-									config: {friction: 30, tension: 900, mass: 1}
-								}).start();
-							}
-							else if (e2.instance.props[type] == null && e2.methodArguments[0][type] != null) {
-								e2.instance.state[`${type}Mask`].update({
-									spring: 0,
-									immediate: !document.hasFocus(),
-									config: {duration: 150, friction: 10, tension: 100, mass: 1}
-								}).start();
-							}
-						}
-					}, {name: "BlobMask"});
-				};
 				Internal.processDiscordTag = function (e) {
 					if (e.instance && e.instance.props && e.returnvalue && e.instance.props.user) e.returnvalue.props.user = e.instance.props.user;
 				};
 				Internal.processEmojiPickerListRow = function (e) {
 					if (e.instance.props.emojiDescriptors && Internal.LibraryComponents.EmojiPickerButton.current && Internal.LibraryComponents.EmojiPickerButton.current.props && Internal.LibraryComponents.EmojiPickerButton.current.props.allowManagedEmojisUsage) for (let i in e.instance.props.emojiDescriptors) e.instance.props.emojiDescriptors[i] = Object.assign({}, e.instance.props.emojiDescriptors[i], {isDisabled: false});
 				};
-				Internal.processNameContainer = function (e) {
-					if (!e.instance.props.avatar) return;
-					let userId = BDFDB.ReactUtils.findValue(e.instance.props.name, "userId");
-					if (userId) e.instance.props.avatar = Internal._processAvatarRender(BDFDB.LibraryStores.UserStore.getUser(userId), e.instance.props.avatar) || e.instance.props.avatar;
+				Internal.processNameContainerAvatar = function (e) {
+					if (!e.instance.props.user) return;
+					e.returnvalue = Internal._processAvatarRender(e.instance.props.user, e.returnvalue) || e.returnvalue;
 				};
 				Internal.processMenu = function (e) {
 					if (e.instance.props && (e.instance.props.children || BDFDB.ArrayUtils.is(e.instance.props.children) && e.instance.props.children.length)) {
@@ -8425,15 +8333,17 @@ module.exports = (_ => {
 							else if (parentModule.type && typeof parentModule.type.render == "function") parentModule = parentModule.type, patchFunction = "render";
 							if (patchFunction) for (const type in PluginStores.modulePatches.after) if (Internal.isCorrectModule(renderFunction, type, true)) {
 								for (let plugin of PluginStores.modulePatches.after[type].flat(10)) if (!BDFDB.PatchUtils.isPatched(plugin, parentModule, patchFunction)) {
-									BDFDB.PatchUtils.patch(plugin, parentModule, patchFunction, {after: e2 => Internal.initiatePatch(plugin, type, {
-										arguments: e2.methodArguments,
-										instance: e2.instance,
-										returnvalue: e2.returnValue,
-										component: e.methodArguments[0],
-										name: type,
-										methodname: patchFunction,
-										patchtypes: ["after"]
-									})}, {name: type});
+									BDFDB.PatchUtils.patch(plugin, parentModule, patchFunction, {after: e2 => {
+										Internal.initiatePatch(plugin, type, {
+											arguments: e2.methodArguments,
+											instance: e2.instance,
+											returnvalue: e2.returnValue,
+											component: e.methodArguments[0],
+											name: type,
+											methodname: patchFunction,
+											patchtypes: ["after"]
+										});
+									}}, {name: type});
 								}
 								break;
 							}
