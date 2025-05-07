@@ -20,6 +20,9 @@ pgrep thunar || exec thunar --daemon &
 # Start emote
 pgrep emote || exec emote &
 
+# Start unclutter
+pgrep unclutter || unclutter -b
+
 # Set the compose key to right alt
 setxkbmap -option compose:ralt
 
