@@ -96,8 +96,11 @@ awful.layout.layouts = {
 }
 
 datewidget = wibox.widget.textclock("%B %d %G, %r", 1)
-month_calendar = awful.widget.calendar_popup.month()
-month_calendar:attach(datewidget, "tr")
+month_calendar = awful.widget.calendar_popup.month({
+  start_sunday = true,
+  position = "tr",
+})
+month_calendar:attach(datewidget)
 
 memwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.mem)
