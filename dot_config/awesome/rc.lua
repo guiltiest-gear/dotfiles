@@ -99,6 +99,7 @@ datewidget = wibox.widget.textclock("%B %d %G, %r", 1)
 month_calendar = awful.widget.calendar_popup.month({
   start_sunday = true,
   position = "tr",
+  long_weekdays = true,
 })
 month_calendar:attach(datewidget)
 
