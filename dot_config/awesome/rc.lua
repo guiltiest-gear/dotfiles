@@ -719,4 +719,4 @@ gears.timer({
 })
 
 -- Autostart applications in the background
-awful.spawn.with_shell("~/.config/awesome/autorun.sh")
+awful.spawn.with_shell(gears.filesystem.get_configuration_dir() .. "autorun.sh")
