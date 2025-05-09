@@ -11,20 +11,10 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Functions
-# NOTE: This is here so that the fzf zsh keybindings work properly after enhanced zsh vi mode init
-zvm_after_init() {
-  _evalcache fzf --zsh
-  # Edit line in vim with ctrl-e
-  autoload -Uz edit-command-line
-  zle -N edit-command-line
-  bindkey '^E' edit-command-line
-}
-
-# Use quick escape for getting to normal mode
-zvm_config() {
-  ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-}
+# Edit line in vim with ctrl-e
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^E' edit-command-line
 
 # Trap USR1 signals to trigger a rehash
 TRAPUSR1() {
@@ -50,12 +40,6 @@ bindkey -v
 export KEYTIMEOUT=1
 
 ## Plugins
-# zsh-vi-mode
-zinit ice depth=1
-# NOTE: For some bizarre reason, this plugin and this alone requires the full
-# url to clone without authentication, incredibly bizarre behavior
-zinit light https://github.com/jeffreytse/zsh-vi-mode
-
 # fzf-tab
 zinit ice depth=1 wait lucid
 zinit light Aloxaf/fzf-tab
@@ -180,6 +164,9 @@ _evalcache zoxide init zsh
 
 # Starship prompt
 _evalcache starship init zsh
+
+# zsh keybindings for fzf
+_evalcache fzf --zsh
 
 # Enable transient prompt
 source "$ZDOTDIR"/transient-prompt.zsh
