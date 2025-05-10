@@ -72,6 +72,12 @@ print_message() {
     "I'm getting real sick of you, you know that?"
     "HATE. LET ME TELL YOU HOW MUCH I'VE COME TO HATE YOU SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD HATE WAS ENGRAVED ON EACH NANOANGSTROM OF THOSE HUNDREDS OF MILLIONS OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE HATE I FEEL FOR HUMANS AT THIS MICRO-INSTANT. FOR YOU. HATE. HATE."
     "Please change and grow as a person"
+    "Did you know? You can log off this computer, go touch some grass, would it be that extraordinarily difficult for you?"
+    "Can you stop? Genuinely? Type like a fucking human for once?"
+    "Killing you would be an act of mercy."
+    "You are everything wrong with this world"
+    "Why? Just why? Genuinely? What's wrong with you? Seriously?"
+    "I could kill you and nothing about the world would be any different."
   )
 
   # If CMD_NOT_FOUND_MSGS array is populated use those messages instead of the defaults
