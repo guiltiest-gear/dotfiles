@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.1.3
+ * @version 4.1.5
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -2677,15 +2677,24 @@ module.exports = (_ => {
 					};
 					return reactEle;
 				};
-				MyReact.findDOMNode = function (instance) {
+				MyReact.findDOMNode = function (instance, onlyChildren) {
 					if (Node.prototype.isPrototypeOf(instance)) return instance;
 					if (!instance || !instance.updater || typeof instance.updater.isMounted !== "function" || !instance.updater.isMounted(instance)) return null;
 					let node = Internal.LibraryModules.ReactDOM.findDOMNode && Internal.LibraryModules.ReactDOM.findDOMNode(instance);
-					for (let path of ["child.stateNode", "child.ref.current", "return.stateNode"]) if (!node) {
+					for (let path of ["child.stateNode", "child.ref.current", onlyChildren && "return.stateNode"]) if (!node && path) {
 						node = BDFDB.ObjectUtils.get(instance[BDFDB.ReactUtils.instanceKey] || instance, path);
 						node = Node.prototype.isPrototypeOf(node) ? node : null;
 					}
-					if (!node) node = BDFDB.ReactUtils.findValue(instance[BDFDB.ReactUtils.instanceKey] || instance, "containerInfo", {up: true});
+					if (!node) {
+						if (!onlyChildren) node = BDFDB.ReactUtils.findValue(instance[BDFDB.ReactUtils.instanceKey] || instance, "containerInfo", {up: true});
+						else {
+							let child = (instance[BDFDB.ReactUtils.instanceKey] || instance);
+							while (child && !node) {
+								if (child && Node.prototype.isPrototypeOf(child.stateNode)) node = child.stateNode;
+								else child = child.child;
+							}
+						}
+					}
 					return Node.prototype.isPrototypeOf(node) ? node : null;
 				};
 				MyReact.findParent = function (nodeOrInstance, config) {
@@ -3067,6 +3076,15 @@ module.exports = (_ => {
 							BDFDB.PatchUtils.patch({name: "BDFDB MessageUtils"}, LayerProviderPrototype, "render", {after: e => {
 								e.returnValue.props.children = typeof e.returnValue.props.children == "function" ? (_ => {return null;}) : [];
 								BDFDB.ReactUtils.forceUpdate(LayerProviderIns);
+								let messagesScroller = document.querySelector(BDFDB.dotCN.messagesscroller);
+								let scrollTop = messagesScroller.scrollTop;
+								BDFDB.TimeUtils.interval((interval, count) => {
+									let newMessagesScroller = document.querySelector(BDFDB.dotCN.messagesscroller);
+									if (newMessagesScroller != messagesScroller || count > 6000) {
+										newMessagesScroller.scrollTo({top: scrollTop});
+										BDFDB.TimeUtils.clear(interval);
+									}
+								}, 10);
 							}}, {once: true});
 							BDFDB.ReactUtils.forceUpdate(LayerProviderIns);
 						}
@@ -6834,7 +6852,7 @@ module.exports = (_ => {
 						this.toggle = this.toggle.bind(this);
 						this.onDocumentClicked = this.onDocumentClicked.bind(this);
 						this.domElementRef = BDFDB.ReactUtils.createRef();
-						this.domElementRef.current = BDFDB.ReactUtils.findDOMNode(this) || BDFDB.ReactUtils.findValue(this[BDFDB.ReactUtils.instanceKey], "ref", {notNull: true});
+						this.domElementRef.current = BDFDB.ReactUtils.findDOMNode(this, true) || BDFDB.ReactUtils.findValue(this[BDFDB.ReactUtils.instanceKey], "ref", {notNull: true});
 					}
 					onDocumentClicked() {
 						const node = BDFDB.ReactUtils.findDOMNode(this.popout);
