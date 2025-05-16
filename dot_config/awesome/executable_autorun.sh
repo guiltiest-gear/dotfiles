@@ -23,6 +23,9 @@ pgrep emote || exec emote &
 # Start unclutter
 pgrep unclutter || unclutter -b
 
+# Start the arch-update tray icon
+pgrep -af "arch-update --tray" || exec arch-update --tray
+
 # Set the compose key to right alt
 setxkbmap -option compose:ralt
 
