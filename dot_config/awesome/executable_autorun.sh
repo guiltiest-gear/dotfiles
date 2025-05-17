@@ -27,7 +27,7 @@ pgrep unclutter || unclutter -b
 pgrep -af "arch-update --tray" || exec arch-update --tray &
 
 # Set the compose key to right alt
-setxkbmap -option compose:ralt
+setxkbmap -option compose:ralt &
 
 # Fix java applications misbehaving
-wmname LG3D
+wmname LG3D &
