@@ -26,6 +26,9 @@ pgrep unclutter || unclutter -b
 # Start the arch-update tray icon
 pgrep -af "arch-update --tray" || exec arch-update --tray &
 
+# Start clipmenu
+pgrep -af "bash /usr/bin/clipmenud" || exec clipmenud &
+
 # Set the compose key to right alt
 setxkbmap -option compose:ralt &
 
