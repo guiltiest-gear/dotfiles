@@ -31,6 +31,3 @@ setxkbmap -option compose:ralt
 
 # Fix java applications misbehaving
 wmname LG3D
-
-# Ensure clipmenu has the DISPLAY environment variable
-systemctl --user import-environment DISPLAY
