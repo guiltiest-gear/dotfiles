@@ -168,9 +168,6 @@ _evalcache starship init zsh
 # zsh keybindings for fzf
 _evalcache fzf --zsh
 
-# thefuck alias
-_evalcache thefuck --alias
-
 # Enable transient prompt
 source "$ZDOTDIR"/transient-prompt.zsh
 
