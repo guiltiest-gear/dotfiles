@@ -494,7 +494,7 @@ ignore_diacritics = "yes"
 #
 #block_search_constraints_change_if_items_found = yes
 #
-#mouse_support = yes
+mouse_support = no
 #
 #mouse_list_scroll_whole_page = no
 #
