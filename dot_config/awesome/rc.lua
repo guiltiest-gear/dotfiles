@@ -425,7 +425,7 @@ globalkeys = gears.table.join(
     awful.spawn("flameshot gui")
   end, { description = "Take screenshot", group = "launcher" }),
   awful.key({ modkey, alt }, "m", function()
-    awful.spawn({ terminal, "ncmpcpp" })
+    awful.spawn(terminal .. " ncmpcpp")
   end, { description = "Open ncmpcpp", group = "launcher" }),
 
   awful.key({}, "XF86AudioMute", function()
