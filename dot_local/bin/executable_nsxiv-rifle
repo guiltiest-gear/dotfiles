@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 TMPDIR="${TMPDIR:-/tmp}"
 tmp="$TMPDIR/nsxiv_rifle_$$"
