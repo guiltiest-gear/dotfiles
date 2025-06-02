@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+function clipmenu-clear {
+  options="Yes\nNo"
+  selected=$(echo -e $options | dmenu -p 'Clear clipmenu selections?')
+  if [[ selected == "Yes" ]]; then
+    clipdel -d .
+  elif [[ selected == "No" ]]; then
+    return
+  fi
+}
+
+clipmenu-clear
