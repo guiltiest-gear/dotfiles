@@ -415,9 +415,6 @@ globalkeys = gears.table.join(
   awful.key({ modkey, "Shift" }, "c", function()
     awful.spawn("clipmenu")
   end, { description = "Open clipmenu", group = "launcher" }),
-  awful.key({ modkey, alt }, "c", function()
-    awful.spawn("clipmenu-clear")
-  end, { description = "Clear clipmenu selections", group = "launcher" }),
   awful.key({ modkey, "Shift" }, "n", function()
     awful.spawn("networkmanager_dmenu")
   end, { description = "Open networkmanager dmenu", group = "launcher" }),
