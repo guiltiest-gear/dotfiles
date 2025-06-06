@@ -630,6 +630,16 @@ awful.rules.rules = {
     },
   },
 
+  -- Fix utility type windows attempting to tile and act as their own window
+  {
+    rule = { type = "utility" },
+    properties = {
+      floating = true,
+      focusable = false,
+      border_width = 0,
+    },
+  },
+
   -- Always maximize mpv
   {
     rule = { class = "mpv" },
