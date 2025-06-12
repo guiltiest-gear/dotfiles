@@ -35,9 +35,8 @@ _fzf_compgen_dir() {
 autoload -U colors && colors
 
 # vi mode
-# NOTE: Keep this here in case we don't have zsh-vi-mode installed
 bindkey -v
-export KEYTIMEOUT=1
+# export KEYTIMEOUT=1
 
 ## Plugins
 # fzf-tab
