@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.1.9
+ * @version 4.2.1
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -3189,10 +3189,10 @@ module.exports = (_ => {
 					let keys = Object.keys(guild);
 					return guild instanceof Internal.DiscordObjects.Guild || Object.keys(new Internal.DiscordObjects.Guild({})).every(key => keys.indexOf(key) > -1);
 				};
-				BDFDB.GuildUtils.getIcon = function (id) {
+				BDFDB.GuildUtils.getIcon = function (id, size, canAnimate) {
 					let guild = Internal.LibraryStores.GuildStore.getGuild(id);
 					if (!guild || !guild.icon) return "";
-					return Internal.LibraryModules.IconUtils.getGuildIconURL(guild).split("?")[0];
+					return size ? Internal.LibraryModules.IconUtils.getGuildIconURL({id, size, canAnimate, icon: guild.icon}) : Internal.LibraryModules.IconUtils.getGuildIconURL({id, size, canAnimate, icon: guild.icon}).split("?")[0];
 				};
 				BDFDB.GuildUtils.getBanner = function (id) {
 					let guild = Internal.LibraryStores.GuildStore.getGuild(id);
@@ -7306,7 +7306,7 @@ module.exports = (_ => {
 					}
 					renderHeaderOption(props) {
 						return BDFDB.ReactUtils.createElement("div", {
-							className: BDFDB.DOMUtils.formatClassName(props.className, BDFDB.disCN.colorbase, BDFDB.disCN.size10, props.clickable && BDFDB.disCN.cursorpointer),
+							className: BDFDB.DOMUtils.formatClassName(props.className, BDFDB.disCN.eyebrow, props.clickable && BDFDB.disCN.cursorpointer),
 							onClick: _ => {if (typeof this.props.onHeaderClick == "function") this.props.onHeaderClick(props.label, this);},
 							onContextMenu: _ => {if (typeof this.props.onHeaderContextMenu == "function") this.props.onHeaderContextMenu(props.label, this);},
 							children: BDFDB.ReactUtils.createElement("span", {
@@ -7776,6 +7776,33 @@ module.exports = (_ => {
 							}
 						}, this.props);
 					}
+				};
+				
+				CustomComponents.TextElement = reactInitialized && class BDFDB_TextScroller extends Internal.LibraryModules.React.Component {
+					render() {
+						let color = this.props.color != undefined ? this.props.color && Internal.DiscordConstants.ColorsCSS[this.props.color] : Internal.DiscordConstants.ColorsCSS[CustomComponents.TextElement.Colors.STANDARD];
+						return BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Text, {
+							className: this.props.className,
+							variant: `${this.props.size || CustomComponents.TextElement.Sizes.SIZE_12}/${this.props.weight || "normal"}`,
+							style: color ? {color: color} : {},
+							color: "",
+							children: this.props.children
+						});
+					}
+				};
+				CustomComponents.TextElement.Colors = {
+					"CUSTOM": "",
+					"MUTED": "TEXT_MUTED",
+					"PRIMARY": "TEXT_PRIMARY",
+					"STANDARD": "TEXT_DEFAULT",
+					"STATUS_RED": "STATUS_DANGER"
+				};
+				CustomComponents.TextElement.Sizes = {
+					"SIZE_10": "text-xxs",
+					"SIZE_12": "text-xs",
+					"SIZE_14": "text-sm",
+					"SIZE_16": "text-md",
+					"SIZE_20": "text-lg"
 				};
 				
 				CustomComponents.TextGradientElement = reactInitialized && class BDFDB_TextGradientElement extends Internal.LibraryModules.React.Component {
