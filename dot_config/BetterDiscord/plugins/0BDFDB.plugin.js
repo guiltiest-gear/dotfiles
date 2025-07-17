@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.2.1
+ * @version 4.2.3
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -2089,8 +2089,8 @@ module.exports = (_ => {
 												className: BDFDB.DOMUtils.formatClassName(BDFDB.disCN.tooltipguildnametext),
 												children: fontColorIsGradient ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextGradientElement, {
 													gradient: BDFDB.ColorUtils.createGradient(config.fontColor),
-													children: config.guild.toString()
-												}) : config.guild.toString()
+													children: config.guild.name
+												}) : config.guild.name
 											}),
 										]
 									}),
@@ -7783,7 +7783,7 @@ module.exports = (_ => {
 						let color = this.props.color != undefined ? this.props.color && Internal.DiscordConstants.ColorsCSS[this.props.color] : Internal.DiscordConstants.ColorsCSS[CustomComponents.TextElement.Colors.STANDARD];
 						return BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Text, {
 							className: this.props.className,
-							variant: `${this.props.size || CustomComponents.TextElement.Sizes.SIZE_12}/${this.props.weight || "normal"}`,
+							variant: `${this.props.size || CustomComponents.TextElement.Sizes.SIZE_14}/${this.props.weight || "normal"}`,
 							style: color ? {color: color} : {},
 							color: "",
 							children: this.props.children
