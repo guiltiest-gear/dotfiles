@@ -40,7 +40,7 @@ alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settin
 ## Internet connection
 alias check='ping -c 4 archlinux.org'
 alias myip='curl ip.me'
-alias speed='speedtest --single --secure'
+# alias speed='speedtest --single --secure'
 ## Pacman and paru
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 ## Terminal
