@@ -1,0 +1,13 @@
+encryption = "gpg"
+
+[gpg]
+recipient = "477652D8FD9296E3ABD5E25790E62EF00917B8CB"
+args = ["--quiet"]
+
+[diff]
+command = "delta"
+args = ["--color-only", "{{ .Destination }}", "{{ .Target }}"]
+
+[merge]
+command = "nvim"
+args = ["-d", "{{ .Destination }}", "{{ .Source }}", "{{ .Target }}"]
