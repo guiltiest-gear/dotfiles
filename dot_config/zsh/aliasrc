@@ -70,7 +70,7 @@ mpvf() { fd "mp4$|mkv$" --type=f --color=never ~/Videos/ | fzf --scheme=path | s
 imgf() { find ~/Pictures/ -type f | sort | fzf --scheme=path | sed 's/^/"/;s/$/"/' | xargs -rI % nsxiv -apq %; }
 
 # icat alias
-alias icat='kitty +kitten icat'
+[ "$TERM" = "xterm-kitty" ] && alias icat='kitty +kitten icat'
 # kitty ssh alias
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
