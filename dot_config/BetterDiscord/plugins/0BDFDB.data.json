@@ -217,9 +217,8 @@
 		"NitroUtils": {"props": ["canUseIncreasedMessageLength", "canUsePremiumGuildMemberProfile"]},
 		"NotificationSettingsUtils": {"props": ["setDesktopType", "setTTSType"]},
 		"PlatformUtils": {"props": ["isAndroid", "isWindows"]},
-		"PermissionRoleUtils": {"strings": [".roles.indexOf(", ".getMember", "excludeGuildPermissions"], "exported": false, "value": "exports", "map": {
-			"can": ["excludeGuildPermissions", "permission:"],
-			"getHighestRole": [".roles.indexOf(", ".getMember"]
+		"PermissionRoleUtils": {"strings": ["permission:", ".getMember", "excludeGuildPermissions"], "exported": false, "value": "exports", "map": {
+			"can": ["excludeGuildPermissions", "permission:"]
 		}},
 		"PreferencesContext": {"strings": ["reducedMotion", "forcedColors", "alwaysShowLinkDecorations", "createContext"], "exported": false, "value": "exports", "map": {
 			"AccessibilityPreferencesContext": ["[object Object]"]
@@ -233,9 +232,8 @@
 			"getRoleIconData": ["customIconSrc:"]
 		}},
 		"RTCConnectionUtils": {"props": ["getChannelId", "getGuildId", "getRTCConnectionId"]},
-		"SearchPageUtils": {"strings": ["dispatch({type:\"SEARCH_CLEAR_HISTORY\"", "*"], "exported": false, "value": "exports", "map": {
-			"changePage": ["*"],
-			"clearHistory": ["dispatch({type:\"SEARCH_CLEAR_HISTORY\""]
+		"SearchPageUtils": {"strings": ["SEARCH_RESULT_PAGE_CHANGED", "newPageIndex", "refreshSearch"], "exported": false, "value": "exports", "map": {
+			"changePage": ["SEARCH_RESULT_PAGE_CHANGED"]
 		}},
 		"SimpleMarkdownParser": {"props": ["parseBlock", "parseInline", "defaultOutput"]},
 		"SlateRichUtils": {"strings": ["{type:\"line\",children", "textValue:", "richValue:", "map"], "exported": false, "value": "exports", "map": {
@@ -290,7 +288,7 @@
 		"TabBar": {"props": ["Item", "Header", "Panel"]},
 		"Table": {"props": ["SortDirection", "defaultProps"]},
 		"TextArea": {"strings": ["onKeyDown", "defaultDirty"]},
-		"TextInput": {"strings": ["onFocus", "defaultValue", "getIsOverFlowing"]},
+		"TextInput": {"strings": ["onFocus", "defaultValue", "editable"]},
 		"TooltipContainer": {"strings": ["Tooltip cannot find DOM node", "shouldShowTooltip", "clickable"]}
 	},
 	"LibraryComponents": {
@@ -565,7 +563,7 @@
 		"SearchPopout": {"strings": [".handleHintClick", ".selectedIndex", "token.start"]},
 		"SearchPopoutOption": {"strings": [".plusIcon", ".option,", ".filter"]},
 		"SearchResult": {"strings": ["onJump:", "message:", "handleMessageClick"]},
-		"SearchResults": {"strings": ["renderNoResults", "emptyResultsText", "isSearching"], "noSearch": true},
+		"SearchResults": {"strings": ["paginationLimitHeader", "searchResultsWrap", "isSearching"], "noSearch": true},
 		"SearchResultsHeader": {"strings": [".MOST_RELEVANT", "searchMode"]},
 		"SearchResultsInner": {"strings": ["totalResults", "resultsBlocked", "\"search-results\""], "noSearch": true},
 		"SearchResultsPagination": {"strings": ["maxVisiblePages", "pageSize", "container"]},
@@ -578,7 +576,7 @@
 		"SystemMessageWrapper": {"strings": ["unknown message type", "\"SystemMessage\""]},
 		"TabBar": {"props": ["Item", "Header", "Panel"]},
 		"TextChannelEmptyMessage": {"strings": ["MANAGE_CHANNELS", ".BEGINNING_CHANNEL_DESCRIPTION", "topicHook:"]},
-		"TextInput": {"strings": ["onFocus", "defaultValue", "getIsOverFlowing"], "noSearch": true},
+		"TextInput": {"strings": ["onFocus","defaultValue", "editable"], "noSearch": true},
 		"ThreadCard": {"strings": ["threadId:", ".container", ".threadName"]},
 		"ThreadCardDescription": {"strings": [".bullet", ".lastMessageId"]},
 		"ThreadEmptyMessage": {"strings": [",{channel:", ".name", "{channelId:", ".iconWrapper", ".icon}"]},
@@ -607,7 +605,7 @@
 		"UserPopoutHeader": {"strings": ["PRESS_VIEW_PROFILE", "PROFILE_POPOUT"], "noSearch": true},
 		"UserPopoutStatusBubble": {"strings": [".statusText,", "ringClassName", "action:\"HOVER_CUSTOM_STATUS\""], "noSearch": true},
 		"UserPopoutStatusBubbleEmpty": {"strings": [".addStatusPrompt", "PRESS_ADD_CUSTOM_STATUS"], "noSearch": true},
-		"UserProfile": {"strings": [".PROFILE_MODAL", "USER_INFO_CONNECTIONS", ".topSection"], "noSearch": true},
+		"UserProfile": {"strings": [".Provider", "themeType:", "secondaryColor"]},
 		"UserProfileHeader": {"strings": ["\"header\"", "user", "PROFILE_MODAL"], "noSearch": true},
 		"UserProfileInfoSection": {"strings": ["trackUserProfileAction:", "\"PRESS_APP_CONNECTION\"", "onUpdate"], "noSearch": true},
 		"UserProfileMutualGuilds": {"strings": ["mutualGuilds", ".listScroller", ".emptyText"]},
@@ -1565,7 +1563,8 @@
 		"Roles": {"props": ["rolePill", "roles", "rolePillBorder"]},
 		"Scrollbar": {"props": ["scrollbar", "scrollbarGhost"]},
 		"Scroller": {"props": ["disableScrollAnchor", "none", "fade"]},
-		"SearchBar": {"props": ["clear", "container", "pointer"]},
+		"SearchBar": {"props": ["container", "code", "input"]},
+		"SearchBarIcon": {"props": ["clear", "icon", "pointer"]},
 		"SearchPopout": {"props": ["datePicker", "searchResultChannelIcon"]},
 		"SearchPopoutWrap": {"props": ["container", "queryContainer"]},
 		"SearchResults": {"props": ["noResults", "searchResultsWrap"]},
@@ -2409,6 +2408,7 @@
 		"imagezoom": ["ImageWrapper", "imageZoom"],
 		"itemlayer": ["ItemLayerContainer", "layer"],
 		"itemlayercontainer": ["ItemLayerContainer", "layerContainer"],
+		"itemlayercontainerclicktrap": ["ItemLayerContainer", "clickTrapContainer"],
 		"itemlayercontainerzindexdisabled": ["BDFDB", "layerContainerZIndexDisabled"],
 		"itemlayerdisabledpointerevents": ["ItemLayerContainer", "disabledPointerEvents"],
 		"input": ["Input", "input"],
@@ -2918,16 +2918,13 @@
 		"scrollerscrolling": ["Scroller", "scrolling"],
 		"scrollerthin": ["Scroller", "thin"],
 		"searchbar": ["SearchBar", "container"],
-		"searchbarclear": ["SearchBar", "clear"],
-		"searchbaricon": ["SearchBar", "icon"],
-		"searchbariconlayout": ["SearchBar", "iconLayout"],
-		"searchbariconwrap": ["SearchBar", "iconContainer"],
+		"searchbarclear": ["SearchBarIcon", "clear"],
+		"searchbaricon": ["SearchBarIcon", "icon"],
+		"searchbariconlayout": ["SearchBarIcon", "iconLayout"],
+		"searchbariconwrap": ["SearchBarIcon", "iconContainer"],
 		"searchbarinner": ["SearchBar", "inner"],
 		"searchbarinput": ["SearchBar", "input"],
-		"searchbarlarge": ["SearchBar", "large"],
-		"searchbarmedium": ["SearchBar", "medium"],
-		"searchbarsmall": ["SearchBar", "small"],
-		"searchbarvisible": ["SearchBar", "visible"],
+		"searchbarvisible": ["SearchBarIcon", "visible"],
 		"searchbarwrapper": ["BDFDB", "searchBarWrapper"],
 		"searchpopout": ["SearchPopoutWrap", "container"],
 		"searchpopoutanswer": ["SearchPopout", "answer"],

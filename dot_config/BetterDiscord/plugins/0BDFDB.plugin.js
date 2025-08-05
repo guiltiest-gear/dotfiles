@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.2.4
+ * @version 4.2.6
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -1655,10 +1655,10 @@ module.exports = (_ => {
 						plugin.globalKeybinds = {};
 					}
 					else {
-						BDFDB.LibraryModules.WindowUtils.inputEventUnregister(plugin.globalKeybinds[id]);
+						if (plugin.globalKeybinds[id]) BDFDB.LibraryModules.WindowUtils.inputEventUnregister(plugin.globalKeybinds[id]);
 						delete plugin.globalKeybinds[id];
 						const alternativeId = id + "___ALTERNATIVE";
-						BDFDB.LibraryModules.WindowUtils.inputEventUnregister(plugin.globalKeybinds[alternativeId]);
+						if (plugin.globalKeybinds[alternativeId]) BDFDB.LibraryModules.WindowUtils.inputEventUnregister(plugin.globalKeybinds[alternativeId]);
 						delete plugin.globalKeybinds[alternativeId];
 					}
 				};
@@ -2009,15 +2009,16 @@ module.exports = (_ => {
 				BDFDB.TooltipUtils = {};
 				BDFDB.TooltipUtils.create = function (anker, text, config = {}) {
 					if (!text && !config.guild) return null;
-					const itemLayerContainer = document.querySelector(BDFDB.dotCN.app + " ~ " + BDFDB.dotCN.itemlayercontainer) || document.querySelector(BDFDB.dotCN.itemlayercontainer);
+					const itemLayerContainer = document.querySelector(`${BDFDB.dotCN.app} ~ ${BDFDB.dotCN.itemlayercontainer}:has(${BDFDB.dotCN.itemlayercontainerclicktrap})`) || document.querySelector(`${BDFDB.dotCN.app} ~ ${BDFDB.dotCN.itemlayercontainer}`) || document.querySelector(BDFDB.dotCN.itemlayercontainer);
 					if (!itemLayerContainer || !Node.prototype.isPrototypeOf(anker) || !document.contains(anker)) return null;
 					const id = BDFDB.NumberUtils.generateId(Tooltips);
-					const itemLayer = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCNS.itemlayer + BDFDB.disCN.itemlayerdisabledpointerevents}"><div class="${BDFDB.disCN.tooltip}" tooltip-id="${id}"><div class="${BDFDB.disCN.tooltipcontent}"></div><div class="${BDFDB.disCNS.tooltippointer + BDFDB.disCN.tooltippointerbg}"></div><div class="${BDFDB.disCN.tooltippointer}"></div></div></div>`);
-					itemLayerContainer.appendChild(itemLayer);
+					const wrapper = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCN.itemlayercontainerclicktrap}"><div class="${BDFDB.disCNS.itemlayer + BDFDB.disCN.itemlayerdisabledpointerevents}"><div class="${BDFDB.disCN.tooltip}" tooltip-id="${id}"><div class="${BDFDB.disCN.tooltipcontent}"></div><div class="${BDFDB.disCNS.tooltippointer + BDFDB.disCN.tooltippointerbg}"></div><div class="${BDFDB.disCN.tooltippointer}"></div></div></div></div>`);
+					itemLayerContainer.appendChild(wrapper);
 					
-					const tooltip = itemLayer.firstElementChild;
-					const tooltipContent = itemLayer.querySelector(BDFDB.dotCN.tooltipcontent);
-					const tooltipPointers = Array.from(itemLayer.querySelectorAll(BDFDB.dotCN.tooltippointer));
+					const itemLayer = wrapper.firstElementChild;
+					const tooltip = wrapper.querySelector(BDFDB.dotCN.tooltip);
+					const tooltipContent = wrapper.querySelector(BDFDB.dotCN.tooltipcontent);
+					const tooltipPointers = Array.from(wrapper.querySelectorAll(BDFDB.dotCN.tooltippointer));
 					
 					if (config.id) tooltip.id = config.id.split(" ").join("");
 					
@@ -2063,11 +2064,11 @@ module.exports = (_ => {
 						document.removeEventListener("wheel", wheel);
 						document.removeEventListener("mousemove", mouseMove);
 						document.removeEventListener("mouseleave", mouseLeave);
-						BDFDB.DOMUtils.remove(itemLayer);
+						BDFDB.DOMUtils.remove(wrapper);
 						BDFDB.ArrayUtils.remove(Tooltips, id);
 						observer.disconnect();
 						if (zIndexed) BDFDB.DOMUtils.removeClass(itemLayerContainer, BDFDB.disCN.itemlayercontainerzindexdisabled);
-						if (typeof config.onHide == "function") config.onHide(itemLayer, anker);
+						if (typeof config.onHide == "function") config.onHide(wrapper, anker);
 					};
 					const setText = newText => {
 						if (BDFDB.ObjectUtils.is(config.guild)) {
@@ -2166,7 +2167,7 @@ module.exports = (_ => {
 						if (type == "top" || type == "bottom") {
 							if (left < 0) {
 								itemLayer.style.setProperty("left", "5px", "important");
-								tooltipPointer.style.setProperty("margin-left", `${left - 10}px`, "important");
+								for (let pointer of tooltipPointers) pointer.style.setProperty("margin-left", `${left - 10}px`, "important");
 							}
 							else {
 								const rightMargin = aRects.width - (left + iRects.width);
@@ -2214,27 +2215,27 @@ module.exports = (_ => {
 					
 					const observer = new MutationObserver(changes => changes.forEach(change => {
 						const nodes = Array.from(change.removedNodes);
-						if (nodes.indexOf(itemLayer) > -1 || nodes.indexOf(anker) > -1 || nodes.some(n =>  n.contains(anker))) removeTooltip();
+						if (nodes.indexOf(wrapper) > -1 || nodes.indexOf(anker) > -1 || nodes.some(n =>  n.contains(anker))) removeTooltip();
 					}));
 					observer.observe(document.body, {subtree: true, childList: true});
 					
-					tooltip.removeTooltip = itemLayer.removeTooltip = removeTooltip;
-					tooltip.setText = itemLayer.setText = setText;
-					tooltip.update = itemLayer.update = update;
+					tooltip.removeTooltip = wrapper.removeTooltip = removeTooltip;
+					tooltip.setText = wrapper.setText = setText;
+					tooltip.update = wrapper.update = update;
 					setText(text);
 					update();
 					
 					if (config.delay) {
-						BDFDB.DOMUtils.toggle(itemLayer);
+						BDFDB.DOMUtils.toggle(wrapper);
 						BDFDB.TimeUtils.timeout(_ => {
-							BDFDB.DOMUtils.toggle(itemLayer);
-							if (typeof config.onShow == "function") config.onShow(itemLayer, anker);
+							BDFDB.DOMUtils.toggle(wrapper);
+							if (typeof config.onShow == "function") config.onShow(wrapper, anker);
 						}, config.delay);
 					}
 					else {
-						if (typeof config.onShow == "function") config.onShow(itemLayer, anker);
+						if (typeof config.onShow == "function") config.onShow(wrapper, anker);
 					}
-					return itemLayer;
+					return wrapper;
 				};
 				
 				Internal.addModulePatches = function (plugin) {
@@ -4301,7 +4302,7 @@ module.exports = (_ => {
 				};
 				BDFDB.NumberUtils.generateId = function (array) {
 					array = BDFDB.ArrayUtils.is(array) ? array : [];
-					let id = Math.floor(Math.random() * 10000000000000000);
+					let id = Math.floor(Math.random() * 1000000000);
 					if (array.includes(id)) return BDFDB.NumberUtils.generateId(array);
 					else {
 						array.push(id);
@@ -7824,130 +7825,126 @@ module.exports = (_ => {
 				};
 				
 				CustomComponents.TextInput = reactInitialized && class BDFDB_TextInput extends Internal.LibraryModules.React.Component {
-					render () {
-						return BDFDB.ReactUtils.createElement(class extends Internal.LibraryModules.React.Component {
-							handleChange(e, e2) {
-								let value = e = BDFDB.ObjectUtils.is(e) ? (e.currentTarget || e.target).value : e;
-								if (this.props.type == "number") value = parseInt(value);
-								this.props.value = this.props.valuePrefix && !value.startsWith(this.props.valuePrefix) ? (this.props.valuePrefix + value) : value;
-								this.props.file = e2 = BDFDB.ObjectUtils.is(e2) ? (e2.currentTarget || e2.target).value : e2;
-								if (typeof this.props.onChange == "function") this.props.onChange(this.props.type == "file" ? this.props.file : this.props.value, this);
-								BDFDB.ReactUtils.forceUpdate(this);
-							}
-							handleInput(e) {if (typeof this.props.onInput == "function") this.props.onInput(BDFDB.ObjectUtils.is(e) ? (e.currentTarget || e.target).value : e, this);}
-							handleKeyDown(e) {if (typeof this.props.onKeyDown == "function") this.props.onKeyDown(e, this);}
-							handleBlur(e) {if (typeof this.props.onBlur == "function") this.props.onBlur(e, this);}
-							handleFocus(e) {if (typeof this.props.onFocus == "function") this.props.onFocus(e, this);}
-							handleMouseEnter(e) {if (typeof this.props.onMouseEnter == "function") this.props.onMouseEnter(e, this);}
-							handleMouseLeave(e) {if (typeof this.props.onMouseLeave == "function") this.props.onMouseLeave(e, this);}
-							handleNumberButton(ins, value) {
-								BDFDB.TimeUtils.clear(this.pressedTimeout);
-								this.pressedTimeout = BDFDB.TimeUtils.timeout(_ => {
-									delete this.props.focused;
-									BDFDB.ReactUtils.forceUpdate(this);
-								}, 1000);
-								this.props.focused = true;
-								this.handleChange.apply(this, [value]);
-								this.handleInput.apply(this, [value]);
-							}
-							componentDidMount() {
-								if (this.props.type == "file") {
-									let navigatorInstance = BDFDB.ReactUtils.findOwner(this, {name: "BDFDB_FileButton"});
-									if (navigatorInstance) navigatorInstance.refInput = this;
-								}
-								let input = BDFDB.ReactUtils.findDOMNode(this);
-								if (!input) return;
-								input = input.querySelector("input") || input;
-								if (input && !input.patched) {
-									input.addEventListener("keydown", e => {
-										this.handleKeyDown.apply(this, [e]);
-										e.stopImmediatePropagation();
-									});
-									input.patched = true;
-								}
-							}
-							render() {
-								let inputChildren = [
-									BDFDB.ReactUtils.createElement("input", BDFDB.ObjectUtils.exclude(Object.assign({}, this.props, {
-										className: BDFDB.DOMUtils.formatClassName(BDFDB.disCN.input, this.props.size, this.props.inputClassName, this.props.focused && BDFDB.disCN.inputfocused, this.props.error || this.props.errorMessage ? BDFDB.disCN.inputerror : (this.props.success && BDFDB.disCN.inputsuccess), this.props.disabled && BDFDB.disCN.inputdisabled, this.props.editable && BDFDB.disCN.inputeditable),
-										type: this.props.type == "color" || this.props.type == "file" ? "text" : this.props.type,
-										onChange: this.handleChange.bind(this),
-										onInput: this.handleInput.bind(this),
-										onKeyDown: this.handleKeyDown.bind(this),
-										onBlur: this.handleBlur.bind(this),
-										onFocus: this.handleFocus.bind(this),
-										onMouseEnter: this.handleMouseEnter.bind(this),
-										onMouseLeave: this.handleMouseLeave.bind(this),
-										maxLength: this.props.type == "file" ? false : this.props.maxLength,
-										style: this.props.width ? {width: `${this.props.width}px`} : {},
-										ref: this.props.inputRef
-									}), "errorMessage", "focused", "error", "success", "inputClassName", "inputChildren", "valuePrefix", "size", "editable", "inputRef", "style", "mode", "colorPickerOpen", "noAlpha", "filter")),
-									this.props.inputChildren,
-									this.props.type == "color" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
-										wrap: true,
-										children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.ColorSwatches, {
-											colors: [],
-											color: this.props.value && this.props.mode == "comp" ? BDFDB.ColorUtils.convert(this.props.value.split(","), "RGB") : this.props.value,
-											onColorChange: color => this.handleChange.apply(this, [!color ? "" : (this.props.mode == "comp" ? BDFDB.ColorUtils.convert(color, "RGBCOMP").slice(0, 3).join(",") : BDFDB.ColorUtils.convert(color, this.props.noAlpha ? "RGB" : "RGBA"))]),
-											pickerOpen: this.props.colorPickerOpen,
-											onPickerOpen: _ => this.props.colorPickerOpen = true,
-											onPickerClose: _ => delete this.props.colorPickerOpen,
-											ref: this.props.controlsRef,
-											pickerConfig: {gradient: false, alpha: this.props.mode != "comp" && !this.props.noAlpha}
-										})
-									}) : null,
-									this.props.type == "file" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FileButton, {
-										filter: this.props.filter,
-										mode: this.props.mode,
-										ref: this.props.controlsRef
-									}) : null
-								].flat(10).filter(n => n);
-								
-								return BDFDB.ReactUtils.createElement("div", {
-									className: BDFDB.DOMUtils.formatClassName(BDFDB.disCN.inputwrapper, this.props.type == "number" && (this.props.size && Internal.LibraryComponents.TextInput.Sizes[this.props.size.toUpperCase()] && BDFDB.disCN["inputnumberwrapper" + this.props.size.toLowerCase()] || BDFDB.disCN.inputnumberwrapperdefault), this.props.className),
-									style: this.props.style,
+					handleChange(e, e2) {
+						let value = e = BDFDB.ObjectUtils.is(e) ? (e.currentTarget || e.target).value : e;
+						if (this.props.type == "number") value = parseInt(value);
+						this.props.value = this.props.valuePrefix && !value.startsWith(this.props.valuePrefix) ? (this.props.valuePrefix + value) : value;
+						this.props.file = e2 = BDFDB.ObjectUtils.is(e2) ? (e2.currentTarget || e2.target).value : e2;
+						if (typeof this.props.onChange == "function") this.props.onChange(this.props.type == "file" ? this.props.file : this.props.value, this);
+						BDFDB.ReactUtils.forceUpdate(this);
+					}
+					handleInput(e) {if (typeof this.props.onInput == "function") this.props.onInput(BDFDB.ObjectUtils.is(e) ? (e.currentTarget || e.target).value : e, this);}
+					handleKeyDown(e) {if (typeof this.props.onKeyDown == "function") this.props.onKeyDown(e, this);}
+					handleBlur(e) {if (typeof this.props.onBlur == "function") this.props.onBlur(e, this);}
+					handleFocus(e) {if (typeof this.props.onFocus == "function") this.props.onFocus(e, this);}
+					handleMouseEnter(e) {if (typeof this.props.onMouseEnter == "function") this.props.onMouseEnter(e, this);}
+					handleMouseLeave(e) {if (typeof this.props.onMouseLeave == "function") this.props.onMouseLeave(e, this);}
+					handleNumberButton(ins, value) {
+						BDFDB.TimeUtils.clear(this.pressedTimeout);
+						this.pressedTimeout = BDFDB.TimeUtils.timeout(_ => {
+							delete this.props.focused;
+							BDFDB.ReactUtils.forceUpdate(this);
+						}, 1000);
+						this.props.focused = true;
+						this.handleChange.apply(this, [value]);
+						this.handleInput.apply(this, [value]);
+					}
+					componentDidMount() {
+						if (this.props.type == "file") {
+							let navigatorInstance = BDFDB.ReactUtils.findOwner(this, {name: "BDFDB_FileButton"});
+							if (navigatorInstance) navigatorInstance.refInput = this;
+						}
+						let input = BDFDB.ReactUtils.findDOMNode(this);
+						if (!input) return;
+						input = input.querySelector("input") || input;
+						if (input && !input.patched) {
+							input.addEventListener("keydown", e => {
+								this.handleKeyDown.apply(this, [e]);
+								e.stopImmediatePropagation();
+							});
+							input.patched = true;
+						}
+					}
+					render() {
+						let inputChildren = [
+							BDFDB.ReactUtils.createElement("input", BDFDB.ObjectUtils.exclude(Object.assign({}, this.props, {
+								className: BDFDB.DOMUtils.formatClassName(BDFDB.disCN.input, this.props.size, this.props.inputClassName, this.props.focused && BDFDB.disCN.inputfocused, this.props.error || this.props.errorMessage ? BDFDB.disCN.inputerror : (this.props.success && BDFDB.disCN.inputsuccess), this.props.disabled && BDFDB.disCN.inputdisabled, this.props.editable && BDFDB.disCN.inputeditable),
+								type: this.props.type == "color" || this.props.type == "file" ? "text" : this.props.type,
+								onChange: this.handleChange.bind(this),
+								onInput: this.handleInput.bind(this),
+								onKeyDown: this.handleKeyDown.bind(this),
+								onBlur: this.handleBlur.bind(this),
+								onFocus: this.handleFocus.bind(this),
+								onMouseEnter: this.handleMouseEnter.bind(this),
+								onMouseLeave: this.handleMouseLeave.bind(this),
+								maxLength: this.props.type == "file" ? false : this.props.maxLength,
+								style: this.props.width ? {width: `${this.props.width}px`} : {},
+								ref: this.props.inputRef
+							}), "errorMessage", "focused", "error", "success", "inputClassName", "inputChildren", "valuePrefix", "size", "editable", "inputRef", "style", "mode", "colorPickerOpen", "noAlpha", "filter")),
+							this.props.inputChildren,
+							this.props.type == "color" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
+								wrap: true,
+								children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.ColorSwatches, {
+									colors: [],
+									color: this.props.value && this.props.mode == "comp" ? BDFDB.ColorUtils.convert(this.props.value.split(","), "RGB") : this.props.value,
+									onColorChange: color => this.handleChange.apply(this, [!color ? "" : (this.props.mode == "comp" ? BDFDB.ColorUtils.convert(color, "RGBCOMP").slice(0, 3).join(",") : BDFDB.ColorUtils.convert(color, this.props.noAlpha ? "RGB" : "RGBA"))]),
+									pickerOpen: this.props.colorPickerOpen,
+									onPickerOpen: _ => this.props.colorPickerOpen = true,
+									onPickerClose: _ => delete this.props.colorPickerOpen,
+									ref: this.props.controlsRef,
+									pickerConfig: {gradient: false, alpha: this.props.mode != "comp" && !this.props.noAlpha}
+								})
+							}) : null,
+							this.props.type == "file" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FileButton, {
+								filter: this.props.filter,
+								mode: this.props.mode,
+								ref: this.props.controlsRef
+							}) : null
+						].flat(10).filter(n => n);
+						
+						return BDFDB.ReactUtils.createElement("div", {
+							className: BDFDB.DOMUtils.formatClassName(BDFDB.disCN.inputwrapper, this.props.type == "number" && (this.props.size && Internal.LibraryComponents.TextInput.Sizes[this.props.size.toUpperCase()] && BDFDB.disCN["inputnumberwrapper" + this.props.size.toLowerCase()] || BDFDB.disCN.inputnumberwrapperdefault), this.props.className),
+							style: this.props.style,
+							children: [
+								this.props.type == "number" ? BDFDB.ReactUtils.createElement("div", {
+									className: BDFDB.disCN.inputnumberbuttons,
 									children: [
-										this.props.type == "number" ? BDFDB.ReactUtils.createElement("div", {
-											className: BDFDB.disCN.inputnumberbuttons,
-											children: [
-												BDFDB.ReactUtils.createElement("div", {
-													className: BDFDB.disCN.inputnumberbuttonup,
-													onClick: e => {
-														let min = parseInt(this.props.min);
-														let max = parseInt(this.props.max);
-														let newV = parseInt(this.props.value) + 1 || min || 0;
-														if (isNaN(max) || !isNaN(max) && newV <= max) this.handleNumberButton.bind(this)(e._targetInst, isNaN(min) || !isNaN(min) && newV >= min ? newV : min);
-													}
-												}),
-												BDFDB.ReactUtils.createElement("div", {
-													className: BDFDB.disCN.inputnumberbuttondown,
-													onClick: e => {
-														let min = parseInt(this.props.min);
-														let max = parseInt(this.props.max);
-														let newV = parseInt(this.props.value) - 1 || min || 0;
-														if (isNaN(min) || !isNaN(min) && newV >= min) this.handleNumberButton.bind(this)(e._targetInst, isNaN(max) || !isNaN(max) && newV <= max ? newV : max);
-													}
-												})
-											]
-										}) : null,
-										inputChildren.length == 1 ? inputChildren[0] : BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex, {
-											wrap: Internal.LibraryComponents.Flex.Wrap.NO_WRAP,
-											align: Internal.LibraryComponents.Flex.Align.CENTER,
-											children: inputChildren.map((child, i) => i != 0 ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
-												shrink: 0,
-												children: child
-											}) : child)
+										BDFDB.ReactUtils.createElement("div", {
+											className: BDFDB.disCN.inputnumberbuttonup,
+											onClick: e => {
+												let min = parseInt(this.props.min);
+												let max = parseInt(this.props.max);
+												let newV = parseInt(this.props.value) + 1 || min || 0;
+												if (isNaN(max) || !isNaN(max) && newV <= max) this.handleNumberButton.bind(this)(e._targetInst, isNaN(min) || !isNaN(min) && newV >= min ? newV : min);
+											}
 										}),
-										this.props.errorMessage ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextElement, {
-											className: BDFDB.disCN.margintop8,
-											size: Internal.LibraryComponents.TextElement.Sizes.SIZE_12,
-											color: Internal.LibraryComponents.TextElement.Colors.STATUS_RED,
-											children: this.props.errorMessage
-										}) : null
-									].filter(n => n)
-								});
-							}
-						}, this.props);
+										BDFDB.ReactUtils.createElement("div", {
+											className: BDFDB.disCN.inputnumberbuttondown,
+											onClick: e => {
+												let min = parseInt(this.props.min);
+												let max = parseInt(this.props.max);
+												let newV = parseInt(this.props.value) - 1 || min || 0;
+												if (isNaN(min) || !isNaN(min) && newV >= min) this.handleNumberButton.bind(this)(e._targetInst, isNaN(max) || !isNaN(max) && newV <= max ? newV : max);
+											}
+										})
+									]
+								}) : null,
+								inputChildren.length == 1 ? inputChildren[0] : BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex, {
+									wrap: Internal.LibraryComponents.Flex.Wrap.NO_WRAP,
+									align: Internal.LibraryComponents.Flex.Align.CENTER,
+									children: inputChildren.map((child, i) => i != 0 ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
+										shrink: 0,
+										children: child
+									}) : child)
+								}),
+								this.props.errorMessage ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextElement, {
+									className: BDFDB.disCN.margintop8,
+									size: Internal.LibraryComponents.TextElement.Sizes.SIZE_12,
+									color: Internal.LibraryComponents.TextElement.Colors.STATUS_RED,
+									children: this.props.errorMessage
+								}) : null
+							].filter(n => n)
+						});
 					}
 				};
 				CustomComponents.TextInput.Sizes = {
