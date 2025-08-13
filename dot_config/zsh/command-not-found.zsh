@@ -78,6 +78,7 @@ print_message() {
     "You are everything wrong with this world"
     "Why? Just why? Genuinely? What's wrong with you? Seriously?"
     "I could kill you and nothing about the world would be any different."
+    "Your mom's a hamster, and your dad smells like elderberries, dickhead."
   )
 
   # If CMD_NOT_FOUND_MSGS array is populated use those messages instead of the defaults
