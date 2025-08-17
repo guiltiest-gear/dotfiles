@@ -80,6 +80,27 @@ fi
 # Fix adb
 alias adb='HOME=$XDG_DATA_HOME/android adb'
 
+# Abbreviations
+if type abbr >/dev/null; then
+  abbr p='pacman'
+  abbr pa='paru'
+  abbr sp='sudo pacman'
+  abbr sps='sudo pacman -S'
+  abbr pqi='pacman -Qi'
+  abbr psi='pacman -Si'
+  abbr g='git'
+  abbr ga='git annex'
+  abbr v='vim'
+  abbr ch='chezmoi'
+  abbr cha='chezmoi add'
+  abbr chd='chezmoi diff'
+  abbr che='chezmoi edit'
+  abbr chap='chezmoi apply'
+  abbr chg='chezmoi git'
+  abbr chc='chezmoi cd'
+  abbr chdx='chezmoi diff -x'
+fi
+
 # Fun
 ## Terminal rickroll
 # alias rr='curl -sL https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
