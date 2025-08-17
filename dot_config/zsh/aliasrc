@@ -98,6 +98,7 @@ if type abbr >/dev/null; then
   abbr chg='chezmoi git'
   abbr chc='chezmoi cd'
   abbr chdx='chezmoi diff -x'
+  abbr pagp="paru -Gp"
 fi
 
 # Fun
