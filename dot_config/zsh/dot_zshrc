@@ -55,6 +55,16 @@ zinit light MichaelAquilina/zsh-you-should-use
 zinit ice depth"1"
 zinit light mroth/evalcache
 
+# zsh-abbr
+# Make abbr cram a sock in it
+export ABBR_QUIETER=1
+zinit ice depth"1" lucid
+zinit light olets/zsh-abbr
+
+# zsh-autosuggestions-abbreviations-strategy
+zinit ice depth"1" lucid
+zinit light olets/zsh-autosuggestions-abbreviations-strategy
+
 # verbose copy
 zinit snippet OMZP::cp
 
@@ -67,7 +77,7 @@ zinit snippet OMZP::extract
 # Exports
 export FZF_DEFAULT_OPTS="--no-mouse --cycle --tiebreak=chunk"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
-export ZSH_AUTOSUGGEST_STRATEGY=(completion)
+export ZSH_AUTOSUGGEST_STRATEGY=(abbreviations completion history)
 # export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#7f7d9c"
 export _ZO_EXCLUDE_DIRS="/tmp:/tmp/*:$HOME/Downloads/*:$HOME/Music/*:$HOME/Documents/*:$HOME/Pictures/*:\
 $HOME/Videos/*:/run/*:$HOME/.local/share/nvim/*:$HOME/.local/state/nvim/*:$HOME/.local/share/chezmoi/*:\
