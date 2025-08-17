@@ -37,11 +37,13 @@ alias tb='nc termbin.com 9999'
 alias se='sudoedit'
 alias wget='wget --continue --hsts-file="$XDG_DATA_HOME"/wget-hsts'
 alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
+
 ## Internet connection
 alias check='ping -c 4 archlinux.org'
 alias myip='curl ip.me'
 # alias speed='speedtest --single --secure'
-## Pacman and paru
+
+# Pacman
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 ## Terminal
 # HACK: For some reason, clear doesn't work properly with xterm-kitty when output exceeds number of rows
