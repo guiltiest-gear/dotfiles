@@ -38,36 +38,6 @@ autoload -U colors && colors
 bindkey -v
 # export KEYTIMEOUT=1
 
-## Plugins
-# fzf-tab
-zinit ice depth"1" wait lucid
-zinit light Aloxaf/fzf-tab
-
-# zsh-autosuggestions
-zinit ice depth"1"
-zinit light zsh-users/zsh-autosuggestions
-
-# zsh-you-should-use
-zinit ice depth"1" wait"1" lucid
-zinit light MichaelAquilina/zsh-you-should-use
-
-# evalcache
-zinit ice depth"1"
-zinit light mroth/evalcache
-
-# zsh-abbr
-zinit ice depth"1"
-zinit light olets/zsh-abbr
-
-# verbose copy
-zinit snippet OMZP::cp
-
-# Prepend sudo
-zinit snippet OMZP::sudo
-
-# extract
-zinit snippet OMZP::extract
-
 # Exports
 export ABBR_QUIETER=1
 export FZF_DEFAULT_OPTS="--no-mouse --cycle --tiebreak=chunk"
@@ -146,6 +116,26 @@ set-abbreviations() {
   abbr -g pagp="paru -Gp"
 }
 
+# Plugins
+zinit depth"1" light-mode for \
+  mroth/evalcache
+
+zinit depth"1" wait lucid light-mode for \
+  Aloxaf/fzf-tab \
+  zsh-users/zsh-syntax-highlighting \
+  atload"set-abbreviations; unset -f set-abbreviations" \
+  olets/zsh-abbr \
+  atload"_zsh_autosuggest_start" \
+  zsh-users/zsh-autosuggestions \
+  MichaelAquilina/zsh-you-should-use \
+  hlissner/zsh-autopair
+
+zinit wait lucid for \
+  OMZP::cp \
+  OMZP::sudo \
+  atload"unalias x" \
+  OMZP::extract
+
 # Load completion
 zmodload zsh/complist
 # Include hidden files
@@ -201,8 +191,3 @@ source "$ZDOTDIR"/transient-prompt.zsh
 
 # Use cdreplay for performance
 zinit cdreplay -q
-
-# zsh-syntax-highlighting
-# NOTE: Always ensure this is the last plugin sourced
-zinit ice depth=1
-zinit light zsh-users/zsh-syntax-highlighting
