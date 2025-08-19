@@ -181,5 +181,3 @@ _evalcache thefuck --alias
 # Enable transient prompt
 source "$ZDOTDIR"/transient-prompt.zsh
 
-# Use cdreplay for performance
-zinit cdreplay -q
