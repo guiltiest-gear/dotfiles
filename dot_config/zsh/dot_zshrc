@@ -125,6 +125,27 @@ setopt share_history
 # bindkey -M menuselect 'l' vi-forward-char
 # bindkey -M menuselect 'j' vi-down-line-or-history
 
+set-abbreviations() {
+  abbr -g p='pacman'
+  abbr -g pa='paru'
+  abbr -g sp='sudo pacman'
+  abbr -g sps='sudo pacman -S'
+  abbr -g pqi='pacman -Qi'
+  abbr -g psi='pacman -Si'
+  abbr -g g='git'
+  abbr -g ga='git annex'
+  abbr -g v='vim'
+  abbr -g ch='chezmoi'
+  abbr -g cha='chezmoi add'
+  abbr -g chd='chezmoi diff'
+  abbr -g che='chezmoi edit'
+  abbr -g chap='chezmoi apply'
+  abbr -g chg='chezmoi git'
+  abbr -g chc='chezmoi cd'
+  abbr -g chdx='chezmoi diff -x'
+  abbr -g pagp="paru -Gp"
+}
+
 # Load completion
 zmodload zsh/complist
 # Include hidden files
