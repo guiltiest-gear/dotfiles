@@ -128,12 +128,6 @@ zinit wait lucid for \
   OMZP::sudo \
   atload"unalias x" OMZP::extract
 
-# Load completion
-zmodload zsh/complist
-# Include hidden files
-_comp_options+=(globdots)
-# Basic auto/tab complete
-autoload -Uz compinit && compinit
 # Disable zsh menu completion
 zstyle ':completion:*' menu no
 # Ignore case completion
