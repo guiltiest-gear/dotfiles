@@ -151,21 +151,6 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # Set other fzf flags
 zstyle ':fzf-tab:*' fzf-flags --scheme=path
 
-# Load in aliases from aliasrc
-source "$ZDOTDIR"/aliasrc
-
-# Insulter
-source "$ZDOTDIR"/command-not-found.zsh
-
-# Random color script
-colorscript random
-
-# fzf tokyonight colors
-source ~/.local/share/nvim/lazy/tokyonight.nvim/extras/fzf/tokyonight_night.sh
-
-# git extras completion
-source /usr/share/doc/git-extras/git-extras-completion.zsh
-
 # Load zoxide
 _evalcache zoxide init zsh
 
@@ -178,6 +163,20 @@ _evalcache fzf --zsh
 # thefuck alias
 _evalcache thefuck --alias
 
+# Load in aliases from aliasrc
+source "$ZDOTDIR"/aliasrc
+
 # Enable transient prompt
 source "$ZDOTDIR"/transient-prompt.zsh
 
+# Insulter
+source "$ZDOTDIR"/command-not-found.zsh
+
+# fzf tokyonight colors
+source "$XDG_DATA_HOME"/nvim/lazy/tokyonight.nvim/extras/fzf/tokyonight_night.sh
+
+# git extras completion
+source /usr/share/doc/git-extras/git-extras-completion.zsh
+
+# Random color script
+colorscript random
