@@ -123,18 +123,15 @@ zinit depth"1" light-mode for \
 zinit depth"1" wait lucid light-mode for \
   Aloxaf/fzf-tab \
   zsh-users/zsh-syntax-highlighting \
-  atload"set-abbreviations; unset -f set-abbreviations" \
-  olets/zsh-abbr \
-  atload"_zsh_autosuggest_start" \
-  zsh-users/zsh-autosuggestions \
+  atload"set-abbreviations; unset -f set-abbreviations" olets/zsh-abbr \
+  atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
   MichaelAquilina/zsh-you-should-use \
   hlissner/zsh-autopair
 
 zinit wait lucid for \
   OMZP::cp \
   OMZP::sudo \
-  atload"unalias x" \
-  OMZP::extract
+  atload"unalias x" OMZP::extract
 
 # Load completion
 zmodload zsh/complist
