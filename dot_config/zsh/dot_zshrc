@@ -56,8 +56,6 @@ zinit ice depth"1"
 zinit light mroth/evalcache
 
 # zsh-abbr
-# Make abbr cram a sock in it
-export ABBR_QUIETER=1
 zinit ice depth"1"
 zinit light olets/zsh-abbr
 
@@ -71,6 +69,7 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::extract
 
 # Exports
+export ABBR_QUIETER=1
 export FZF_DEFAULT_OPTS="--no-mouse --cycle --tiebreak=chunk"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
 export ZSH_AUTOSUGGEST_STRATEGY=(completion history)
