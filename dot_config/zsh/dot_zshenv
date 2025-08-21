@@ -30,5 +30,5 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # Fix formatting for manpager
 export MANROFFOPT="-c"
 
-# Keep coloring with piped input into less
-export LESS="-R"
+# Less options
+export LESS="-R -i -F"
