@@ -70,7 +70,7 @@ set-abbreviations() {
   abbr -g psi='pacman -Si'
   abbr -g g='git'
   abbr -g ga='git annex'
-  abbr -g v='vim'
+  abbr -g v='nvim'
   abbr -g ch='chezmoi'
   abbr -g cha='chezmoi add'
   abbr -g chd='chezmoi diff'
