@@ -93,8 +93,7 @@ zinit depth"1" wait lucid light-mode for \
   atload"set-abbreviations; unset -f set-abbreviations" olets/zsh-abbr \
   atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
   MichaelAquilina/zsh-you-should-use \
-  hlissner/zsh-autopair \
-  Tarrasch/zsh-bd
+  hlissner/zsh-autopair
 
 zinit wait lucid for \
   OMZP::cp \
