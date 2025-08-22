@@ -415,9 +415,9 @@ globalkeys = gears.table.join(
   awful.key({ modkey, "Shift" }, "c", function()
     awful.spawn("clipmenu")
   end, { description = "Open clipmenu", group = "launcher" }),
-  awful.key({ modkey, "Shift" }, "n", function()
+  --[[ awful.key({ modkey, "Shift" }, "n", function()
     awful.spawn("networkmanager_dmenu")
-  end, { description = "Open networkmanager dmenu", group = "launcher" }),
+  end, { description = "Open networkmanager dmenu", group = "launcher" }), ]]
   awful.key({ modkey }, ".", function()
     awful.spawn("emote")
   end, { description = "Open emote", group = "launcher" }),
