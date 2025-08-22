@@ -29,6 +29,9 @@ pgrep -af "arch-update --tray" || exec arch-update --tray &
 # Start clipmenu
 pgrep -af "bash /usr/bin/clipmenud" || exec clipmenud &
 
+# Start nm-applet
+pgrep nm-applet || exec nm-applet &
+
 # Set the compose key to right alt
 setxkbmap -option compose:ralt &
 
