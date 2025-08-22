@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Set up monitors
 if [[ $(xrandr -q | grep "HDMI-1-0 connected") ]]; then
