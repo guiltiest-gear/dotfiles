@@ -413,11 +413,8 @@ globalkeys = gears.table.join(
     awful.spawn("powermenu")
   end, { description = "Open the power menu", group = "launcher" }),
   awful.key({ modkey, "Shift" }, "c", function()
-    awful.spawn("clipmenu")
-  end, { description = "Open clipmenu", group = "launcher" }),
-  --[[ awful.key({ modkey, "Shift" }, "n", function()
-    awful.spawn("networkmanager_dmenu")
-  end, { description = "Open networkmanager dmenu", group = "launcher" }), ]]
+    awful.spawn("clipcat-menu")
+  end, { description = "Open clipcat menu", group = "launcher" }),
   awful.key({ modkey }, ".", function()
     awful.spawn("emote")
   end, { description = "Open emote", group = "launcher" }),
