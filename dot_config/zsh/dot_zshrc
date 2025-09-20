@@ -40,6 +40,7 @@ bindkey -v
 
 # Exports
 export ABBR_QUIETER=1
+export ABBR_SET_EXPANSION_CURSOR=1
 export FZF_DEFAULT_OPTS="--no-mouse --cycle --tiebreak=chunk"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
 export ZSH_AUTOSUGGEST_STRATEGY=(completion history)
@@ -62,28 +63,31 @@ setopt hist_expire_dups_first
 setopt share_history
 
 set-abbreviations() {
-  abbr -g p='pacman'
-  abbr -g pa='paru'
-  abbr -g sp='sudo pacman'
-  abbr -g sps='sudo pacman -S'
-  abbr -g pq='pacman -Q%'
-  abbr -g pqi='pacman -Qi'
-  abbr -g psi='pacman -Si'
-  abbr -g pql='pacman -Qi'
-  abbr -g pfl='pacman -Fl'
-  abbr -g spyu='sudo pacman -Syu'
-  abbr -g g='git'
-  abbr -g ga='git annex'
-  abbr -g v='nvim'
-  abbr -g ch='chezmoi'
-  abbr -g cha='chezmoi add'
-  abbr -g chd='chezmoi diff'
-  abbr -g che='chezmoi edit'
-  abbr -g chap='chezmoi apply'
-  abbr -g chg='chezmoi git'
-  abbr -g chc='chezmoi cd'
-  abbr -g chdx='chezmoi diff -x'
-  abbr -g pagp="paru -Gp"
+  abbr p='pacman'
+  abbr pa='paru'
+  abbr sp='sudo pacman'
+  abbr sps='sudo pacman -S'
+  abbr pq='pacman -Q%'
+  abbr pqi='pacman -Qi'
+  abbr psi='pacman -Si'
+  abbr pql='pacman -Ql'
+  abbr pfl='pacman -Fl'
+  abbr pss='pacman -Ss'
+  abbr pqs='pacman -Qs'
+  abbr spyu='sudo pacman -Syu'
+  abbr spr='sudo pacman -Rns'
+  abbr g='git'
+  abbr ga='git annex'
+  abbr v='nvim'
+  abbr ch='chezmoi'
+  abbr cha='chezmoi add'
+  abbr chd='chezmoi diff'
+  abbr che='chezmoi edit'
+  abbr chap='chezmoi apply'
+  abbr chg='chezmoi git'
+  abbr chc='chezmoi cd'
+  abbr chdx='chezmoi diff -x'
+  abbr pagp="paru -Gp"
 }
 
 # Plugins
