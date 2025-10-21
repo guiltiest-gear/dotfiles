@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.2.8
+ * @version 4.3.3
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -1907,7 +1907,7 @@ module.exports = (_ => {
 						}
 					};
 					
-					if (!("Notification" in window)) {}
+					if (!("Notification" in window)) {BDFDB.NotificationUtils.toast(content, config);}
 					else if (Notification.permission === "granted") queue();
 					else if (Notification.permission !== "denied") Notification.requestPermission(function (response) {if (response === "granted") queue();});
 				};
@@ -4982,22 +4982,23 @@ module.exports = (_ => {
 					handleMouseEnter(e) {if (typeof this.props.onMouseEnter == "function") this.props.onMouseEnter(e, this);}
 					handleMouseLeave(e) {if (typeof this.props.onMouseLeave == "function") this.props.onMouseLeave(e, this);}
 					render() {
-						let processingAndListening = (this.props.disabled || this.props.submitting) && (null != this.props.onMouseEnter || null != this.props.onMouseLeave);
+						if (!this.state) this.state = {disabled: this.props.disabled};
+						let processingAndListening = (this.state.disabled || this.props.submitting) && (null != this.props.onMouseEnter || null != this.props.onMouseLeave);
 						let props = BDFDB.ObjectUtils.exclude(this.props, "look", "color", "hover", "size", "fullWidth", "grow", "disabled", "submitting", "type", "style", "wrapperClassName", "className", "innerClassName", "onClick", "onContextMenu", "onMouseDown", "onMouseUp", "onMouseEnter", "onMouseLeave", "children", "rel");
-						let button = BDFDB.ReactUtils.createElement("button", Object.assign({}, !this.props.disabled && !this.props.submitting && props, {
+						let button = BDFDB.ReactUtils.createElement("button", Object.assign({}, !this.state.disabled && !this.props.submitting && props, {
 							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.button, this.props.look != null ? this.props.look : Internal.LibraryComponents.Button.Looks.FILLED, this.props.color != null ? this.props.color : Internal.LibraryComponents.Button.Colors.BRAND, this.props.hover, this.props.size != null ? this.props.size : Internal.LibraryComponents.Button.Sizes.MEDIUM, processingAndListening && this.props.wrapperClassName, this.props.fullWidth && BDFDB.disCN.buttonfullwidth, (this.props.grow === undefined || this.props.grow) && BDFDB.disCN.buttongrow, this.props.submitting && BDFDB.disCN.buttonsubmitting),
-							onClick: (this.props.disabled || this.props.submitting) ? e => {return e.preventDefault();} : this.handleClick.bind(this),
-							onContextMenu: (this.props.disabled || this.props.submitting) ? e => {return e.preventDefault();} : this.handleContextMenu.bind(this),
-							onMouseUp: !this.props.disabled && this.handleMouseDown.bind(this),
-							onMouseDown: !this.props.disabled && this.handleMouseUp.bind(this),
+							onClick: (this.state.disabled || this.props.submitting) ? e => {return e.preventDefault();} : this.handleClick.bind(this),
+							onContextMenu: (this.state.disabled || this.props.submitting) ? e => {return e.preventDefault();} : this.handleContextMenu.bind(this),
+							onMouseUp: !this.state.disabled && this.handleMouseDown.bind(this),
+							onMouseDown: !this.state.disabled && this.handleMouseUp.bind(this),
 							onMouseEnter: this.handleMouseEnter.bind(this),
 							onMouseLeave: this.handleMouseLeave.bind(this),
 							type: !this.props.type ? "button" : this.props.type,
-							disabled: this.props.disabled,
+							disabled: this.state.disabled,
 							style: this.props.style,
 							rel: this.props.rel,
 							children: [
-								this.props.submitting && !this.props.disabled ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.SpinnerComponents.Spinner, {
+								this.props.submitting && !this.state.disabled ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.SpinnerComponents.Spinner, {
 									type: Internal.LibraryComponents.SpinnerComponents.Types.PULSING_ELLIPSIS,
 									className: BDFDB.disCN.buttonspinner,
 									itemClassName: BDFDB.disCN.buttonspinneritem
@@ -5034,6 +5035,10 @@ module.exports = (_ => {
 								!this.props.noRemove ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Clickable, {
 									"aria-label": BDFDB.LanguageUtils.LanguageStrings.REMOVE,
 									className: BDFDB.disCNS.hovercardbutton + BDFDB.disCNS.hovercardremovebutton + BDFDB.disCN.hovercardremovebuttondefault,
+									children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.SvgIcon, {
+										nativeClass: true,
+										name: Internal.LibraryComponents.SvgIcon.Names.REMOVE
+									}),
 									onClick: e => {
 										if (typeof this.props.onRemove == "function") this.props.onRemove(e, this);
 										BDFDB.ListenerUtils.stopEvent(e);
@@ -5277,9 +5282,9 @@ module.exports = (_ => {
 				};
 				if (CustomComponents.Checkbox) {
 					CustomComponents.Checkbox.Types = {
-					DEFAULT: "DEFAULT",
-					GHOST: "GHOST",
-					INVERTED: "INVERTED"
+						DEFAULT: "DEFAULT",
+						GHOST: "GHOST",
+						INVERTED: "INVERTED"
 					};
 					CustomComponents.Checkbox.Shapes = {
 						BOX: "box",
@@ -6286,6 +6291,19 @@ module.exports = (_ => {
 					}
 				};
 				
+				CustomComponents.FormTitle = reactInitialized && class BDFDB_FormTitle extends Internal.LibraryModules.React.Component {
+					render() {
+						return BDFDB.ReactUtils.createElement(Internal.NativeSubComponents.FormTitle, this.props);
+					}
+				};
+				CustomComponents.FormTitle.Title = CustomComponents.FormTitle;
+				CustomComponents.FormTitle.Tags = new Proxy({}, {
+					get: function (_, item) {
+						let tag = item && item.toLowerCase();
+						return tag.startsWith("h") && tag.length == 2 ? tag : "h5";
+					}
+				});
+				
 				CustomComponents.GuildSummaryItem = reactInitialized && class BDFDB_GuildSummaryItem extends Internal.LibraryModules.React.Component {
 					defaultRenderGuild(guild, isLast) {
 						if (!guild) return BDFDB.ReactUtils.createElement("div", {
@@ -7203,51 +7221,65 @@ module.exports = (_ => {
 							className: BDFDB.DOMUtils.formatClassName(this.props.labelClassName, BDFDB.disCN.marginreset),
 							tag: this.props.tag,
 							children: this.props.label
-						}) : BDFDB.ReactUtils.createElement(Internal.LibraryComponents.SettingsLabel, {
-							className: BDFDB.DOMUtils.formatClassName(this.props.labelClassName),
-							mini: this.props.mini,
-							label: this.props.label
+						}) : BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextElement, {
+							size: Internal.LibraryComponents.TextElement.Sizes.SIZE_16,
+							children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.SettingsLabel, {
+								className: BDFDB.DOMUtils.formatClassName(this.props.labelClassName),
+								mini: this.props.mini,
+								label: this.props.label
+							})
 						})) : null;
 						let margin = this.props.margin != null ? this.props.margin : (this.props.mini ? 0 : 8);
 						return BDFDB.ReactUtils.createElement("div", {
-							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.settingsrow, BDFDB.disCN.settingsrowcontainer, this.state.disabled && BDFDB.disCN.settingsrowdisabled, margin != null && (InternalData.DiscordClasses[`marginbottom${margin}`] && BDFDB.disCN[`marginbottom${margin}`] || margin == 0 && BDFDB.disCN.marginreset)),
+							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.settingsrowcontainer, margin != null && (InternalData.DiscordClasses[`marginbottom${margin}`] && BDFDB.disCN[`marginbottom${margin}`] || margin == 0 && BDFDB.disCN.marginreset)),
 							id: this.props.id,
 							children: [
 								this.props.dividerTop ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormDivider, {
 									className: this.props.mini ? BDFDB.disCN.marginbottom4 : BDFDB.disCN.marginbottom8
 								}) : null,
 								BDFDB.ReactUtils.createElement("div", {
-									className: BDFDB.disCN.settingsrowlabel,
+									className: BDFDB.DOMUtils.formatClassName(BDFDB.disCN.settingsrow, this.state.disabled && BDFDB.disCN.settingsrowdisabled),
+									"data-layout": "horizontal",
 									children: [
-										label && !this.props.basis ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
-											grow: 1,
-											shrink: 1,
-											wrap: true,
-											children: label
-										}) : label,
-										this.props.labelChildren,
+										BDFDB.ReactUtils.createElement("div", {
+											className: BDFDB.disCN.settingsrowlabel,
+											children: [
+												label && !this.props.basis ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
+													grow: 1,
+													shrink: 1,
+													wrap: true,
+													children: label
+												}) : label,
+												typeof this.props.note == "string" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
+													className: BDFDB.disCN.settingsrownote,
+													children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextElement, {
+														size: Internal.LibraryComponents.TextElement.Sizes.SIZE_12,
+														children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextScroller, {
+															speed: 2,
+															children: this.props.note
+														})
+													})
+												}) : null
+											].flat(10).filter(n => n)
+										}),
 										BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
 											className: BDFDB.disCNS.settingsrowcontrol + BDFDB.disCN.flexchild,
 											grow: 0,
 											shrink: this.props.basis ? 0 : 1,
 											basis: this.props.basis,
 											wrap: true,
-											children: BDFDB.ReactUtils.createElement(childComponent, BDFDB.ObjectUtils.exclude(Object.assign(BDFDB.ObjectUtils.exclude(this.props, "className", "id", "type"), this.props.childProps, {
-												disabled: this.state.disabled,
-												onChange: this.handleChange.bind(this),
-												onValueChange: this.handleChange.bind(this)
-											}), "basis", "margin", "dividerBottom", "dividerTop", "label", "labelClassName", "labelChildren", "tag", "mini", "note", "childProps"))
+											style: {"flex-direction": "row", "align-items": "center"},
+											children: [
+												this.props.labelChildren,
+												BDFDB.ReactUtils.createElement(childComponent, BDFDB.ObjectUtils.exclude(Object.assign(BDFDB.ObjectUtils.exclude(this.props, "className", "id", "type"), this.props.childProps, {
+													disabled: this.state.disabled,
+													onChange: this.handleChange.bind(this),
+													onValueChange: this.handleChange.bind(this)
+												}), "basis", "margin", "dividerBottom", "dividerTop", "label", "labelClassName", "labelChildren", "tag", "mini", "note", "childProps"))
+											].flat(10).filter(n => n)
 										})
-									].flat(10).filter(n => n)
+									]
 								}),
-								typeof this.props.note == "string" ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Flex.Child, {
-									className: BDFDB.disCN.settingsrownote,
-									children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormText.Text, {
-										disabled: this.state.disabled,
-										type: Internal.LibraryComponents.FormText.Types.DESCRIPTION,
-										children: BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextScroller, {speed: 2, children: this.props.note})
-									})
-								}) : null,
 								this.props.dividerBottom ? BDFDB.ReactUtils.createElement(Internal.LibraryComponents.FormDivider, {
 									className: this.props.mini ? BDFDB.disCN.margintop4 : BDFDB.disCN.margintop8
 								}) : null
@@ -7259,10 +7291,10 @@ module.exports = (_ => {
 				CustomComponents.SettingsLabel = reactInitialized && class BDFDB_SettingsLabel extends Internal.LibraryModules.React.Component {
 					render() {
 						return BDFDB.ReactUtils.createElement(Internal.LibraryComponents.TextScroller, {
-							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.settingsrowtitle, this.props.mini && BDFDB.disCN.settingsrowtitlemini, BDFDB.disCN.cursordefault),
-							speed: 2,
-							children: this.props.label
-						});
+								className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.settingsrowtitle, this.props.mini && BDFDB.disCN.settingsrowtitlemini, BDFDB.disCN.cursordefault),
+								speed: 2,
+								children: this.props.label
+							})
 					}	
 				};
 				
@@ -7354,7 +7386,7 @@ module.exports = (_ => {
 									})).flat(10).filter(n => n)
 								})
 							]
-						}), "title", "data", "settings", "renderLabel", "cardClassName", "cardStyle", "checkboxColor", "getCheckboxColor",  "getCheckboxValue", "onCheckboxChange", "configWidth", "biggestWidth", "pagination"));
+						}), "title", "data", "settings", "renderLabel", "cardClassName", "cardStyle", "checkboxColor", "getCheckboxColor", "getCheckboxValue", "onCheckboxChange", "configWidth", "biggestWidth", "pagination"));
 					}
 					render() {
 						this.props.settings = BDFDB.ArrayUtils.is(this.props.settings) ? this.props.settings : [];
@@ -7779,7 +7811,7 @@ module.exports = (_ => {
 					}
 				};
 				
-				CustomComponents.TextElement = reactInitialized && class BDFDB_TextScroller extends Internal.LibraryModules.React.Component {
+				CustomComponents.TextElement = reactInitialized && class BDFDB_TextElement extends Internal.LibraryModules.React.Component {
 					render() {
 						let color = this.props.color != undefined ? this.props.color && Internal.DiscordConstants.ColorsCSS[this.props.color] : Internal.DiscordConstants.ColorsCSS[CustomComponents.TextElement.Colors.STANDARD];
 						return BDFDB.ReactUtils.createElement(Internal.LibraryComponents.Text, {
@@ -8234,7 +8266,6 @@ module.exports = (_ => {
 					after: [
 						"DiscordTag",
 						"NameContainerAvatar",
-						"UserHeaderAvatar",
 						"UserPanelHeader",
 						"UserProfileHeader"
 					],
@@ -8373,10 +8404,6 @@ module.exports = (_ => {
 				};
 				Internal.processSearchBar = function (e) {
 					if (typeof e.instance.props.query != "string") e.instance.props.query = "";
-				};
-				Internal.processUserHeaderAvatar = function (e) {
-					if (!e.instance.props.user) return;
-					e.returnvalue = Internal._processAvatarRender(e.instance.props.user, e.returnvalue) || e.returnvalue;
 				};
 				Internal.processUserPanelHeader = function (e) {
 					if (!e.instance.props.user) return;
