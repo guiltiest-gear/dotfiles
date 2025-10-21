@@ -74,6 +74,7 @@ set-abbreviations() {
   abbr pfl='pacman -Fl'
   abbr pss='pacman -Ss'
   abbr pqs='pacman -Qs'
+  abbr pqe='pacman -Qe'
   abbr spyu='sudo pacman -Syu'
   abbr spr='sudo pacman -Rns'
   abbr g='git'
