@@ -10,6 +10,9 @@ $character
 # Disables blank line between shell prompts
 add_newline = false
 
+# Give starship more time to scan for files
+scan_timeout = 100
+
 # Use spaces for fill module
 [fill]
 symbol = " "
