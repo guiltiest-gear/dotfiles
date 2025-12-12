@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.3.6
+ * @version 4.3.9
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -1434,10 +1434,11 @@ module.exports = (_ => {
 							return {};
 						}
 						if (InternalData.DiscordConstants[item].strings) DiscordConstants[item] = BDFDB.ModuleUtils.findByString(InternalData.DiscordConstants[item].strings);
+						else if (InternalData.DiscordConstants[item].props) DiscordConstants[item] = BDFDB.ModuleUtils.findByProperties(InternalData.DiscordConstants[item].props);
 						else {
 							if (DiscordConstantsObject) DiscordConstants[item] = DiscordConstantsObject[Object.keys(DiscordConstantsObject).find(n => {
 								let keys = Object.keys(DiscordConstantsObject[n]);
-								if (keys && keys.length < 10000 && InternalData.DiscordConstants[item].every(k => keys.indexOf(k) > -1)) return true;
+								if (keys && keys.length < 10000 && InternalData.DiscordConstants[item].every && InternalData.DiscordConstants[item].every(k => keys.indexOf(k) > -1)) return true;
 							})];
 							if (!DiscordConstants[item]) DiscordConstants[item] = BDFDB.ModuleUtils.findByProperties(InternalData.DiscordConstants[item]);
 						}
@@ -1445,13 +1446,20 @@ module.exports = (_ => {
 						return DiscordConstants[item] ? DiscordConstants[item] : {};
 					}
 				});
-				const DiscordColors = BDFDB.ModuleUtils.findByProperties("spotify", "guild-boosting-blue") || {};
-				Internal.DiscordConstants.Colors = new Proxy(DiscordConstants, {
+				const ColorsCSS = Internal.DiscordConstants.ColorsCSS || {};
+				Internal.DiscordConstants.ColorsCSS = new Proxy(ColorsCSS, {
+					get: function (_, item) {
+						const color = ColorsCSS[item] || ColorsCSS[item.toLowerCase()] || ColorsCSS[item.toUpperCase()];
+						return color && color.css || color || "";
+					}
+				});
+				const DiscordColors = Internal.DiscordConstants.Colors || {};
+				Internal.DiscordConstants.Colors = new Proxy(DiscordColors, {
 					get: function (_, item) {
 						const color = DiscordColors[item] || DiscordColors[item.toLowerCase()] || DiscordColors[item.toUpperCase()];
 						if (color) return color && color.hex || color || "";
 						else {
-							const item2 = item + "-500";
+							const item2 = item + "_500";
 							const color2 = DiscordColors[item2] || DiscordColors[item2.toLowerCase()] || DiscordColors[item2.toUpperCase()];
 							if (color2) return color2 && color2.hex || color2 || "";
 							else {
@@ -1466,7 +1474,7 @@ module.exports = (_ => {
 							}
 						}
 					}
-				})
+				});
 				BDFDB.DiscordConstants = Internal.DiscordConstants;
 				
 				Internal.DiscordObjects = new Proxy(DiscordObjects, {
@@ -2566,10 +2574,6 @@ module.exports = (_ => {
 				LibraryModules.ReactDOM = BDFDB.ModuleUtils.findByProperties("render", "findDOMNode", {noWarnings: true}) || BDFDB.ModuleUtils.findByProperties("createRoot");
 				LibraryModules.ReactPortal = BDFDB.ModuleUtils.findByProperties("flushSync", "createPortal");
 				
-				console.log(LanguageStores);
-				console.log(LibraryModules.EngLanguageStore);
-				console.log(LibraryModules.LanguageStore);
-				
 				Internal.LibraryModules = new Proxy(LibraryModules, {
 					get: function (_, item) {
 						if (LibraryModules[item]) return LibraryModules[item];
@@ -2694,7 +2698,7 @@ module.exports = (_ => {
 				};
 				MyReact.findDOMNode = function (instance, onlyChildren) {
 					if (Node.prototype.isPrototypeOf(instance)) return instance;
-					if (!instance || !instance.updater || typeof instance.updater.isMounted !== "function" || !instance.updater.isMounted(instance)) return null;
+					if (!instance || !instance.updater) return null;
 					let node = Internal.LibraryModules.ReactDOM.findDOMNode && Internal.LibraryModules.ReactDOM.findDOMNode(instance);
 					for (let path of ["child.stateNode", "child.ref.current", !onlyChildren && "return.stateNode", !onlyChildren && "return.return.stateNode"]) if (!node && path) {
 						node = BDFDB.ObjectUtils.get(instance[BDFDB.ReactUtils.instanceKey] || instance, path);
@@ -3021,7 +3025,7 @@ module.exports = (_ => {
 					}
 				};
 				MyReact.forceUpdate = function (...instances) {
-					for (let ins of instances.flat(10).filter(n => n)) if (ins.updater && typeof ins.updater.isMounted == "function" && ins.updater.isMounted(ins)) ins.forceUpdate();
+					for (let ins of instances.flat(10).filter(n => n)) if (ins.updater) ins.forceUpdate();
 				};
 				MyReact.getInstance = function (node) {
 					if (!BDFDB.ObjectUtils.is(node)) return null;
