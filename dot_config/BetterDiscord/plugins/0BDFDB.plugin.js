@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.3.9
+ * @version 4.4.3
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -2033,6 +2033,7 @@ module.exports = (_ => {
 					if (typeof config.type != "string" || !BDFDB.disCN["tooltip" + config.type.toLowerCase()]) config.type = "top";
 					let type = config.type.toLowerCase();
 					BDFDB.DOMUtils.addClass(tooltip, BDFDB.disCN["tooltip" + type], config.className);
+					BDFDB.DOMUtils.addClass(tooltipContent, config.contentClassName);
 					
 					let fontColorIsGradient = false, customBackgroundColor = false, style = "";
 					if (config.style) style += config.style;
@@ -2066,7 +2067,7 @@ module.exports = (_ => {
 					else if (config.color && BDFDB.disCN["tooltip" + config.color.toLowerCase()]) BDFDB.DOMUtils.addClass(tooltip, BDFDB.disCN["tooltip" + config.color.toLowerCase()]);
 					else BDFDB.DOMUtils.addClass(tooltip, BDFDB.disCN.tooltipprimary);
 					
-					if (config.list || BDFDB.ObjectUtils.is(config.guild)) BDFDB.DOMUtils.addClass(tooltip, BDFDB.disCN.tooltiplistitem);
+					if (config.list || BDFDB.ObjectUtils.is(config.guild)) BDFDB.DOMUtils.addClass(tooltipContent, BDFDB.disCN.guildlistitemtooltip);
 					
 					const removeTooltip = _ => {
 						document.removeEventListener("wheel", wheel);
@@ -4516,7 +4517,7 @@ module.exports = (_ => {
 				BDFDB.DiscordClasses = Object.assign({}, DiscordClasses);
 				Internal.getDiscordClass = function (item, selector) {
 					let className, fallbackClassName, notFoundAndLazyloaded = false;
-					className = fallbackClassName = Internal.DiscordClassModules.BDFDB.BDFDBundefined + "_" + Internal.generateClassId();
+					className = fallbackClassName = Internal.generateClassId() + "-" + Internal.DiscordClassModules.BDFDB.BDFDBundefined;
 					if (DiscordClasses[item] === undefined) {
 						BDFDB.LogUtils.warn([item, "not found in DiscordClasses"]);
 						return className;
@@ -4532,7 +4533,7 @@ module.exports = (_ => {
 						}
 						else notFoundAndLazyloaded = true;
 					}
-					else if ([DiscordClasses[item][1]].flat().every(prop => Internal.DiscordClassModules[DiscordClasses[item][0]][prop] === undefined && !(JSON.stringify(Internal.DiscordClassModules[DiscordClasses[item][0]]).split(" ").find(n => n.startsWith(`${prop}_`)) || "").split("\"")[0])) {
+					else if ([DiscordClasses[item][1]].flat().every(prop => Internal.DiscordClassModules[DiscordClasses[item][0]][prop] === undefined && !(JSON.stringify(Internal.DiscordClassModules[DiscordClasses[item][0]]).split(" ").find(n => n.startsWith(`${prop}_`) || n.endsWith(`-${prop}`)) || "").split("\"")[0])) {
 						if (!InternalData.LazyloadedClassModules || !InternalData.LazyloadedClassModules[DiscordClasses[item][0]]) {
 							BDFDB.LogUtils.warn([DiscordClasses[item][1], "not found in", DiscordClasses[item][0], "in DiscordClassModules"]);
 							return className;
@@ -4540,11 +4541,11 @@ module.exports = (_ => {
 						else notFoundAndLazyloaded = true;
 					}
 					if (notFoundAndLazyloaded) {
-						className = `${DiscordClasses[item][1]}_${InternalData.LazyloadedClassModules[DiscordClasses[item][0]]}`;
+						className = `${InternalData.LazyloadedClassModules[DiscordClasses[item][0]]}-${DiscordClasses[item][1]}`;
 						DiscordClassModules[DiscordClasses[item][0]] = Object.assign({}, DiscordClassModules[item], {[DiscordClasses[item][1]]: className});
 					}
 					else for (let prop of [DiscordClasses[item][1]].flat()) {
-						className = Internal.DiscordClassModules[DiscordClasses[item][0]][prop] || (JSON.stringify(Internal.DiscordClassModules[DiscordClasses[item][0]]).split(" ").find(n => n.startsWith(`${prop}_`)) || "").split("\"")[0];
+						className = Internal.DiscordClassModules[DiscordClasses[item][0]][prop] || (JSON.stringify(Internal.DiscordClassModules[DiscordClasses[item][0]]).split(" ").find(n => n.startsWith(`${prop}_`) || n.endsWith(`-${prop}`)) || "").split("\"")[0];
 						if (className) break;
 						else className = fallbackClassName;
 					}
@@ -4557,7 +4558,7 @@ module.exports = (_ => {
 				const generationChars = "0123456789abcdef".split("");
 				Internal.generateClassId = function () {
 					let id = "";
-					while (id.length < 6) id += generationChars[Math.floor(Math.random() * generationChars.length)];
+					while (id.length < 16) id += generationChars[Math.floor(Math.random() * generationChars.length)];
 					return id;
 				};
 				BDFDB.disCN = new Proxy({}, {
@@ -7537,10 +7538,12 @@ module.exports = (_ => {
 								return newMarker;
 							}
 							handleValueChange(value) {
-								let newValue = BDFDB.NumberUtils.mapRange([0, 100], this.props.edges, value);
+								let newValue = value;
 								if (typeof this.props.digits == "number") newValue = Math.round(newValue * Math.pow(10, this.props.digits)) / Math.pow(10, this.props.digits);
+								if (newValue < this.props.minValue) newValue = this.props.minValue;
+								else if (newValue > this.props.maxValue) newValue = this.props.maxValue;
 								this.props.defaultValue = this.props.value = newValue;
-								if (typeof this.props.onValueChange == "function") this.props.onValueChange(newValue, this);
+								if (typeof this.props.onValueChange == "function") this.props.onValueChange(BDFDB.NumberUtils.mapRange([0, 100], this.props.edges, newValue), this);
 								BDFDB.ReactUtils.forceUpdate(this);
 							}
 							handleValueRender(value) {
@@ -7554,10 +7557,10 @@ module.exports = (_ => {
 							}
 							render() {
 								let value = this.props.value || this.props.defaultValue || 0;
-								if (!BDFDB.ArrayUtils.is(this.props.edges) || this.props.edges.length != 2) this.props.edges = [this.props.min || this.props.minValue || 0, this.props.max || this.props.maxValue || 100];
 								this.props.minValue = 0;
 								this.props.maxValue = 100;
-								let defaultValue = BDFDB.NumberUtils.mapRange(this.props.edges, [0, 100], value);
+								if (!BDFDB.ArrayUtils.is(this.props.edges) || this.props.edges.length != 2) this.props.edges = [this.props.min || this.props.minValue, this.props.max || this.props.maxValue];
+								let defaultValue = BDFDB.NumberUtils.mapRange([0, 100], this.props.edges, value);
 								if (typeof this.props.digits == "number") defaultValue = Math.round(defaultValue * Math.pow(10, this.props.digits)) / Math.pow(10, this.props.digits);
 								return BDFDB.ReactUtils.createElement(Internal.NativeSubComponents.Slider, BDFDB.ObjectUtils.exclude(Object.assign({}, this.props, {
 									initialValue: defaultValue,
