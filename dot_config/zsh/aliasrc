@@ -64,11 +64,11 @@ alias icat='kitty +kitten icat'
 alias ssh="kitty +kitten ssh"
 
 ## Pihole shortcuts
-alias pihole='kitten ssh amaterasu'
-alias pi-update='kitten ssh -t amaterasu "sudo apt update && sudo apt upgrade -y"'
-alias pi-gravity='kitten ssh -t amaterasu "sudo pihole -g"'
-alias pi-shutdown='kitten ssh -t amaterasu "sudo systemctl poweroff"'
-alias pi-reboot='kitten ssh -t amaterasu "sudo systemctl reboot"'
+# alias pihole='kitten ssh amaterasu'
+# alias pi-update='kitten ssh -t amaterasu "sudo apt update && sudo apt upgrade -y"'
+# alias pi-gravity='kitten ssh -t amaterasu "sudo pihole -g"'
+# alias pi-shutdown='kitten ssh -t amaterasu "sudo systemctl poweroff"'
+# alias pi-reboot='kitten ssh -t amaterasu "sudo systemctl reboot"'
 
 ## Terminal
 # HACK: For some reason, clear doesn't work properly with xterm-kitty when output exceeds number of rows
