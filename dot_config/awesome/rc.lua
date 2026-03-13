@@ -419,7 +419,7 @@ globalkeys = gears.table.join(
     awful.spawn("emote")
   end, { description = "Open emote", group = "launcher" }),
   awful.key({}, "Print", function()
-    awful.spawn("flameshot gui")
+    awful.spawn.with_shell("maim -s ~/Pictures/$(date +%s).png")
   end, { description = "Take screenshot", group = "launcher" }),
   awful.key({ modkey, alt }, "m", function()
     awful.spawn(terminal .. " ncmpcpp")
