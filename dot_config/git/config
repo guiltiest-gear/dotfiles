@@ -39,7 +39,7 @@
 [include]
   path = "~/.local/share/nvim/lazy/tokyonight.nvim/extras/delta/tokyonight_night.gitconfig"
 [merge]
-  conflictstyle = diff3
+  conflictStyle = zdiff3
 [diff]
   colorMoved = default
 [init]
