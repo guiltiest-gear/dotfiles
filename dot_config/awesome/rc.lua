@@ -120,7 +120,7 @@ vicious.cache(vicious.widgets.wifi)
 vicious.register(
   wifiwidget,
   vicious.widgets.wifiiw,
-  "${ssid} ${rate}Mb/s",
+  "${ssid} ${rate} Mb/s",
   1,
   "wlo1"
 )
