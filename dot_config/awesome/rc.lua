@@ -421,6 +421,9 @@ globalkeys = gears.table.join(
   awful.key({}, "Print", function()
     awful.spawn.with_shell("maim -u -s ~/Downloads/$(date +%s).png")
   end, { description = "Take screenshot", group = "launcher" }),
+  awful.key({ "Shift" }, "Print", function()
+    awful.spawn("maimpick")
+  end, { description = "Use maimpick", group = "launcher" }),
   awful.key({ modkey, alt }, "m", function()
     awful.spawn(terminal .. " ncmpcpp")
   end, { description = "Open ncmpcpp", group = "launcher" }),
