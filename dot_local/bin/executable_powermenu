@@ -2,26 +2,17 @@
 
 set -eu
 
-function powermenu {
-  options="Cancel\nShutdown\nRestart\nLock"
-  selected=$(echo -e $options | dmenu)
-  case $selected in
-    "Cancel")
-      return
-      ;;
-    "Shutdown")
-      shutdown now
-      ;;
-    "Restart")
-      reboot
-      ;;
-    "Lock")
-      slock
-      ;;
-    *)
-      return
-      ;;
-  esac
-}
-
-powermenu
+case "$(printf "Cancel\nShutdown\nRestart\nLock\n" | dmenu -l 4)" in
+  "Cancel")
+    exit
+    ;;
+  "Shutdown")
+    shutdown now
+    ;;
+  "Restart")
+    reboot
+    ;;
+  "Lock")
+    slock
+    ;;
+esac
