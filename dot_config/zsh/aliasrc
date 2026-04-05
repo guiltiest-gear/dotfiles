@@ -39,7 +39,7 @@ alias wget='wget --continue --hsts-file="$XDG_DATA_HOME"/wget-hsts'
 alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
 
 ## Internet connection
-alias check='ping -c 4 archlinux.org'
+alias check='ping -c 4 ping.archlinux.org'
 alias myip='curl ip.me'
 # alias speed='speedtest --single --secure'
 
