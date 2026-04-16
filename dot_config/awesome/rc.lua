@@ -410,7 +410,7 @@ globalkeys = gears.table.join(
     awful.spawn("thunar")
   end, { description = "Open thunar", group = "launcher" }),
   awful.key({ modkey }, "p", function()
-    awful.spawn("powermenu")
+    awful.spawn.with_shell("~/.local/bin/powermenu")
   end, { description = "Open the power menu", group = "launcher" }),
   awful.key({ modkey, "Shift" }, "c", function()
     awful.spawn("clipcat-menu")
@@ -422,7 +422,7 @@ globalkeys = gears.table.join(
     awful.spawn.with_shell("maim -u -s ~/Downloads/$(date +%s).png")
   end, { description = "Take screenshot", group = "launcher" }),
   awful.key({ "Shift" }, "Print", function()
-    awful.spawn("maimpick")
+    awful.spawn.with_shell("~/.local/bin/maimpick")
   end, { description = "Use maimpick", group = "launcher" }),
   awful.key({ modkey, alt }, "m", function()
     awful.spawn(terminal .. " ncmpcpp")
