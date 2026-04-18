@@ -73,8 +73,12 @@ alias ssh="kitty +kitten ssh"
 ## Terminal
 # HACK: For some reason, clear doesn't work properly with xterm-kitty when output exceeds number of rows
 # Tricking clear into thinking we're using xterm-256color seems to fix things
-alias cl='TERM=xterm-256color clear'
-alias clear='TERM=xterm-256color clear'
+if [[ "$TERM" = 'xterm-kitty' ]]; then
+  alias clear='TERM=xterm-256color clear'
+  alias cl='TERM=xterm-256color clear'
+else
+  alias cl='clear'
+fi
 
 # Fix adb
 alias adb='HOME=$XDG_DATA_HOME/android adb'
