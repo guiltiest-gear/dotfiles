@@ -32,6 +32,9 @@ pgrep -af "arch-update --tray" || exec arch-update --tray &
 # Start nm-applet
 pgrep nm-applet || exec nm-applet &
 
+# Start gammastep
+pgrep gammastep || exec gammastep &
+
 # Set the compose key to right alt
 setxkbmap -option compose:ralt &
 
