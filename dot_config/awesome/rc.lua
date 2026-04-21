@@ -378,7 +378,7 @@ globalkeys = gears.table.join(
 
   -- Prompt
   awful.key({ modkey }, "r", function()
-    awful.spawn({ "j4-dmenu-desktop", "--dmenu=/usr/local/bin/dmenu" })
+    awful.spawn("j4-dmenu-desktop --dmenu=/usr/local/bin/dmenu")
   end, { description = "run prompt", group = "launcher" }),
 
   -- dmenu_run prompt
