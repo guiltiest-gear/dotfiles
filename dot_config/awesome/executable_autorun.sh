@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Set up monitors
-if [[ $(xrandr -q | grep "HDMI-1-0 connected") ]]; then
+if xrandr -q | grep -q "HDMI-1-0 connected"; then
   xrandr --output eDP-1 --primary --auto --pos 1920x0 --rotate normal \
     --output HDMI-1-0 --auto --pos 0x0 --rotate normal
 else
