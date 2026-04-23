@@ -128,13 +128,13 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' fzf-flags --scheme=path
 
 # Load zoxide
-_evalcache zoxide init zsh
+command -v zoxide >/dev/null 2>&1 && _evalcache zoxide init zsh
 
 # Starship prompt
-_evalcache starship init zsh
+command -v starship >/dev/null 2>&1 && _evalcache starship init zsh
 
 # zsh keybindings for fzf
-_evalcache fzf --zsh
+command -v fzf >/dev/null 2>&1 && _evalcache fzf --zsh
 
 # Load in aliases from aliasrc
 source "$ZDOTDIR"/aliasrc
@@ -152,4 +152,4 @@ source "$XDG_DATA_HOME"/nvim/lazy/tokyonight.nvim/extras/fzf/tokyonight_night.sh
 source /usr/share/doc/git-extras/git-extras-completion.zsh
 
 # Random color script
-colorscript random
+command -v colorscript >/dev/null 2>&1 && colorscript random
