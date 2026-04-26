@@ -17,9 +17,7 @@ zle -N edit-command-line
 bindkey '^E' edit-command-line
 
 # Trap USR1 signals to trigger a rehash
-TRAPUSR1() {
-  rehash
-}
+trap 'rehash' USR1
 
 # Use fd to list path candidates
 _fzf_compgen_path() {
