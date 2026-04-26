@@ -8,11 +8,13 @@ alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
 # ls flag variations
-alias ls='eza -Mal --color always --group-directories-first --git --color-scale size --no-quotes'
-alias la='eza -Ma --color always --group-directories-first --color-scale size --no-quotes'
-alias ll='eza -Ml --color always --group-directories-first --git --color-scale size --no-quotes'
-alias lt='eza -MaT --color always --group-directories-first --ignore-glob ".git" --color-scale size --no-quotes'
-alias l.='eza -a | grep "^\."'
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza -Mal --color always --group-directories-first --git --color-scale size --no-quotes'
+  alias la='eza -Ma --color always --group-directories-first --color-scale size --no-quotes'
+  alias ll='eza -Ml --color always --group-directories-first --git --color-scale size --no-quotes'
+  alias lt='eza -MaT --color always --group-directories-first --ignore-glob ".git" --color-scale size --no-quotes'
+  alias l.='eza -a | grep "^\."'
+fi
 
 # Output coloring
 alias grep='grep --color=auto'
@@ -31,12 +33,16 @@ alias rm='rm -i'
 
 # Termbin
 ## REMEMBER TO PIPE OUTPUT
-alias tb='nc termbin.com 9999'
+if command -v nc >/dev/null 2>&1; then
+  alias tb='nc termbin.com 9999'
+fi
 
 # Shortcuts
 alias se='sudoedit'
 alias wget='wget --continue --hsts-file="$XDG_DATA_HOME"/wget-hsts'
-alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
+if command -v nvidia-settings >/dev/null 2>&1; then
+  alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
+fi
 
 ## Internet connection
 alias check='ping -c 4 ping.archlinux.org'
@@ -47,21 +53,18 @@ alias myip='curl ip.me'
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 
 ## yt-dlp shortcuts
-alias ytdl-audio='yt-dlp --config-locations ~/.config/yt-dlp/audio'
-alias ytdl-music='yt-dlp --config-locations ~/.config/yt-dlp/music'
-alias ytdl-video='yt-dlp --config-locations ~/.config/yt-dlp/video'
-alias ytdl-video-cc='yt-dlp --config-locations ~/.config/yt-dlp/video-cc'
-alias ytdl-thumbnail='yt-dlp --list-thumbnail'
+if command -v yt-dlp >/dev/null 2>&1; then
+  alias ytdl-audio='yt-dlp --config-locations ~/.config/yt-dlp/audio'
+  alias ytdl-music='yt-dlp --config-locations ~/.config/yt-dlp/music'
+  alias ytdl-video='yt-dlp --config-locations ~/.config/yt-dlp/video'
+  alias ytdl-video-cc='yt-dlp --config-locations ~/.config/yt-dlp/video-cc'
+  alias ytdl-thumbnail='yt-dlp --list-thumbnail'
+fi
 
 # Find a video with fzf and play with mpv
-mpvf() { fd "mp4$|mkv$" --type=f --color=never ~/Videos/ | fzf --scheme=path | sed 's/^/"/;s/$/"/' | xargs -rI % mpv %; }
-
-# kitty terminal specific aliases
-# icat alias
-alias icat='kitty +kitten icat'
-
-# kitty ssh alias
-alias ssh="kitty +kitten ssh"
+if command -v mpv fd fzf sed xargs >/dev/null 2>&1; then
+  mpvf() { fd "mp4$|mkv$" --type=f --color=never ~/Videos/ | fzf --scheme=path | sed 's/^/"/;s/$/"/' | xargs -rI % mpv %; }
+fi
 
 ## Pihole shortcuts
 # alias pihole='kitten ssh amaterasu'
@@ -76,12 +79,22 @@ alias ssh="kitty +kitten ssh"
 if [[ "$TERM" = 'xterm-kitty' ]]; then
   alias clear='TERM=xterm-256color clear'
   alias cl='TERM=xterm-256color clear'
+
+  # kitty terminal specific aliases
+  # icat alias
+  alias icat='kitty +kitten icat'
+
+  # kitty ssh alias
+  alias ssh="kitty +kitten ssh"
+
 else
   alias cl='clear'
 fi
 
 # Fix adb
-alias adb='HOME=$XDG_DATA_HOME/android adb'
+if command -v adb >/dev/null 2>&1; then
+  alias adb='HOME=$XDG_DATA_HOME/android adb'
+fi
 
 # Fun
 ## Terminal rickroll
