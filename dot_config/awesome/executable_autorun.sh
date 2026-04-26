@@ -2,10 +2,10 @@
 
 # Set up monitors
 if xrandr -q | grep -q "HDMI-1-0 connected"; then
-  xrandr --output eDP-1 --primary --auto --pos 1920x0 --rotate normal \
-    --output HDMI-1-0 --auto --pos 0x0 --rotate normal
+  xrandr --output eDP-1 --primary --auto --right-of HDMI-1-0 --rotate normal \
+    --output HDMI-1-0 --auto --rotate normal
 else
-  xrandr --output eDP-1 --primary --auto --pos 0x0 --rotate normal
+  xrandr --output eDP-1 --primary --auto --rotate normal
 fi
 
 # Start picom
