@@ -185,11 +185,42 @@ local tasklist_buttons = gears.table.join(
 )
 
 local function set_wallpaper(s)
-  gears.wallpaper.maximized(
+  local function scandir(directory, filter)
+    local i, t, popen = 0, {}, io.popen
+    if not filter then
+      filter = function(_)
+        return true
+      end
+    end
+    print(filter)
+    for filename in popen('ls -a "' .. directory .. '"'):lines() do
+      if filter(filename) then
+        i = i + 1
+        t[i] = filename
+      end
+    end
+
+    return t
+  end
+
+  local wp_path = gears.filesystem.get_configuration_dir() .. "wallpapers/"
+  local wp_filter = function(s)
+    return string.match(s, "%.png$") or string.match(s, "%.jpg$")
+  end
+  local wp_files = scandir(wp_path, wp_filter)
+
+  math.randomseed(os.time())
+  local wp_index = math.random(1, #wp_files)
+
+  for s = 1, screen.count() do
+    gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
+  end
+
+  --[[ gears.wallpaper.maximized(
     gears.filesystem.get_configuration_dir() .. "wallpaper.png",
     s,
     true
-  )
+  ) ]]
 end
 
 -- Re-set the wallpaper when a screen's geometry changes
