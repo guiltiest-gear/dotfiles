@@ -94,19 +94,25 @@ set-abbreviations() {
 zinit depth"1" light-mode for \
   mroth/evalcache
 
-zinit depth"1" wait lucid light-mode for \
-  Aloxaf/fzf-tab \
-  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-  atload"unalias fsh-alias" zdharma-continuum/fast-syntax-highlighting \
-  atload"set-abbreviations; unset -f set-abbreviations" olets/zsh-abbr \
-  atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
-  MichaelAquilina/zsh-you-should-use \
-  hlissner/zsh-autopair
-
 zinit wait lucid for \
   OMZP::cp \
   OMZP::sudo \
   atload"unalias x" OMZP::extract
+
+zinit depth"1" wait lucid light-mode for \
+  Aloxaf/fzf-tab \
+  atload"set-abbreviations; unset -f set-abbreviations" olets/zsh-abbr \
+  MichaelAquilina/zsh-you-should-use \
+  hlissner/zsh-autopair
+
+zinit depth"1" wait lucid light-mode for \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+  atload"unalias fsh-alias" \
+  zdharma-continuum/fast-syntax-highlighting \
+  blockf \
+  zsh-users/zsh-completions \
+  atload"!_zsh_autosuggest_start" \
+  zsh-users/zsh-autosuggestions
 
 # Disable zsh menu completion
 zstyle ':completion:*' menu no
