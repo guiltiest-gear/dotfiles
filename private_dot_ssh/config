@@ -9,7 +9,7 @@ Host aur.archlinux.org
   User aur
 Host amaterasu
   IdentityFile ~/.ssh/dietpi
-  User root
+  User dietpi
 Host codeberg.org
   IdentityFile ~/.ssh/codeberg
   User git
