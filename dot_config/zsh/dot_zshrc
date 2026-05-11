@@ -93,6 +93,24 @@ set-abbreviations() {
     abbr chdx='chezmoi diff -x'
   fi
 }
+
+fzf-tab-zstyle-opts() {
+  # Disable zsh menu completion
+  zstyle ':completion:*' menu no
+  # Ignore case completion
+  zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+  # Set description format for fzf-tab group support
+  zstyle ':completion:*:descriptions' format '[%d]'
+  # Switch group using `<` and `>`
+  zstyle ':fzf-tab:*' switch-group '<' '>'
+  # Disable sort when completing git checkout
+  zstyle ':completion:*:git-checkout:*' sort false
+  # Preview directory content with eza when completing cd
+  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+  # Re-add style flags to fzf-tab
+  zstyle ':fzf-tab:*' use-fzf-default-opts yes
+  # Set other fzf flags
+  zstyle ':fzf-tab:*' fzf-flags --scheme=path
 }
 
 # Plugins
@@ -105,6 +123,8 @@ zinit wait lucid for \
   atload"unalias x" OMZP::extract
 
 zinit depth"1" wait lucid light-mode for \
+  has"fzf" \
+  atload"fzf-tab-zstyle-opts; unset -f fzf-tab-zstyle-opts" \
   Aloxaf/fzf-tab \
   atload"set-abbreviations; unset -f set-abbreviations" olets/zsh-abbr \
   MichaelAquilina/zsh-you-should-use \
@@ -119,22 +139,6 @@ zinit depth"1" wait lucid light-mode for \
   atload"!_zsh_autosuggest_start" \
   zsh-users/zsh-autosuggestions
 
-# Disable zsh menu completion
-zstyle ':completion:*' menu no
-# Ignore case completion
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-# Set description format for fzf-tab group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# Switch group using `<` and `>`
-zstyle ':fzf-tab:*' switch-group '<' '>'
-# Disable sort when completing git checkout
-zstyle ':completion:*:git-checkout:*' sort false
-# Preview directory content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-# Re-add style flags to fzf-tab
-zstyle ':fzf-tab:*' use-fzf-default-opts yes
-# Set other fzf flags
-zstyle ':fzf-tab:*' fzf-flags --scheme=path
 zinit depth"1" wait"0a" lucid light-mode for \
   has"git" \
   as"program" \
