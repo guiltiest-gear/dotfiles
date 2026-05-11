@@ -120,13 +120,15 @@ zinit depth"1" light-mode for \
 zinit wait lucid for \
   OMZP::cp \
   OMZP::sudo \
-  atload"unalias x" OMZP::extract
+  atload"unalias x" \
+  OMZP::extract
 
 zinit depth"1" wait lucid light-mode for \
   has"fzf" \
   atload"fzf-tab-zstyle-opts; unset -f fzf-tab-zstyle-opts" \
   Aloxaf/fzf-tab \
-  atload"set-abbreviations; unset -f set-abbreviations" olets/zsh-abbr \
+  atload"set-abbreviations; unset -f set-abbreviations" \
+  olets/zsh-abbr \
   MichaelAquilina/zsh-you-should-use \
   hlissner/zsh-autopair
 
@@ -134,7 +136,8 @@ zinit depth"1" wait lucid light-mode for \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
   atload"unalias fsh-alias" \
   zdharma-continuum/fast-syntax-highlighting \
-  blockf atpull"zinit creinstall -q ." \
+  blockf \
+  atpull"zinit creinstall -q ." \
   zsh-users/zsh-completions \
   atload"!_zsh_autosuggest_start" \
   zsh-users/zsh-autosuggestions
