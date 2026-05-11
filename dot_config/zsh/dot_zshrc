@@ -61,33 +61,38 @@ setopt hist_expire_dups_first
 setopt share_history
 
 set-abbreviations() {
-  abbr p='pacman'
-  abbr pa='paru'
-  abbr sp='sudo pacman'
-  abbr sps='sudo pacman -S'
-  abbr pq='pacman -Q%'
-  abbr pqi='pacman -Qi'
-  abbr psi='pacman -Si'
-  abbr pql='pacman -Ql'
-  abbr pfl='pacman -Fl'
-  abbr pss='pacman -Ss'
-  abbr pqs='pacman -Qs'
-  abbr pqe='pacman -Qe'
-  abbr pqo='pacman -Qo'
-  abbr spyu='sudo pacman -Syu'
-  abbr spr='sudo pacman -Rns'
+  if command -v pacman >/dev/null 2>&1; then
+    abbr p='pacman'
+    abbr sp='sudo pacman'
+    abbr sps='sudo pacman -S'
+    abbr pq='pacman -Q%'
+    abbr pqi='pacman -Qi'
+    abbr psi='pacman -Si'
+    abbr pql='pacman -Ql'
+    abbr pfl='pacman -Fl'
+    abbr pss='pacman -Ss'
+    abbr pqs='pacman -Qs'
+    abbr pqe='pacman -Qe'
+    abbr pqo='pacman -Qo'
+    abbr spyu='sudo pacman -Syu'
+    abbr spr='sudo pacman -Rns'
+    abbr pa='paru'
+    abbr pagp="paru -Gp"
+  fi
   abbr g='git'
-  abbr ga='git annex'
-  abbr v='nvim'
-  abbr ch='chezmoi'
-  abbr cha='chezmoi add'
-  abbr chd='chezmoi diff'
-  abbr che='chezmoi edit'
-  abbr chap='chezmoi apply'
-  abbr chg='chezmoi git'
-  abbr chc='chezmoi cd'
-  abbr chdx='chezmoi diff -x'
-  abbr pagp="paru -Gp"
+  command -v git-annex >/dev/null 2>&1 && abbr ga='git annex'
+  command -v nvim >/dev/null 2>&1 && abbr v='nvim'
+  if command -v chezmoi >/dev/null 2>&1; then
+    abbr ch='chezmoi'
+    abbr cha='chezmoi add'
+    abbr chd='chezmoi diff'
+    abbr che='chezmoi edit'
+    abbr chap='chezmoi apply'
+    abbr chg='chezmoi git'
+    abbr chc='chezmoi cd'
+    abbr chdx='chezmoi diff -x'
+  fi
+}
 }
 
 # Plugins
