@@ -130,6 +130,13 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # Set other fzf flags
 zstyle ':fzf-tab:*' fzf-flags --scheme=path
+zinit depth"1" wait"0a" lucid light-mode for \
+  has"git" \
+  as"program" \
+  pick"$ZPFX/bin/git-*" \
+  src"etc/git-extras-completion.zsh" \
+  make"PREFIX=$ZPFX" \
+  tj/git-extras
 
 # Load zoxide
 command -v zoxide >/dev/null 2>&1 && _evalcache zoxide init zsh
@@ -151,9 +158,6 @@ source "$ZDOTDIR"/command-not-found.zsh
 
 # fzf tokyonight colors
 source "$XDG_DATA_HOME"/nvim/lazy/tokyonight.nvim/extras/fzf/tokyonight_night.sh
-
-# git extras completion
-source /usr/share/doc/git-extras/git-extras-completion.zsh
 
 # Random color script
 command -v colorscript >/dev/null 2>&1 && colorscript random
