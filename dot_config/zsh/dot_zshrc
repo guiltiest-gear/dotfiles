@@ -130,9 +130,7 @@ zinit depth"1" wait lucid light-mode for \
   atload"set-abbreviations; unset -f set-abbreviations" \
   olets/zsh-abbr \
   MichaelAquilina/zsh-you-should-use \
-  hlissner/zsh-autopair
-
-zinit depth"1" wait lucid light-mode for \
+  hlissner/zsh-autopair \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
   atload"unalias fsh-alias" \
   zdharma-continuum/fast-syntax-highlighting \
