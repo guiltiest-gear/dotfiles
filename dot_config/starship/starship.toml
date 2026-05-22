@@ -3,7 +3,7 @@
 
 # Use custom format
 format = """
-$username$directory$fill$lua$c$cpp$python$nodejs$perl$git_status$git_branch$git_state$git_commit
+$username$hostname$directory$fill$lua$c$cpp$python$nodejs$perl$git_status$git_branch$git_state$git_commit
 $character
 """
 
@@ -28,7 +28,13 @@ vimcmd_replace_one_symbol = "[](bold yellow)"
 
 # Username style options
 [username]
-format = '\[[$user]($style)\]'
+# format = '\[[$user]($style)\]'
+format = "[$user]($style)"
+show_always = true
+
+[hostname]
+format = "@[$hostname]($style) "
+ssh_only = false
 
 # Directory options
 [directory]
