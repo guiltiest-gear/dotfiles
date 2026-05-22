@@ -118,7 +118,6 @@ zinit depth"1" light-mode for \
   mroth/evalcache
 
 zinit wait lucid for \
-  OMZP::cp \
   OMZP::sudo \
   atload"unalias x" \
   OMZP::extract

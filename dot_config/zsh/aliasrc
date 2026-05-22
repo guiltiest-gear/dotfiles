@@ -91,6 +91,17 @@ else
   alias cl='clear'
 fi
 
+# cp/mv rsync alternatives
+if command -v rsync >/dev/null 2>&1; then
+  cpr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
+  }
+
+  mvr() {
+    rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
+  }
+fi
+
 # Fix adb
 if command -v adb >/dev/null 2>&1; then
   alias adb='HOME=$XDG_DATA_HOME/android adb'
