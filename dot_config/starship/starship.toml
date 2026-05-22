@@ -1,5 +1,5 @@
 # Get editor completions based on the config schema
-"$schema" = 'https://starship.rs/config-schema.json'
+"$schema" = "https://starship.rs/config-schema.json"
 
 # Use custom format
 format = """
@@ -37,7 +37,7 @@ truncation_length = 8
 truncation_symbol = "../"
 truncate_to_repo = false
 read_only = "󰌾"
-style = 'bold blue'
+style = "bold blue"
 
 # Git branch
 [git_branch]
