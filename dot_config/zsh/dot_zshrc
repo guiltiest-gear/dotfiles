@@ -166,7 +166,7 @@ source "$ZDOTDIR"/transient-prompt.zsh
 source "$ZDOTDIR"/command-not-found.zsh
 
 # fzf tokyonight colors
-source "$XDG_DATA_HOME"/nvim/lazy/tokyonight.nvim/extras/fzf/tokyonight_night.sh
+source "$ZDOTDIR"/tokyonight_night.sh
 
 # Random color script
 command -v colorscript >/dev/null 2>&1 && colorscript random
