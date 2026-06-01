@@ -11,7 +11,7 @@ $character
 add_newline = false
 
 # Give starship more time to scan for files
-scan_timeout = 100
+scan_timeout = 150
 
 # Use spaces for fill module
 [fill]
