@@ -76,10 +76,12 @@ set-abbreviations() {
     abbr pqo='pacman -Qo'
     abbr spyu='sudo pacman -Syu'
     abbr spr='sudo pacman -Rns'
-    abbr pa='paru'
-    abbr pagp="paru -Gp"
+    if command -v paru >/dev/null 2>&1; then
+      abbr pa='paru'
+      abbr pagp="paru -Gp"
+    fi
   fi
-  abbr g='git'
+  command -v git >/dev/null 2>&1 && abbr g='git'
   command -v git-annex >/dev/null 2>&1 && abbr ga='git annex'
   command -v nvim >/dev/null 2>&1 && abbr v='nvim'
   if command -v chezmoi >/dev/null 2>&1; then
