@@ -14,8 +14,8 @@ pgrep picom || picom -b
 # Start polkit-gnome
 pgrep -af polkit-gnome-au || exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-# Start thunar daemon
-pgrep thunar || exec thunar --daemon &
+# Start pcmanfm daemon
+pgrep -af "pcmanfm --daemon-mode" || exec pcmanfm --daemon-mode &
 
 # Start emote
 pgrep emote || exec emote &

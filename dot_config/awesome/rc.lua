@@ -438,7 +438,7 @@ globalkeys = gears.table.join(
     awful.spawn("thunderbird")
   end, { description = "Open Thunderbird", group = "launcher" }),
   awful.key({ modkey }, "f", function()
-    awful.spawn("thunar")
+    awful.spawn("pcmanfm")
   end, { description = "Open thunar", group = "launcher" }),
   awful.key({ modkey }, "p", function()
     awful.spawn.with_shell("~/.local/bin/powermenu")
