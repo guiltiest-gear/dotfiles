@@ -1,0 +1,82 @@
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+version = 4
+final_space = true
+
+[palette]
+main-bg = "#24283b"
+terminal-red = "#f7768e"
+pistachio-green = "#9ece6a"
+terminal-green = "#73daca"
+terminal-yellow = "#e0af68"
+terminal-blue = "#7aa2f7"
+celeste-blue = "#b4f9f8"
+light-sky-blue = "#7dcfff"
+terminal-white = "#c0caf5"
+white-blue = "#a9b1d6"
+blue-bell = "#9aa5ce"
+pastal-grey = "#cfc9c2"
+terminal-magenta = "#bb9af7"
+blue-black = "#565f89"
+terminal-black = "#414868"
+t-background = "p:main-bg"
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+[[blocks.segments]]
+type = "session"
+style = "plain"
+background = "transparent"
+foreground = "p:terminal-yellow"
+template = "{{ .UserName }}<p:terminal-white>@</><p:celeste-blue>{{ .HostName }}</> "
+
+[[blocks.segments]]
+type = "path"
+style = "plain"
+background = "transparent"
+foreground = "p:terminal-blue"
+template = "{{ .Path }} {{ if not .Writable }}<p:terminal-red>󰌾</>{{ end }}"
+
+[blocks.segments.properties]
+style = "full"
+
+[[blocks.segments]]
+type = "git"
+style = "plain"
+foreground = "grey"
+background = "transparent"
+template = "{{ .HEAD }} {{ if gt .Working.Untracked 0 }}?{{ end }}{{ if gt .Staging.Added 0}}<p:terminal-green>+</>{{ end }}{{ if gt .Staging.Deleted 0 }}<p:terminal-red>-</>{{ end }}{{ if .Staging.Modified }}<p:terminal-yellow>~</>{{ end }} <p:terminal-blue>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>"
+
+[blocks.segments.properties]
+branch_icon = " "
+fetch_status = true
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+[[blocks.segments]]
+type = "text"
+style = "plain"
+foreground_templates = [
+  "{{ if gt .Code 0 }}p:terminal-red{{ end }}",
+  "{{ if eq .Code 0 }}p:pistachio-green{{ end }}",
+]
+background = "transparent"
+template = "❯"
+
+[transient_prompt]
+foreground_templates = [
+  "{{ if gt .Code 0 }}p:terminal-red{{ end }}",
+  "{{ if eq .Code 0 }}p:pistachio-green{{ end }}",
+]
+background = "transparent"
+template = "❯ "
+
+[secondary_prompt]
+foreground = "p:terminal-magenta"
+background = "transparent"
+template = "❯❯ "

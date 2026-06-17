@@ -43,7 +43,6 @@ export FZF_DEFAULT_OPTS="--no-mouse --cycle --tiebreak=chunk"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
 export ZSH_AUTOSUGGEST_STRATEGY=(completion history)
 export YSU_MESSAGE_POSITION="after"
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
 export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/zsh/evalcache
 
 # Various options
@@ -154,17 +153,14 @@ zinit depth"1" wait"0a" lucid light-mode for \
 # Load zoxide
 command -v zoxide >/dev/null 2>&1 && _evalcache zoxide init zsh
 
-# Starship prompt
-command -v starship >/dev/null 2>&1 && _evalcache starship init zsh
+# oh-my-posh prompt
+command -v oh-my-posh >/dev/null 2>&1 && eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/oh-my-posh.toml)"
 
 # zsh keybindings for fzf
 command -v fzf >/dev/null 2>&1 && _evalcache fzf --zsh
 
 # Load in aliases from aliasrc
 source "$ZDOTDIR"/aliasrc
-
-# Enable transient prompt
-source "$ZDOTDIR"/transient-prompt.zsh
 
 # Insulter
 source "$ZDOTDIR"/command-not-found.zsh
