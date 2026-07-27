@@ -680,6 +680,15 @@ awful.rules.rules = {
     },
   },
 
+  -- XClicker should always be on top of other windows
+  {
+    rule = { name = "XClicker" },
+    properties = {
+      ontop = true,
+      floating = true,
+    },
+  },
+
   -- Floating clients.
   {
     rule_any = {
