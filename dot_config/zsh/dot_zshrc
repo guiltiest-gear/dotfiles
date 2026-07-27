@@ -117,13 +117,13 @@ fzf-tab-zstyle-opts() {
 }
 
 # Plugins
-zinit depth"1" light-mode for \
-  mroth/evalcache
-
 zinit wait lucid for \
   OMZP::sudo \
   atload"unalias x" \
   OMZP::extract
+
+zinit depth"1" light-mode for \
+  mroth/evalcache
 
 zinit depth"1" wait lucid light-mode for \
   has"fzf" \
