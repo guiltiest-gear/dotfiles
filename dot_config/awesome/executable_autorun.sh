@@ -27,7 +27,7 @@ pgrep unclutter || unclutter -b
 pgrep clipcatd || clipcatd --replace &
 
 # Start the arch-update tray icon
-pgrep -af "arch-update --tray" || exec arch-update --tray &
+# pgrep -af "arch-update --tray" || exec arch-update --tray &
 
 # Start nm-applet
 pgrep nm-applet || exec nm-applet &
