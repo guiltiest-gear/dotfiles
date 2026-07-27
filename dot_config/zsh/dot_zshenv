@@ -53,4 +53,7 @@ export MANROFFOPT="-c"
 export LESS="-R -i -F"
 
 # golang xdg dirs
-# export GOPATH="$XDG_DATA_HOME"/go
+export GOPATH="$XDG_DATA_HOME"/go
+
+# cargo path
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
