@@ -16,7 +16,7 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
 # Append to the path
 typeset -U path PATH
-path=(~/.local/bin $path)
+path=("$HOME"/.local/bin $path)
 export PATH
 
 # Editor config
