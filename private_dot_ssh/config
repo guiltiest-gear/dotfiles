@@ -9,6 +9,7 @@ Host aur.archlinux.org
   User aur
 Host amaterasu
   IdentityFile ~/.ssh/amaterasu
+  Compression no
   User dietpi
 Host codeberg.org
   IdentityFile ~/.ssh/codeberg
