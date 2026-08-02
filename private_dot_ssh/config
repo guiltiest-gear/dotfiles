@@ -1,7 +1,7 @@
 Host *
   Compression yes
   ControlMaster auto
-  ControlPath ~/.ssh/control/%r@%h:%p
+  ControlPath ~/.ssh/sockets/socket-%r@%h:%p
   ControlPersist 300
   Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com,chacha20-poly1305@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
 Host aur.archlinux.org
