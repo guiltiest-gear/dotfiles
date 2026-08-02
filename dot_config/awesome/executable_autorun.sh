@@ -8,6 +8,10 @@ else
   xrandr --output eDP-1 --primary --auto --rotate normal
 fi
 
+# Start and fork snixembed
+# NOTE: Keep near start to avoid race conditions
+pgrep snixembed || snixembed --fork
+
 # Start picom
 pgrep picom || picom -b
 
@@ -26,14 +30,14 @@ pgrep unclutter || unclutter -b
 # Start clipcat
 pgrep clipcatd || clipcatd --replace &
 
-# Start the arch-update tray icon
-# pgrep -af "arch-update --tray" || exec arch-update --tray &
+# Start gammastep
+pgrep gammastep || exec gammastep &
 
 # Start nm-applet
 pgrep nm-applet || exec nm-applet &
 
-# Start gammastep
-pgrep gammastep || exec gammastep &
+# Start the arch-update tray icon
+pgrep -af "arch-update --tray" || exec arch-update --tray &
 
 # Set the compose key to right alt
 setxkbmap -option compose:ralt &
