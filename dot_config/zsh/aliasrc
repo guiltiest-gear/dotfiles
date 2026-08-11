@@ -103,9 +103,9 @@ if command -v rsync >/dev/null 2>&1; then
 fi
 
 # Fix adb
-if command -v adb >/dev/null 2>&1; then
-  alias adb='HOME=$XDG_DATA_HOME/android adb'
-fi
+# if command -v adb >/dev/null 2>&1; then
+#   alias adb='HOME=$XDG_DATA_HOME/android adb'
+# fi
 
 # Fun
 ## Terminal rickroll
