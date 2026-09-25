@@ -80,3 +80,4 @@ template = "❯ "
 foreground = "p:terminal-magenta"
 background = "transparent"
 template = "❯❯ "
+multiline_keepprompt = true
