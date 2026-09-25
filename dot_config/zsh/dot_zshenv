@@ -57,3 +57,5 @@ export GOPATH="$XDG_DATA_HOME"/go
 
 # cargo path
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
+
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
