@@ -159,6 +159,9 @@ command -v oh-my-posh >/dev/null 2>&1 && eval "$(oh-my-posh init zsh --config $H
 # zsh keybindings for fzf
 command -v fzf >/dev/null 2>&1 && _evalcache fzf --zsh
 
+# Load direnv
+command -v direnv >/dev/null 2>&1 && _evalcache direnv hook zsh
+
 # Load in aliases from aliasrc
 source "$ZDOTDIR"/aliasrc
 
