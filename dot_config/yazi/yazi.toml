@@ -1,3 +1,15 @@
+[mgr]
+show_hidden = true
+show_symlink = true
+sort_sensitive = false
+sort_dir_first = true
+mouse_events = []
+
+[opener]
+play = [{ run = "mpv %s", orphan = true, for = "unix" }]
+edit = [{ run = "$EDITOR %s", block = true, for = "unix" }]
+open = [{ run = "xdg-open %s1", desc = "Open" }]
+
 [[plugin.prepend_fetchers]]
 url = "*"
 run = "git"
