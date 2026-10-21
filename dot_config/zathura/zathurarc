@@ -1,5 +1,7 @@
 map u scroll half-up
 map d scroll half-down
+map <C-f> forward
+map <C-b> backward
 map D toggle_page_mode
 map r reload
 map R rotate
