@@ -8,7 +8,11 @@ mouse_events = []
 [opener]
 play = [{ run = "mpv %s", orphan = true, for = "unix" }]
 edit = [{ run = "$EDITOR %s", block = true, for = "unix" }]
+pdf-open = [{ run = "zathura %s", orphan = true, for = "unix" }]
 open = [{ run = "xdg-open %s1", desc = "Open" }]
+
+[open]
+prepend_rules = [{ url = "*.pdf", use = "pdf-open" }]
 
 [[plugin.prepend_fetchers]]
 url = "*"
