@@ -40,7 +40,14 @@ bindkey -v
 export ABBR_QUIETER=1
 export ABBR_SET_EXPANSION_CURSOR=1
 export FZF_DEFAULT_OPTS="--no-mouse --cycle --tiebreak=chunk"
-export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
 export ZSH_AUTOSUGGEST_STRATEGY=(completion history)
 export YSU_MESSAGE_POSITION="after"
 export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/zsh/evalcache
