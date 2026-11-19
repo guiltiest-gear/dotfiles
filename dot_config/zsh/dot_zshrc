@@ -1,15 +1,19 @@
 #!/usr/bin/env zsh
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 # Remove annoying zinit aliases
-declare -A ZINIT=([NO_ALIASES]=1)
+declare -A ZINIT=([NO_ALIASES]=1) # shuck: ignore=C001
 
 # Set up zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
+
+# vi mode
+bindkey -v
 
 # Edit line in vim with ctrl-e
 autoload -Uz edit-command-line
@@ -31,10 +35,6 @@ _fzf_compgen_dir() {
 
 # Enable colors and change prompt:
 autoload -U colors && colors
-
-# vi mode
-bindkey -v
-# export KEYTIMEOUT=1
 
 # Exports
 export ABBR_QUIETER=1
@@ -116,7 +116,7 @@ fzf-tab-zstyle-opts() {
   # Disable sort when completing git checkout
   zstyle ':completion:*:git-checkout:*' sort false
   # Preview directory content with eza when completing cd
-  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath' # shuck: ignore=C005
   # Re-add style flags to fzf-tab
   zstyle ':fzf-tab:*' use-fzf-default-opts yes
   # Set other fzf flags
