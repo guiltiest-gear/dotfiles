@@ -34,7 +34,7 @@ alias rm='rm -i'
 # Termbin
 ## REMEMBER TO PIPE OUTPUT
 if command -v nc >/dev/null 2>&1; then
-  alias tb='nc termbin.com 9999'
+  alias -g TB='| nc termbin.com 9999'
 fi
 
 # Shortcuts
@@ -133,3 +133,16 @@ fi
 # Power
 alias rbn='reboot'
 alias sdn='shutdown now'
+
+# suffix aliases
+alias -s md=bat
+alias -s lua='$EDITOR'
+alias -s java='$EDITOR'
+alias -s log=bat
+alias -s txt=bat
+
+# global aliases
+alias -g NE='2>/dev/null'
+alias -g NO='>/dev/null'
+alias -g NUL='>/dev/null 2>&1'
+alias -g C='| xclip -selection clipboard'
